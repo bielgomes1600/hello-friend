@@ -158,7 +158,7 @@ function IntroOverlay() {
   const [visible, setVisible] = useState(true)
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setVisible(false), 3400)
+    const timer = window.setTimeout(() => setVisible(false), 4200)
     return () => window.clearTimeout(timer)
   }, [])
 
@@ -239,7 +239,7 @@ function IntroOverlay() {
         .intro-content {
           animation:
             introContentIn .7s cubic-bezier(.16,1,.3,1) forwards,
-            introContentOut .55s cubic-bezier(.7,0,.84,0) 2.72s forwards;
+            introContentOut .6s cubic-bezier(.7,0,.84,0) 3.45s forwards;
         }
         .intro-line {
           animation: introContentIn .55s ease-out .08s both;
@@ -257,7 +257,7 @@ function IntroOverlay() {
           animation: introContentIn .65s ease-out .38s both;
         }
         .intro-progress > div {
-          animation: introProgress 3.05s linear .12s forwards;
+          animation: introProgress 3.85s linear .12s forwards;
         }
         .intro-overlay {
           animation: introContentOut .55s cubic-bezier(.7,0,.84,0) 2.72s forwards;
