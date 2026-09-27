@@ -142,6 +142,7 @@ function Dashboard() {
           </header>
 
           <div className="mx-auto max-w-[1500px] p-4 sm:p-6 lg:p-9">
+            {sidebar === "Painel central" ? (
             <div className="mb-8 flex flex-col justify-between gap-5 md:flex-row md:items-end">
               <div>
                 <div className="mb-2 flex items-center gap-2 text-xs font-medium text-blue-400">
@@ -237,6 +238,14 @@ function Dashboard() {
                 <button onClick={() => notify("Ver todos")} className="text-blue-400 hover:text-blue-300">Ver todos →</button>
               </div>
             </div>
+            ) : (
+              <div className="mt-6 rounded-2xl border border-white/[0.07] bg-[#070a10] p-8 text-center sm:p-10">
+                <div className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-blue-500/10 text-blue-400"><LayoutDashboard className="h-6 w-6" /></div>
+                <h2 className="mt-5 text-xl font-semibold">{sidebar}</h2>
+                <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-slate-500">Esta seção está preparada para receber a funcionalidade completa. A integração real deste módulo será conectada aqui.</p>
+                <button onClick={() => notify(sidebar)} className="mt-6 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold hover:bg-blue-500">Continuar</button>
+              </div>
+            )}
           </div>
         </section>
       </div>
