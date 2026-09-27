@@ -71,7 +71,7 @@ function Dashboard() {
               <span className="grid h-10 w-10 place-items-center rounded-xl bg-blue-600 shadow-lg shadow-blue-600/20">
                 <Target className="h-5 w-5" />
               </span>
-              <span className="text-lg">Lead<span className="text-blue-400">Flow</span></span>
+              <span className="text-lg">WEBNOVA IA</span>
             </Link>
             <button onClick={() => setMobileOpen(false)} className="rounded-lg p-2 text-slate-500 hover:bg-white/5 lg:hidden">
               <Menu className="h-5 w-5" />
