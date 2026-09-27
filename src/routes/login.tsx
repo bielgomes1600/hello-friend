@@ -27,7 +27,7 @@ function LoginPage() {
               <div><div className="flex justify-between"><label htmlFor="password" className="text-sm font-medium text-slate-300">Senha</label><button type="button" onClick={() => console.log("[WEBNOVA IA] Recuperação de senha — conectar rota futura")} className="text-xs text-blue-400">Esqueci minha senha</button></div><div className="relative mt-2"><input id="password" name="password" type={showPassword ? "text" : "password"} placeholder="••••••••" className="h-12 w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 pr-12 text-sm outline-none placeholder:text-slate-700 focus:border-blue-500/60" /><button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-3 text-slate-500">{showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}</button></div></div>
               <button type="submit" className="flex h-12 w-full items-center justify-center rounded-xl bg-blue-600 text-sm font-bold hover:bg-blue-500">Entrar</button>
             </form>
-            <p className="mt-7 text-center text-sm text-slate-500">Ainda não tem uma conta? <Link to="/#planos" className="font-semibold text-blue-400 hover:text-blue-300">Começar grátis</Link></p>
+            <p className="mt-7 text-center text-sm text-slate-500">Ainda não tem uma conta? <Link to="/" hash="planos" className="font-semibold text-blue-400 hover:text-blue-300">Começar grátis</Link></p>
             <p className="mt-10 text-center text-[11px] leading-5 text-slate-700">Ao continuar, você concorda com os termos de uso e a política de privacidade.</p>
           </div>
         </section>
