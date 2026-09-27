@@ -20,10 +20,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "LeadFlow — Encontre seus próximos leads" },
+      { title: "WEBNOVA IA — Encontre seus próximos leads" },
       { name: "description", content: "SaaS de prospecção para encontrar, filtrar e organizar leads." },
       { name: "theme-color", content: "#05070b" },
-      { property: "og:title", content: "LeadFlow — SaaS de prospecção" },
+      { property: "og:title", content: "WEBNOVA IA — SaaS de prospecção" },
       { property: "og:description", content: "Encontre empresas e organize oportunidades para sua prospecção." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
