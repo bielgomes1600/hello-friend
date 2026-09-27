@@ -20,26 +20,33 @@ export const Route = createFileRoute("/")({ component: SalesPage });
 
 const plans = [
   {
-    name: "Starter",
-    price: "49",
-    leads: "500 leads / mês",
-    description: "Para começar sua prospecção.",
-    features: ["500 leads por mês", "Filtros por nicho e localização", "Exportação CSV", "Busca por empresa"],
+    name: "Grátis",
+    price: "0",
+    leads: "Até 5 pesquisas de leads",
+    description: "Teste a plataforma sem pagar.",
+    features: ["5 pesquisas de leads", "Filtros básicos", "Pesquisa de empresas", "Sem exportação"],
   },
   {
-    name: "Growth",
-    price: "99",
-    leads: "2.500 leads / mês",
-    description: "Para quem quer prospectar todos os dias.",
+    name: "Starter",
+    price: "30",
+    leads: "1.000 leads / mês",
+    description: "Para começar a prospectar com mais volume.",
     popular: true,
-    features: ["2.500 leads por mês", "Todos os filtros de pesquisa", "Dados de contato", "Exportação CSV", "Qualificação de leads"],
+    features: ["1.000 leads por mês", "Filtros de pesquisa", "Dados de contato", "Exportação CSV"],
+  },
+  {
+    name: "Pro",
+    price: "99",
+    leads: "5.000 leads / mês",
+    description: "Para equipes que prospectam diariamente.",
+    features: ["5.000 leads por mês", "Busca avançada", "Qualificação de leads", "Exportações ilimitadas", "Suporte prioritário"],
   },
   {
     name: "Scale",
-    price: "199",
-    leads: "10.000 leads / mês",
+    price: "299",
+    leads: "20.000 leads / mês",
     description: "Para operações comerciais em escala.",
-    features: ["10.000 leads por mês", "Busca avançada", "Qualificação automática", "Exportações ilimitadas", "Suporte prioritário"],
+    features: ["20.000 leads por mês", "Filtros avançados", "Qualificação automática", "Exportações ilimitadas", "Suporte prioritário"],
   },
 ];
 
@@ -70,7 +77,7 @@ function SalesPage() {
           <a href="#planos" className="hover:text-white">Planos</a>
           <a href="#faq" className="hover:text-white">FAQ</a>
         </div>
-        <a href="#planos" className="rounded-xl border border-white/10 bg-white/[0.05] px-4 py-2.5 text-sm font-semibold hover:bg-white/[0.09]">Entrar</a>
+        <a href="/login" className="rounded-xl border border-white/10 bg-white/[0.05] px-4 py-2.5 text-sm font-semibold hover:bg-white/[0.09]">Entrar</a>
       </nav>
 
       <section className="relative z-10 mx-auto max-w-7xl px-6 pb-24 pt-20 text-center lg:px-8 lg:pt-28">
