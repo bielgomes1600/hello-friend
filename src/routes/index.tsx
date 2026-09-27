@@ -7,13 +7,6 @@ import { useState, type ReactNode } from "react";
 
 export const Route = createFileRoute("/")({ component: SalesPage });
 
-const plans = [
-  { name:"Grátis", price:"0", leads:"Até 5 pesquisas de leads", description:"Teste a plataforma sem pagar.", features:["5 pesquisas de leads","Filtros básicos","Pesquisa de empresas","Sem exportação"] },
-  { name:"Starter", price:"30", leads:"1.000 leads / mês", description:"Para começar a prospectar com mais volume.", popular:true, features:["1.000 leads por mês","Filtros de pesquisa","Dados de contato","Exportação CSV"] },
-  { name:"Pro", price:"99", leads:"5.000 leads / mês", description:"Para equipes que prospectam diariamente.", features:["5.000 leads por mês","Busca avançada","Qualificação de leads","Exportações ilimitadas","Suporte prioritário"] },
-  { name:"Scale", price:"299", leads:"20.000 leads / mês", description:"Para operações comerciais em escala.", features:["20.000 leads por mês","Filtros avançados","Qualificação automática","Exportações ilimitadas","Suporte prioritário"] },
-];
-
 const faqs = [
   ["O que é o SaaS?","É uma plataforma de prospecção que ajuda você a encontrar empresas e potenciais clientes usando filtros como nicho e localização, organizando os resultados para o seu processo comercial."],
   ["Preciso instalar algum programa?","Não. O sistema funciona diretamente pelo navegador. Você entra na sua conta e começa a pesquisar."],
@@ -23,6 +16,12 @@ const faqs = [
 
 function SalesPage() {
   const [openFaq,setOpenFaq]=useState<number|null>(null);
+  const plans = [
+    { name:"Grátis", price:"0", leads:"Até 5 pesquisas de leads", description:"Teste a plataforma sem pagar.", features:["5 pesquisas de leads","Filtros básicos","Pesquisa de empresas","Sem exportação"] },
+    { name:"Starter", price:"30", leads:"1.000 leads / mês", description:"Para começar a prospectar com mais volume.", popular:true, features:["1.000 leads por mês","Filtros de pesquisa","Dados de contato","Exportação CSV"] },
+    { name:"Pro", price:"99", leads:"5.000 leads / mês", description:"Para equipes que prospectam diariamente.", features:["5.000 leads por mês","Busca avançada","Qualificação de leads","Exportações ilimitadas","Suporte prioritário"] },
+    { name:"Scale", price:"299", leads:"20.000 leads / mês", description:"Para operações comerciais em escala.", features:["20.000 leads por mês","Filtros avançados","Qualificação automática","Exportações ilimitadas","Suporte prioritário"] },
+  ];
   return <main className="min-h-screen overflow-hidden bg-[#05070b] text-white">
     <style>{`@keyframes float{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-10px) scale(1.015)}}`}</style>
     <div className="pointer-events-none fixed inset-0 -z-0 bg-[radial-gradient(circle_at_50%_-10%,rgba(37,99,235,.22),transparent_38%),radial-gradient(circle_at_100%_35%,rgba(14,165,233,.10),transparent_28%)]"/>
