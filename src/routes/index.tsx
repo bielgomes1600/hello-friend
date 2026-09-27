@@ -158,53 +158,109 @@ function IntroOverlay() {
   const [visible, setVisible] = useState(true)
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setVisible(false), 5000)
+    const timer = window.setTimeout(() => setVisible(false), 3400)
     return () => window.clearTimeout(timer)
   }, [])
 
   if (!visible) return null
 
   return (
-    <div className="fixed inset-0 z-[100] overflow-hidden bg-black">
+    <div className="fixed inset-0 z-[100] overflow-hidden bg-black intro-overlay">
       <div className="absolute inset-0">
         <ShaderAnimation />
       </div>
 
-      <div className="absolute inset-0 bg-black/25" />
+      <div className="absolute inset-0 bg-black/35" />
 
       <div className="absolute inset-0 flex items-center justify-center px-6">
-        <div className="relative">
-          <h2 className="intro-webnova-text relative text-center text-5xl font-black tracking-[-0.06em] text-blue-500 sm:text-7xl md:text-8xl lg:text-9xl">
-            WEB NOVA
-          </h2>
-          <div className="intro-webnova-glow absolute inset-0 text-center text-5xl font-black tracking-[-0.06em] text-blue-400 blur-xl sm:text-7xl md:text-8xl lg:text-9xl">
-            WEB NOVA
+        <div className="relative text-center intro-content">
+          <div className="mb-5 flex items-center justify-center gap-3 intro-line">
+            <span className="h-px w-10 bg-blue-500/60 sm:w-16" />
+            <span className="text-[9px] font-semibold uppercase tracking-[0.42em] text-blue-300/70">
+              INTELLIGENT PROSPECTING
+            </span>
+            <span className="h-px w-10 bg-blue-500/60 sm:w-16" />
           </div>
-          <div className="intro-light-sweep pointer-events-none absolute inset-y-[-12%] w-24 -skew-x-12 bg-gradient-to-r from-transparent via-white/90 to-transparent blur-md" />
+
+          <div className="relative inline-block">
+            <h2 className="intro-webnova-text relative text-center text-5xl font-black tracking-[-0.075em] text-white sm:text-7xl md:text-8xl lg:text-[9rem]">
+              WEB<span className="text-blue-500">NOVA</span>
+            </h2>
+
+            <div className="intro-webnova-glow pointer-events-none absolute inset-0 text-center text-5xl font-black tracking-[-0.075em] text-blue-500 blur-2xl sm:text-7xl md:text-8xl lg:text-[9rem]">
+              WEB<span className="text-blue-500">NOVA</span>
+            </div>
+
+            <div className="intro-scanline pointer-events-none absolute left-[-8%] right-[-8%] top-1/2 h-px bg-gradient-to-r from-transparent via-blue-300 to-transparent" />
+            <div className="intro-light-sweep pointer-events-none absolute inset-y-[-18%] w-20 -skew-x-12 bg-gradient-to-r from-transparent via-white to-transparent blur-sm" />
+          </div>
+
+          <p className="intro-tagline mt-5 text-xs font-medium uppercase tracking-[0.32em] text-blue-200/75 sm:text-sm">
+            EXPANDA SEU POTENCIAL
+          </p>
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[10px] font-semibold uppercase tracking-[0.35em] text-blue-300/50">
-        WEBNOVA IA
+      <div className="absolute bottom-7 left-1/2 -translate-x-1/2 intro-progress">
+        <div className="h-px w-28 overflow-hidden bg-white/10">
+          <div className="h-full w-full origin-left bg-blue-500" />
+        </div>
       </div>
 
       <style>{`
-        @keyframes introLightSweep {
-          0% { left: -25%; opacity: 0; }
-          12% { opacity: 0.95; }
-          48% { opacity: 1; }
-          62% { opacity: 0.8; }
-          100% { left: 125%; opacity: 0; }
+        @keyframes introContentIn {
+          0% { opacity: 0; transform: translateY(14px) scale(.97); filter: blur(8px); }
+          100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        }
+        @keyframes introContentOut {
+          0% { opacity: 1; transform: scale(1); filter: blur(0); }
+          100% { opacity: 0; transform: scale(1.035); filter: blur(5px); }
         }
         @keyframes introGlowPulse {
-          0%, 100% { opacity: 0.65; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.025); }
+          0%, 100% { opacity: .38; transform: scale(.985); }
+          50% { opacity: .82; transform: scale(1.015); }
         }
-        .intro-light-sweep {
-          animation: introLightSweep 2.2s ease-in-out 0.45s forwards;
+        @keyframes introLightSweep {
+          0% { left: -22%; opacity: 0; }
+          12% { opacity: .95; }
+          42% { opacity: 1; }
+          62% { opacity: .25; }
+          100% { left: 122%; opacity: 0; }
+        }
+        @keyframes introLineReveal {
+          0% { width: 0; opacity: 0; }
+          35% { opacity: 1; }
+          100% { width: 100%; opacity: .8; }
+        }
+        @keyframes introProgress {
+          0% { transform: scaleX(0); }
+          100% { transform: scaleX(1); }
+        }
+        .intro-content {
+          animation:
+            introContentIn .7s cubic-bezier(.16,1,.3,1) forwards,
+            introContentOut .55s cubic-bezier(.7,0,.84,0) 2.72s forwards;
+        }
+        .intro-line {
+          animation: introContentIn .55s ease-out .08s both;
         }
         .intro-webnova-glow {
-          animation: introGlowPulse 2s ease-in-out infinite;
+          animation: introGlowPulse 1.6s ease-in-out infinite;
+        }
+        .intro-light-sweep {
+          animation: introLightSweep 1.35s cubic-bezier(.2,.75,.25,1) .62s forwards;
+        }
+        .intro-scanline {
+          animation: introLineReveal 1.1s ease-out .35s both;
+        }
+        .intro-tagline {
+          animation: introContentIn .65s ease-out .38s both;
+        }
+        .intro-progress > div {
+          animation: introProgress 3.05s linear .12s forwards;
+        }
+        .intro-overlay {
+          animation: introContentOut .55s cubic-bezier(.7,0,.84,0) 2.72s forwards;
         }
       `}</style>
     </div>
