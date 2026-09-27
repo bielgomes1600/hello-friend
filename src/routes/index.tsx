@@ -167,10 +167,11 @@ function IntroOverlay() {
   return (
     <div className="fixed inset-0 z-[100] overflow-hidden bg-black intro-overlay">
       <div className="absolute inset-0">
-        <ShaderAnimation />
+        <div className="intro-bg-pulse absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(37,99,235,.22),transparent_28%),radial-gradient(circle_at_30%_50%,rgba(14,165,233,.12),transparent_32%),#000]" />
+        <div className="intro-bg-grid absolute inset-0 opacity-30" />
       </div>
 
-      <div className="absolute inset-0 bg-black/35" />
+      <div className="absolute inset-0 bg-black/25" />
 
       <div className="absolute inset-0 flex items-center justify-center px-6">
         <div className="relative text-center intro-content">
@@ -243,6 +244,25 @@ function IntroOverlay() {
         }
         .intro-line {
           animation: introContentIn .55s ease-out .08s both;
+        }
+        .intro-bg-pulse {
+          animation: introBgPulse 4.2s ease-in-out both;
+        }
+        .intro-bg-grid {
+          background-image: linear-gradient(rgba(59,130,246,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,.08) 1px, transparent 1px);
+          background-size: 52px 52px;
+          transform: perspective(500px) rotateX(58deg) scale(1.8) translateY(12%);
+          transform-origin: center bottom;
+          animation: introGrid 4.2s ease-out both;
+        }
+        @keyframes introBgPulse {
+          0% { opacity: .15; transform: scale(1); }
+          45% { opacity: .85; transform: scale(1.08); }
+          100% { opacity: .55; transform: scale(1.02); }
+        }
+        @keyframes introGrid {
+          0% { opacity: 0; transform: perspective(500px) rotateX(58deg) scale(2) translateY(24%); }
+          100% { opacity: .3; transform: perspective(500px) rotateX(58deg) scale(1.8) translateY(12%); }
         }
         .intro-webnova-text {
           background: linear-gradient(180deg, #ffffff 0%, #dbeafe 24%, #64748b 48%, #ffffff 67%, #94a3b8 100%);
