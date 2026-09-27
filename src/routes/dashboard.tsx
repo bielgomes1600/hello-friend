@@ -262,7 +262,7 @@ function Field({ label, value, onChange, icon }: { label: string; value: string;
       <span className="mb-1.5 block text-[10px] font-medium uppercase tracking-[0.12em] text-slate-600">{label}</span>
       <div className="flex h-11 items-center gap-2.5 rounded-xl border border-white/[0.07] bg-white/[0.02] px-3 transition focus-within:border-blue-500/30">
         <span className="text-blue-400 [&>svg]:h-3.5 [&>svg]:w-3.5">{icon}</span>
-        <input value={value} onChange={(e) => onChange?.(e.target.value)} className="min-w-0 flex-1 bg-transparent text-xs text-slate-300 outline-none" />
+        <input value={value} onChange={(e) => onChange?.(e.target.value)} readOnly={!onChange} className="min-w-0 flex-1 bg-transparent text-xs text-slate-300 outline-none" />
       </div>
     </label>
   );
