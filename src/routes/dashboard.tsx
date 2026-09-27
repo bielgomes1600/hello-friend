@@ -24,7 +24,7 @@ import { useMemo, useState, type ReactNode } from "react";
 
 export const Route = createFileRoute("/dashboard")({ component: Dashboard });
 
-const demoLeads = [
+const demoLeads: [string, string, string, string, string][] = [
   ["Odonto Prime", "Clínica odontológica", "São Paulo, SP", "odonto-prime.com", "Alto"],
   ["Sorriso Center", "Clínica odontológica", "Campinas, SP", "sorrisocenter.com", "Alto"],
   ["Clínica Nova Vida", "Clínica médica", "Santos, SP", "novavida.com.br", "Médio"],
@@ -46,6 +46,7 @@ function Dashboard() {
   const [query, setQuery] = useState("");
   const [location, setLocation] = useState("São Paulo, SP");
   const [mobileOpen, setMobileOpen] = useState(false);
+  const notify = (message: string) => console.log("[WEBNOVA IA]", message);
 
   const filtered = useMemo(
     () => demoLeads.filter((lead) => lead.join(" ").toLowerCase().includes(search.toLowerCase())),
@@ -107,7 +108,7 @@ function Dashboard() {
                 <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/[0.07]">
                   <div className="h-full w-[74%] rounded-full bg-gradient-to-r from-blue-600 to-blue-400" />
                 </div>
-                <Link to="/#planos" className="mt-3 block text-xs font-semibold text-blue-400 hover:text-blue-300">Fazer upgrade →</Link>
+                <Link to="/" hash="planos" className="mt-3 block text-xs font-semibold text-blue-400 hover:text-blue-300">Fazer upgrade →</Link>
               </div>
             </div>
             <Link to="/" className="mt-5 flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-slate-600 transition hover:bg-white/[0.03] hover:text-white">
@@ -128,15 +129,15 @@ function Dashboard() {
               </div>
             </div>
             <div className="flex items-center gap-2.5">
-              <button className="relative grid h-10 w-10 place-items-center rounded-xl border border-white/[0.07] bg-white/[0.015] text-slate-500 transition hover:border-white/10 hover:text-white">
+              <button onClick={() => notify("Notificações")} className="relative grid h-10 w-10 place-items-center rounded-xl border border-white/[0.07] bg-white/[0.015] text-slate-500 transition hover:border-white/10 hover:text-white">
                 <Bell className="h-4 w-4" />
                 <span className="absolute right-2 top-2 h-1.5 w-1.5 rounded-full bg-blue-500" />
               </button>
-              <div className="flex items-center gap-2 rounded-xl border border-white/[0.07] bg-white/[0.015] px-2.5 py-1.5">
+              <button onClick={() => notify("Menu do usuário")} className="flex items-center gap-2 rounded-xl border border-white/[0.07] bg-white/[0.015] px-2.5 py-1.5">
                 <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-blue-500/20 to-blue-500/5 text-xs font-bold text-blue-300">RU</span>
                 <span className="hidden text-xs font-medium sm:block">Ruan</span>
                 <ChevronDown className="h-3 w-3 text-slate-600" />
-              </div>
+              </button>
             </div>
           </header>
 
@@ -149,7 +150,7 @@ function Dashboard() {
                 <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">Olá, Ruan. Vamos encontrar clientes?</h1>
                 <p className="mt-2 max-w-xl text-sm text-slate-500">Encontre empresas, organize seus leads e transforme oportunidades em novos negócios.</p>
               </div>
-              <button className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold shadow-lg shadow-blue-600/10 transition hover:-translate-y-0.5 hover:bg-blue-500 md:w-auto">
+              <button onClick={() => notify("Nova pesquisa")} className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold shadow-lg shadow-blue-600/10 transition hover:-translate-y-0.5 hover:bg-blue-500 md:w-auto">
                 <Plus className="h-4 w-4" /> Nova pesquisa
               </button>
             </div>
@@ -178,7 +179,7 @@ function Dashboard() {
                   <Field label="Nicho" value={query || "Clínicas odontológicas"} onChange={setQuery} icon={<Users />} />
                   <Field label="Localização" value={location} onChange={setLocation} icon={<MapPin />} />
                   <Field label="Website" value="Com website" icon={<Globe2 />} />
-                  <button className="h-11 self-end rounded-xl bg-blue-600 text-sm font-semibold shadow-lg shadow-blue-600/10 transition hover:bg-blue-500">
+                  <button onClick={() => notify("Pesquisar")} className="h-11 self-end rounded-xl bg-blue-600 text-sm font-semibold shadow-lg shadow-blue-600/10 transition hover:bg-blue-500">
                     <Search className="mr-2 inline h-4 w-4" /> Pesquisar
                   </button>
                 </div>
@@ -207,7 +208,7 @@ function Dashboard() {
                     <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Buscar nos resultados..." className="h-9 w-full rounded-lg border border-white/[0.07] bg-white/[0.02] pl-9 pr-3 text-xs text-slate-300 outline-none placeholder:text-slate-700 focus:border-blue-500/30" />
                   </div>
                   <button className="grid h-9 w-9 place-items-center rounded-lg border border-white/[0.07] text-slate-500 transition hover:bg-white/[0.03] hover:text-white"><Filter className="h-3.5 w-3.5" /></button>
-                  <button className="hidden items-center gap-2 rounded-lg border border-white/[0.07] px-3 text-xs text-slate-400 transition hover:bg-white/[0.03] hover:text-white sm:inline-flex"><Download className="h-3.5 w-3.5" /> Exportar</button>
+                  <button onClick={() => notify("Exportar")} className="hidden items-center gap-2 rounded-lg border border-white/[0.07] px-3 text-xs text-slate-400 transition hover:bg-white/[0.03] hover:text-white sm:inline-flex"><Download className="h-3.5 w-3.5" /> Exportar</button>
                 </div>
               </div>
 
@@ -224,7 +225,7 @@ function Dashboard() {
                         <td className="px-5 py-4 text-xs text-slate-500">{lead[2]}</td>
                         <td className="px-5 py-4 text-xs text-blue-400">{lead[3]}</td>
                         <td className="px-5 py-4"><span className={`rounded-md px-2 py-1 text-[10px] font-medium ${lead[4] === "Alto" ? "bg-emerald-400/10 text-emerald-400" : "bg-amber-400/10 text-amber-400"}`}>{lead[4]}</span></td>
-                        <td className="px-5 py-4 text-right"><button className="rounded-lg px-2.5 py-1.5 text-[10px] font-medium text-slate-600 opacity-0 transition group-hover:opacity-100 hover:bg-white/5 hover:text-white">Ver detalhes</button></td>
+                        <td className="px-5 py-4 text-right"><button onClick={() => notify("Ver detalhes")} className="rounded-lg px-2.5 py-1.5 text-[10px] font-medium text-slate-600 opacity-0 transition group-hover:opacity-100 hover:bg-white/5 hover:text-white">Ver detalhes</button></td>
                       </tr>
                     ))}
                   </tbody>
@@ -233,7 +234,7 @@ function Dashboard() {
               </div>
               <div className="flex items-center justify-between border-t border-white/[0.05] px-5 py-3 text-[10px] text-slate-600">
                 <span>Mostrando {filtered.length} de 2.481 leads</span>
-                <button className="text-blue-400 hover:text-blue-300">Ver todos →</button>
+                <button onClick={() => notify("Ver todos")} className="text-blue-400 hover:text-blue-300">Ver todos →</button>
               </div>
             </div>
           </div>
@@ -256,7 +257,7 @@ function Stat({ icon, label, value, change }: { icon: ReactNode; label: string; 
   );
 }
 
-function Field({ label, value, onChange, icon }: { label: string; value: string; onChange?: (v: string) => void; icon: React.ReactNode }) {
+function Field({ label, value, onChange, icon }: { label: string; value: string; onChange?: (v: string) => void; icon: ReactNode }) {
   return (
     <label className="block">
       <span className="mb-1.5 block text-[10px] font-medium uppercase tracking-[0.12em] text-slate-600">{label}</span>
