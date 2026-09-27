@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { BarChart3, Bell, Building2, ChevronDown, Download, Filter, Globe2, LayoutDashboard, LogOut, MapPin, Plus, Search, Settings, Target, Users, Zap } from "lucide-react";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 
 export const Route = createFileRoute("/dashboard")({ component: Dashboard });
 
@@ -51,7 +51,7 @@ function Dashboard() {
   );
 }
 
-function Stat({ icon, label, value, change }: { icon: React.ReactNode; label: string; value: string; change: string }) {
+function Stat({ icon, label, value, change }: { icon: ReactNode; label: string; value: string; change: string }) {
  return <div className="rounded-2xl border border-white/8 bg-[#080b11] p-5"><div className="flex items-center justify-between"><span className="grid h-9 w-9 place-items-center rounded-lg bg-blue-500/10 text-blue-400 [&>svg]:h-4 [&>svg]:w-4">{icon}</span><span className="text-[10px] text-emerald-400">{change}</span></div><p className="mt-5 text-xs text-slate-600">{label}</p><p className="mt-1 text-2xl font-semibold">{value}</p></div>;
 }
 function Field({ label, value, onChange, icon }: { label: string; value: string; onChange?: (v:string)=>void; icon: React.ReactNode }) {
