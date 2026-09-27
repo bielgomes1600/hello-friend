@@ -183,11 +183,11 @@ function IntroOverlay() {
           </div>
 
           <div className="relative inline-block">
-            <h2 className="intro-webnova-text relative text-center text-5xl font-black tracking-[-0.075em] text-white sm:text-7xl md:text-8xl lg:text-[9rem]">
+            <h2 className="intro-webnova-text relative text-center text-5xl font-black tracking-[-0.095em] text-white sm:text-7xl md:text-8xl lg:text-[9rem]">
               WEB<span className="text-blue-500">NOVA</span>
             </h2>
 
-            <div className="intro-webnova-glow pointer-events-none absolute inset-0 text-center text-5xl font-black tracking-[-0.075em] text-blue-500 blur-2xl sm:text-7xl md:text-8xl lg:text-[9rem]">
+            <div className="intro-webnova-glow pointer-events-none absolute inset-0 text-center text-5xl font-black tracking-[-0.095em] text-blue-500 blur-2xl sm:text-7xl md:text-8xl lg:text-[9rem]">
               WEB<span className="text-blue-500">NOVA</span>
             </div>
 
