@@ -33,7 +33,7 @@ const demoLeads = [
 ];
 
 const navItems = [
-  [LayoutDashboard, "Visão geral"],
+  [LayoutDashboard, "Painel central"],
   [Search, "Encontrar leads"],
   [Building2, "Minhas listas"],
   [BarChart3, "Relatórios"],
@@ -42,7 +42,7 @@ const navItems = [
 
 function Dashboard() {
   const [search, setSearch] = useState("");
-  const [sidebar, setSidebar] = useState("Visão geral");
+  const [sidebar, setSidebar] = useState("Painel central");
   const [query, setQuery] = useState("");
   const [location, setLocation] = useState("São Paulo, SP");
   const [mobileOpen, setMobileOpen] = useState(false);
