@@ -3,7 +3,8 @@ import {
   ArrowRight, BarChart3, Check, ChevronDown, Database, Globe2, ShieldCheck,
   Sparkles, Target, Users, Zap,
 } from "lucide-react";
-import { useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import * as THREE from "three";
 
 export const Route = createFileRoute("/")({ component: SalesPage });
 
@@ -14,6 +15,209 @@ const faqs = [
   ["Como recebo os leads?","Os resultados ficam organizados dentro da plataforma e podem ser exportados conforme o plano contratado."],
 ];
 
+function ShaderAnimation() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const sceneRef = useRef<{
+    camera: THREE.Camera
+    scene: THREE.Scene
+    renderer: THREE.WebGLRenderer
+    uniforms: any
+    animationId: number
+  } | null>(null)
+
+  useEffect(() => {
+    if (!containerRef.current) return
+
+    const container = containerRef.current
+
+    // Vertex shader
+    const vertexShader = `
+      void main() {
+        gl_Position = vec4( position, 1.0 );
+      }
+    `
+
+    // Fragment shader
+    const fragmentShader = `
+      #define TWO_PI 6.2831853072
+      #define PI 3.14159265359
+
+      precision highp float;
+      uniform vec2 resolution;
+      uniform float time;
+
+      void main(void) {
+        vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);
+        float t = time*0.05;
+        float lineWidth = 0.002;
+
+        vec3 color = vec3(0.0);
+        for(int j = 0; j < 3; j++){
+          for(int i=0; i < 5; i++){
+            color[j] += lineWidth*float(i*i) / abs(fract(t - 0.01*float(j)+float(i)*0.01)*5.0 - length(uv) + mod(uv.x+uv.y, 0.2));
+          }
+        }
+
+        gl_FragColor = vec4(color[0],color[1],color[2],1.0);
+      }
+    `
+
+    // Initialize Three.js scene
+    const camera = new THREE.Camera()
+    camera.position.z = 1
+
+    const scene = new THREE.Scene()
+    const geometry = new THREE.PlaneGeometry(2, 2)
+
+    const uniforms = {
+      time: { type: "f", value: 1.0 },
+      resolution: { type: "v2", value: new THREE.Vector2() },
+    }
+
+    const material = new THREE.ShaderMaterial({
+      uniforms: uniforms,
+      vertexShader: vertexShader,
+      fragmentShader: fragmentShader,
+    })
+
+    const mesh = new THREE.Mesh(geometry, material)
+    scene.add(mesh)
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true })
+    renderer.setPixelRatio(window.devicePixelRatio)
+
+    container.appendChild(renderer.domElement)
+
+    // Handle window resize
+    const onWindowResize = () => {
+      const width = container.clientWidth
+      const height = container.clientHeight
+      renderer.setSize(width, height)
+      uniforms.resolution.value.x = renderer.domElement.width
+      uniforms.resolution.value.y = renderer.domElement.height
+    }
+
+    // Initial resize
+    onWindowResize()
+    window.addEventListener("resize", onWindowResize, false)
+
+    // Animation loop
+    const animate = () => {
+      const animationId = requestAnimationFrame(animate)
+      uniforms.time.value += 0.05
+      renderer.render(scene, camera)
+
+      if (sceneRef.current) {
+        sceneRef.current.animationId = animationId
+      }
+    }
+
+    // Store scene references for cleanup
+    sceneRef.current = {
+      camera,
+      scene,
+      renderer,
+      uniforms,
+      animationId: 0,
+    }
+
+    // Start animation
+    animate()
+
+    // Cleanup function
+    return () => {
+      window.removeEventListener("resize", onWindowResize)
+
+      if (sceneRef.current) {
+        cancelAnimationFrame(sceneRef.current.animationId)
+
+        if (container && sceneRef.current.renderer.domElement) {
+          container.removeChild(sceneRef.current.renderer.domElement)
+        }
+
+        sceneRef.current.renderer.dispose()
+        geometry.dispose()
+        material.dispose()
+      }
+    }
+  }, [])
+
+  return (
+    <div
+      ref={containerRef}
+      className="w-full h-screen"
+      style={{
+        background: "#000",
+        overflow: "hidden",
+      }}
+    />
+  )
+}
+
+function IntroOverlay() {
+  const [visible, setVisible] = useState(true)
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setVisible(false), 5000)
+    return () => window.clearTimeout(timer)
+  }, [])
+
+  if (!visible) return null
+
+  return (
+    <div className="fixed inset-0 z-[100] overflow-hidden bg-black">
+      <div className="absolute inset-0">
+        <ShaderAnimation />
+      </div>
+
+      <div className="absolute inset-0 bg-black/25" />
+
+      <div className="absolute inset-0 flex items-center justify-center px-6">
+        <div className="relative">
+          <h2 className="intro-webnova-text relative text-center text-5xl font-black tracking-[-0.06em] text-blue-500 sm:text-7xl md:text-8xl lg:text-9xl">
+            WEB NOVA
+          </h2>
+          <div className="intro-webnova-glow absolute inset-0 text-center text-5xl font-black tracking-[-0.06em] text-blue-400 blur-xl sm:text-7xl md:text-8xl lg:text-9xl">
+            WEB NOVA
+          </div>
+          <div className="intro-light-sweep pointer-events-none absolute inset-y-[-12%] w-24 -skew-x-12 bg-gradient-to-r from-transparent via-white/90 to-transparent blur-md" />
+        </div>
+      </div>
+
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[10px] font-semibold uppercase tracking-[0.35em] text-blue-300/50">
+        WEBNOVA IA
+      </div>
+
+      <style>{`
+        @keyframes introLightSweep {
+          0% { left: -25%; opacity: 0; }
+          12% { opacity: 0.95; }
+          48% { opacity: 1; }
+          62% { opacity: 0.8; }
+          100% { left: 125%; opacity: 0; }
+        }
+        @keyframes introGlowPulse {
+          0%, 100% { opacity: 0.65; transform: scale(1); }
+          50% { opacity: 1; transform: scale(1.025); }
+        }
+        @keyframes introFadeOut {
+          0%, 82% { opacity: 1; }
+          100% { opacity: 0; }
+        }
+        .intro-light-sweep {
+          animation: introLightSweep 2.2s ease-in-out 0.45s forwards;
+        }
+        .intro-webnova-glow {
+          animation: introGlowPulse 2s ease-in-out infinite;
+        }
+        .fixed.z-\\[100\\] {
+          animation: introFadeOut 5s ease-in-out forwards;
+        }
+      `}</style>
+    </div>
+  )
+}
+
 function SalesPage() {
   const [openFaq,setOpenFaq]=useState<number|null>(null);
   const plans = [
@@ -22,7 +226,7 @@ function SalesPage() {
     { name:"Pro", price:"99", leads:"5.000 leads / mês", description:"Para equipes que prospectam diariamente.", features:["5.000 leads por mês","Busca avançada","Qualificação de leads","Exportações ilimitadas","Suporte prioritário"] },
     { name:"Scale", price:"299", leads:"20.000 leads / mês", description:"Para operações comerciais em escala.", features:["20.000 leads por mês","Filtros avançados","Qualificação automática","Exportações ilimitadas","Suporte prioritário"] },
   ];
-  return <main className="min-h-screen overflow-hidden bg-[#05070b] text-white">
+  return <><IntroOverlay /><main className="min-h-screen overflow-hidden bg-[#05070b] text-white">
     <style>{`@keyframes float{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-10px) scale(1.015)}}`}</style>
     <div className="pointer-events-none fixed inset-0 -z-0 bg-[radial-gradient(circle_at_50%_-10%,rgba(37,99,235,.22),transparent_38%),radial-gradient(circle_at_100%_35%,rgba(14,165,233,.10),transparent_28%)]"/>
     <nav className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-8">
@@ -68,8 +272,7 @@ function SalesPage() {
     <section id="faq" className="relative z-10 mx-auto max-w-3xl px-6 pb-24 lg:px-8"><div className="text-center"><p className="text-sm font-bold tracking-wider text-blue-400">FAQ</p><h2 className="mt-3 text-3xl font-semibold tracking-tight">Perguntas frequentes</h2></div><div className="mt-10 divide-y divide-white/8 rounded-2xl border border-white/8 bg-white/[0.02]">{faqs.map(([q,a],i)=><button key={q} onClick={()=>setOpenFaq(openFaq===i?null:i)} className="w-full px-6 py-5 text-left"><div className="flex items-center justify-between gap-5"><span className="text-sm font-medium">{q}</span><ChevronDown className={`h-4 w-4 shrink-0 text-slate-500 transition ${openFaq===i?"rotate-180":""}`}/></div>{openFaq===i&&<p className="mt-3 pr-8 text-sm leading-6 text-slate-500">{a}</p>}</button>)}</div></section>
 
     <footer className="relative z-10 border-t border-white/5 px-6 py-8 lg:px-8"><div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 text-xs text-slate-600 sm:flex-row"><div className="font-semibold text-slate-400">WEBNOVA IA</div><p>Prospecção inteligente para sua operação comercial.</p><div className="flex items-center gap-2"><ShieldCheck className="h-3.5 w-3.5"/> Segurança e privacidade</div></div></footer>
-  </main>;
-}
+  </main></>;\n}
 
 function SearchIcon(){ return <span className="[&>svg]:h-5 [&>svg]:w-5"><Target/></span>; }
 function HowStep({number,icon,title,text}:{number:string;icon:ReactNode;title:string;text:string}){return <div className="rounded-2xl border border-white/8 bg-white/[0.025] p-6 text-left"><div className="flex items-center justify-between"><span className="text-sm font-bold text-blue-400">{number}</span><span className="grid h-10 w-10 place-items-center rounded-xl bg-blue-500/10 text-blue-400 [&>svg]:h-4 [&>svg]:w-4">{icon}</span></div><h3 className="mt-8 text-lg font-semibold">{title}</h3><p className="mt-3 text-sm leading-6 text-slate-500">{text}</p></div>}
