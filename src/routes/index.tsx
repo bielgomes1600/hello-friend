@@ -184,11 +184,11 @@ function IntroOverlay() {
 
           <div className="relative inline-block">
             <h2 className="intro-webnova-text relative text-center text-5xl font-black tracking-[-0.095em] text-white sm:text-7xl md:text-8xl lg:text-[9rem]">
-              WEB<span className="text-blue-500">NOVA</span>
+              WEB <span className="text-blue-500">NOVA</span>
             </h2>
 
             <div className="intro-webnova-glow pointer-events-none absolute inset-0 text-center text-5xl font-black tracking-[-0.095em] text-blue-500 blur-2xl sm:text-7xl md:text-8xl lg:text-[9rem]">
-              WEB<span className="text-blue-500">NOVA</span>
+              WEB <span className="text-blue-500">NOVA</span>
             </div>
 
             <div className="intro-scanline pointer-events-none absolute left-[-8%] right-[-8%] top-1/2 h-px bg-gradient-to-r from-transparent via-blue-300 to-transparent" />
@@ -244,8 +244,17 @@ function IntroOverlay() {
         .intro-line {
           animation: introContentIn .55s ease-out .08s both;
         }
+        .intro-webnova-text {
+          background: linear-gradient(180deg, #ffffff 0%, #dbeafe 24%, #64748b 48%, #ffffff 67%, #94a3b8 100%);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          text-shadow: 0 0 28px rgba(37,99,235,.22), 0 2px 0 rgba(255,255,255,.18);
+          filter: drop-shadow(0 8px 22px rgba(0,0,0,.65));
+        }
         .intro-webnova-glow {
           animation: introGlowPulse 1.6s ease-in-out infinite;
+          opacity: .42;
         }
         .intro-light-sweep {
           animation: introLightSweep 1.35s cubic-bezier(.2,.75,.25,1) .62s forwards;
