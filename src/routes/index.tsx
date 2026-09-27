@@ -200,18 +200,11 @@ function IntroOverlay() {
           0%, 100% { opacity: 0.65; transform: scale(1); }
           50% { opacity: 1; transform: scale(1.025); }
         }
-        @keyframes introFadeOut {
-          0%, 82% { opacity: 1; }
-          100% { opacity: 0; }
-        }
         .intro-light-sweep {
           animation: introLightSweep 2.2s ease-in-out 0.45s forwards;
         }
         .intro-webnova-glow {
           animation: introGlowPulse 2s ease-in-out infinite;
-        }
-        .fixed.z-\\[100\\] {
-          animation: introFadeOut 5s ease-in-out forwards;
         }
       `}</style>
     </div>
@@ -272,7 +265,8 @@ function SalesPage() {
     <section id="faq" className="relative z-10 mx-auto max-w-3xl px-6 pb-24 lg:px-8"><div className="text-center"><p className="text-sm font-bold tracking-wider text-blue-400">FAQ</p><h2 className="mt-3 text-3xl font-semibold tracking-tight">Perguntas frequentes</h2></div><div className="mt-10 divide-y divide-white/8 rounded-2xl border border-white/8 bg-white/[0.02]">{faqs.map(([q,a],i)=><button key={q} onClick={()=>setOpenFaq(openFaq===i?null:i)} className="w-full px-6 py-5 text-left"><div className="flex items-center justify-between gap-5"><span className="text-sm font-medium">{q}</span><ChevronDown className={`h-4 w-4 shrink-0 text-slate-500 transition ${openFaq===i?"rotate-180":""}`}/></div>{openFaq===i&&<p className="mt-3 pr-8 text-sm leading-6 text-slate-500">{a}</p>}</button>)}</div></section>
 
     <footer className="relative z-10 border-t border-white/5 px-6 py-8 lg:px-8"><div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 text-xs text-slate-600 sm:flex-row"><div className="font-semibold text-slate-400">WEBNOVA IA</div><p>Prospecção inteligente para sua operação comercial.</p><div className="flex items-center gap-2"><ShieldCheck className="h-3.5 w-3.5"/> Segurança e privacidade</div></div></footer>
-  </main></>;\n}
+  </main></>;
+}
 
 function SearchIcon(){ return <span className="[&>svg]:h-5 [&>svg]:w-5"><Target/></span>; }
 function HowStep({number,icon,title,text}:{number:string;icon:ReactNode;title:string;text:string}){return <div className="rounded-2xl border border-white/8 bg-white/[0.025] p-6 text-left"><div className="flex items-center justify-between"><span className="text-sm font-bold text-blue-400">{number}</span><span className="grid h-10 w-10 place-items-center rounded-xl bg-blue-500/10 text-blue-400 [&>svg]:h-4 [&>svg]:w-4">{icon}</span></div><h3 className="mt-8 text-lg font-semibold">{title}</h3><p className="mt-3 text-sm leading-6 text-slate-500">{text}</p></div>}
