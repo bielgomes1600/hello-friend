@@ -183,7 +183,7 @@ function SalesPage() {
 
       <section id="planos" className="relative z-10 mx-auto max-w-7xl px-6 py-24 lg:px-8">
         <div className="text-center"><p className="text-sm font-bold tracking-wider text-blue-400">ASSINATURA</p><h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Escolha seu plano e comece a prospectar.</h2><p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-slate-500">Planos mensais para diferentes volumes de prospecção.</p></div>
-        <div className="mx-auto mt-14 grid max-w-5xl gap-5 lg:grid-cols-3">
+        <div className="mx-auto mt-14 grid max-w-7xl gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {plans.map((plan) => (
             <div key={plan.name} className={`relative rounded-2xl border p-7 ${plan.popular ? "border-blue-500/60 bg-blue-500/[0.06] shadow-2xl shadow-blue-950/20" : "border-white/8 bg-white/[0.02]"}`}>
               {plan.popular && <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-blue-600 px-3 py-1 text-[10px] font-bold uppercase tracking-wider">Mais escolhido</div>}
