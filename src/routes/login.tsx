@@ -11,14 +11,14 @@ function LoginPage() {
       <div className="grid min-h-screen lg:grid-cols-2">
         <section className="relative hidden overflow-hidden border-r border-white/5 bg-[#080b11] lg:flex lg:flex-col lg:justify-between p-12">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(37,99,235,.20),transparent_42%)]" />
-          <Link to="/" className="relative flex items-center gap-2 font-bold"><span className="grid h-9 w-9 place-items-center rounded-xl bg-blue-600"><Target className="h-5 w-5" /></span>Lead<span className="text-blue-400">Flow</span></Link>
+          <Link to="/" className="relative flex items-center gap-2 font-bold"><span className="grid h-9 w-9 place-items-center rounded-xl bg-blue-600"><Target className="h-5 w-5" /></span>WEBNOVA IA</Link>
           <div className="relative max-w-lg"><p className="text-sm font-semibold text-blue-400">ÁREA DO USUÁRIO</p><h1 className="mt-4 text-5xl font-semibold tracking-tight">Encontre seus próximos clientes.</h1><p className="mt-5 leading-7 text-slate-400">Acesse sua plataforma de prospecção e transforme pesquisas em oportunidades comerciais.</p></div>
-          <p className="relative text-xs text-slate-600">© 2026 LeadFlow</p>
+          <p className="relative text-xs text-slate-600">© 2026 WEBNOVA IA</p>
         </section>
         <section className="flex items-center justify-center px-6 py-12">
           <div className="w-full max-w-md">
             <Link to="/" className="mb-10 inline-flex items-center gap-2 text-sm text-slate-500 hover:text-white"><ArrowLeft className="h-4 w-4" /> Voltar para o site</Link>
-            <div className="mb-8 lg:hidden flex items-center gap-2 font-bold"><span className="grid h-9 w-9 place-items-center rounded-xl bg-blue-600"><Target className="h-5 w-5" /></span>Lead<span className="text-blue-400">Flow</span></div>
+            <div className="mb-8 lg:hidden flex items-center gap-2 font-bold"><span className="grid h-9 w-9 place-items-center rounded-xl bg-blue-600"><Target className="h-5 w-5" /></span>WEBNOVA IA</div>
             <h2 className="text-3xl font-semibold tracking-tight">Entrar na sua conta</h2>
             <p className="mt-2 text-sm text-slate-500">Acesse seu painel de leads.</p>
             <form className="mt-8 space-y-5" onSubmit={(e) => e.preventDefault()}>
