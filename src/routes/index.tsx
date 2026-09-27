@@ -69,7 +69,7 @@ function SalesPage() {
           <span className="grid h-9 w-9 place-items-center rounded-xl bg-blue-600 shadow-lg shadow-blue-600/25">
             <Target className="h-5 w-5" />
           </span>
-          <span className="text-lg">Lead<span className="text-blue-400">Flow</span></span>
+          <span className="text-lg">WEBNOVA IA</span>
         </a>
         <div className="hidden items-center gap-7 text-sm text-slate-400 md:flex">
           <a href="#beneficios" className="hover:text-white">Benefícios</a>
@@ -214,7 +214,7 @@ function SalesPage() {
       </section>
 
       <footer className="relative z-10 border-t border-white/5 px-6 py-8 lg:px-8">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 text-xs text-slate-600 sm:flex-row"><div className="font-semibold text-slate-400">Lead<span className="text-blue-400">Flow</span></div><p>Prospecção inteligente para sua operação comercial.</p><div className="flex items-center gap-2"><ShieldCheck className="h-3.5 w-3.5" /> Segurança e privacidade</div></div>
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 text-xs text-slate-600 sm:flex-row"><div className="font-semibold text-slate-400">WEBNOVA IA</div><p>Prospecção inteligente para sua operação comercial.</p><div className="flex items-center gap-2"><ShieldCheck className="h-3.5 w-3.5" /> Segurança e privacidade</div></div>
       </footer>
     </main>
   );
