@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, Eye, EyeOff, Target } from "lucide-react";
 import { useState } from "react";
 
@@ -6,6 +6,7 @@ export const Route = createFileRoute("/login")({ component: LoginPage });
 
 function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
   return (
     <main className="min-h-screen bg-[#05070b] text-white">
       <div className="grid min-h-screen lg:grid-cols-2">
@@ -21,10 +22,10 @@ function LoginPage() {
             <div className="mb-8 lg:hidden flex items-center gap-2 font-bold"><span className="grid h-9 w-9 place-items-center rounded-xl bg-blue-600"><Target className="h-5 w-5" /></span>WEBNOVA IA</div>
             <h2 className="text-3xl font-semibold tracking-tight">Entrar na sua conta</h2>
             <p className="mt-2 text-sm text-slate-500">Acesse seu painel de leads.</p>
-            <form className="mt-8 space-y-5" onSubmit={(e) => e.preventDefault()}>
-              <div><label className="text-sm font-medium text-slate-300">E-mail</label><input type="email" placeholder="voce@empresa.com" className="mt-2 h-12 w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 text-sm outline-none placeholder:text-slate-700 focus:border-blue-500/60" /></div>
-              <div><div className="flex justify-between"><label className="text-sm font-medium text-slate-300">Senha</label><button type="button" className="text-xs text-blue-400">Esqueci minha senha</button></div><div className="relative mt-2"><input type={showPassword ? "text" : "password"} placeholder="••••••••" className="h-12 w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 pr-12 text-sm outline-none placeholder:text-slate-700 focus:border-blue-500/60" /><button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-3 text-slate-500">{showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}</button></div></div>
-              <Link to="/dashboard" className="flex h-12 w-full items-center justify-center rounded-xl bg-blue-600 text-sm font-bold hover:bg-blue-500">Entrar</Link>
+            <form className="mt-8 space-y-5" onSubmit={(e) => { e.preventDefault(); console.log("[WEBNOVA IA] Login mock — conectar autenticação real aqui"); navigate({ to: "/dashboard" }); }}>
+              <div><label htmlFor="email" className="text-sm font-medium text-slate-300">E-mail</label><input id="email" name="email" type="email" placeholder="voce@empresa.com" className="mt-2 h-12 w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 text-sm outline-none placeholder:text-slate-700 focus:border-blue-500/60" /></div>
+              <div><div className="flex justify-between"><label htmlFor="password" className="text-sm font-medium text-slate-300">Senha</label><button type="button" onClick={() => console.log("[WEBNOVA IA] Recuperação de senha — conectar rota futura")} className="text-xs text-blue-400">Esqueci minha senha</button></div><div className="relative mt-2"><input id="password" name="password" type={showPassword ? "text" : "password"} placeholder="••••••••" className="h-12 w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 pr-12 text-sm outline-none placeholder:text-slate-700 focus:border-blue-500/60" /><button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-3 text-slate-500">{showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}</button></div></div>
+              <button type="submit" className="flex h-12 w-full items-center justify-center rounded-xl bg-blue-600 text-sm font-bold hover:bg-blue-500">Entrar</button>
             </form>
             <p className="mt-7 text-center text-sm text-slate-500">Ainda não tem uma conta? <Link to="/#planos" className="font-semibold text-blue-400 hover:text-blue-300">Começar grátis</Link></p>
             <p className="mt-10 text-center text-[11px] leading-5 text-slate-700">Ao continuar, você concorda com os termos de uso e a política de privacidade.</p>
