@@ -4,6 +4,7 @@ import {
   Sparkles, Target, Users, Zap,
 } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
+import { FloatingPaths } from "@/components/ui/background-paths";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -176,7 +177,7 @@ function SalesPage() {
     { name:"Pro", price:"99", leads:"5.000 leads / mês", description:"Para equipes que prospectam diariamente.", features:["5.000 leads por mês","Busca avançada","Qualificação de leads","Exportações ilimitadas","Suporte prioritário"] },
     { name:"Scale", price:"299", leads:"20.000 leads / mês", description:"Para operações comerciais em escala.", features:["20.000 leads por mês","Filtros avançados","Qualificação automática","Exportações ilimitadas","Suporte prioritário"] },
   ];
-  return <><IntroOverlay /><main className="min-h-screen overflow-hidden bg-[#05070b] text-white">
+  return <><IntroOverlay /><main className="dark min-h-screen overflow-hidden bg-[#05070b] text-white">
     <style>{`
       @keyframes float{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-10px) scale(1.015)}}
       @keyframes navLogoGlow{0%,100%{filter:drop-shadow(0 0 5px rgba(37,99,235,.4))}50%{filter:drop-shadow(0 0 11px rgba(59,130,246,.85))}}
@@ -197,8 +198,13 @@ function SalesPage() {
       <a href="/login" className="rounded-xl border border-white/10 bg-white/[0.05] px-4 py-2.5 text-sm font-semibold hover:bg-white/[0.09]">Entrar</a>
     </nav>
 
-    <section className="relative z-10 mx-auto max-w-7xl px-6 pb-24 pt-20 lg:px-8 lg:pt-28">
-      <div className="mx-auto max-w-4xl text-center">
+    <section className="relative z-10 overflow-hidden px-6 pb-28 pt-20 lg:px-8 lg:pb-36 lg:pt-28">
+      <div aria-hidden="true" className="absolute inset-0 overflow-hidden opacity-55 [mask-image:linear-gradient(to_bottom,black_8%,black_76%,transparent_100%)]">
+        <FloatingPaths position={1} />
+        <FloatingPaths position={-1} />
+      </div>
+      <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_50%_42%,rgba(37,99,235,.16),transparent_42%),linear-gradient(to_bottom,transparent_72%,#05070b_100%)]" />
+      <div className="relative z-10 mx-auto max-w-4xl text-center">
         <div className="mx-auto mb-7 inline-flex items-center gap-2 rounded-full border border-blue-400/20 bg-blue-500/10 px-4 py-2 text-xs font-semibold text-blue-300"><Sparkles className="h-3.5 w-3.5"/>SaaS de prospecção B2B</div>
         <h1 className="text-5xl font-semibold leading-[1.03] tracking-[-0.045em] sm:text-6xl lg:text-7xl">Pare de perder horas procurando clientes.<span className="mt-3 block bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500 bg-clip-text text-transparent">Encontre seus próximos leads.</span></h1>
         <p className="mx-auto mt-7 max-w-2xl text-base leading-7 text-slate-400 sm:text-lg">Tenha uma plataforma para descobrir empresas, filtrar oportunidades e criar listas de prospecção sem depender de pesquisas manuais.</p>
@@ -206,7 +212,10 @@ function SalesPage() {
         <div className="mt-5 flex items-center justify-center gap-5 text-xs text-slate-600"><span className="flex items-center gap-1.5"><Check className="h-3.5 w-3.5 text-emerald-400"/>Sem fidelidade</span><span className="flex items-center gap-1.5"><Check className="h-3.5 w-3.5 text-emerald-400"/>Cancele quando quiser</span></div>
       </div>
 
-      <div id="como-funciona" className="mx-auto mt-20 max-w-6xl">
+    </section>
+
+    <section id="como-funciona" className="relative z-10 mx-auto max-w-6xl px-6 pb-24 lg:px-8">
+      <div>
         <div className="rounded-3xl border border-white/10 bg-[#0b0f16]/90 p-6 shadow-2xl shadow-blue-950/30 sm:p-10">
           <div className="text-center"><p className="text-sm font-bold tracking-wider text-blue-400">COMO FUNCIONA</p><h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Encontre empresas em poucos passos.</h2><p className="mx-auto mt-4 max-w-2xl leading-7 text-slate-400">A WEBNOVA IA transforma a pesquisa manual em um processo simples para você descobrir, analisar e organizar novos leads.</p></div>
           <div className="mt-12 grid gap-5 md:grid-cols-3">
