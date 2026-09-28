@@ -1,5 +1,6 @@
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import viteReact from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
 
 export default defineConfig({
@@ -7,5 +8,12 @@ export default defineConfig({
     host: "0.0.0.0",
     port: 5173,
   },
-  plugins: [tanstackStart(), viteReact()],
+  resolve: {
+    tsconfigPaths: true,
+  },
+  plugins: [
+    tanstackStart(),
+    tailwindcss(),
+    viteReact(),
+  ],
 });
