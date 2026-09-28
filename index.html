@@ -60,6 +60,91 @@
     .custom-checkbox{width:1rem;height:1rem;accent-color:#8b5cf6}
     @media(prefers-reduced-motion:reduce){.animate-element,.animate-slide-right,.animate-testimonial{animation:none}}
 
+    #dashboard-page{--background:#05070d;--card:#0b101b;--border:#202b3e;--muted-foreground:#9baac1;--primary:#3b82f6;--foreground:#edf4ff;background:var(--background);color:var(--foreground)}
+    .wn-dash-root{display:flex;min-height:100dvh;max-width:100%;overflow:clip;font-family:Inter,ui-sans-serif,system-ui,sans-serif}
+    .wn-dash-root [hidden]{display:none!important}
+    .wn-dash-root :is(button,input):focus-visible{outline:2px solid #93c5fd;outline-offset:3px}
+    .wn-dash-sidebar{position:relative;z-index:42;display:flex;flex:0 0 260px;flex-direction:column;gap:26px;min-width:0;min-height:100dvh;padding:20px 14px;background:#080d17;border-right:1px solid var(--border);transition:flex-basis .24s ease,width .24s ease,transform .24s ease}
+    .wn-dash-sidebar-top,.wn-dash-header,.wn-dash-header-left,.wn-dash-header-right,.wn-dash-card-top,.wn-dash-row-top,.wn-dash-row-footer{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .wn-dash-logo{min-width:0;overflow:hidden;white-space:nowrap;font-size:15px;font-weight:800;letter-spacing:-.035em;color:#f8fafc;text-decoration:none}
+    .wn-dash-brand-mark{display:grid;flex:none;place-items:center;width:34px;height:34px;border:1px solid #365ca0;border-radius:11px;background:linear-gradient(145deg,#1d4ed8,#0b1840);color:#fff}
+    .wn-dash-icon-button{display:grid;flex:none;place-items:center;width:38px;height:38px;padding:0;border:1px solid transparent;border-radius:11px;background:transparent;color:#bac9e0;cursor:pointer;transition:background .2s,color .2s}
+    .wn-dash-icon-button:hover,.wn-dash-nav-button:hover{background:#14223a;color:#fff}
+    .wn-dash-icon-button svg,.wn-dash-stat-icon svg,.wn-dash-nav-icon svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+    .wn-dash-sidebar-label{margin:6px 12px 10px;color:var(--muted-foreground);font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+    .wn-dash-nav{display:grid;gap:4px}
+    .wn-dash-nav-button{display:flex;align-items:center;gap:12px;min-height:44px;width:100%;padding:0 12px;border:0;border-radius:11px;background:transparent;color:#aabbd3;text-align:left;font:600 13px Inter,ui-sans-serif,system-ui,sans-serif;cursor:pointer;transition:background .2s,color .2s}
+    .wn-dash-nav-button.wn-dash-active{background:#17305a;color:#eaf2ff;box-shadow:inset 3px 0 0 var(--primary)}
+    .wn-dash-nav-icon{display:grid;flex:none;place-items:center;width:22px;height:22px;font-size:18px}
+    .wn-dash-nav-text{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .wn-dash-sidebar-bottom{margin-top:auto;padding:14px 12px;border-top:1px solid var(--border);color:var(--muted-foreground);font-size:12px}
+    .wn-dash-sidebar-bottom p{margin:0 0 12px}
+    .wn-dash-sidebar-bottom button{border:0;background:none;color:#c4d6f3;cursor:pointer;font:inherit}
+    .wn-dash-inset{flex:1;min-width:0;max-width:100%;background:radial-gradient(ellipse 70% 280px at 60% 0%,#102043 0%,transparent 100%),var(--background)}
+    .wn-dash-header{position:sticky;top:0;z-index:30;min-height:64px;padding:0 18px;border-bottom:1px solid var(--border);background:rgba(5,7,13,.9);backdrop-filter:blur(16px)}
+    .wn-dash-header-left{justify-content:flex-start;min-width:0;flex:1}
+    .wn-dash-header-title{margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:clamp(14px,2vw,18px);font-weight:650}
+    .wn-dash-header-right{flex:none;gap:2px}
+    .wn-dash-avatar{display:grid;flex:none;place-items:center;width:34px;height:34px;border:1px solid #4167aa;border-radius:50%;background:#172d56;color:#dceaff;font-size:12px;font-weight:750;overflow:hidden}
+    .wn-dash-avatar img{width:100%;height:100%;object-fit:cover}
+    .wn-dash-popover{position:absolute;right:16px;top:58px;z-index:55;width:min(300px,calc(100vw - 32px));padding:16px;border:1px solid var(--border);border-radius:16px;background:#10182a;box-shadow:0 20px 50px #0008;color:var(--foreground);font-size:13px}
+    .wn-dash-popover p{margin:8px 0 0;color:var(--muted-foreground);line-height:1.5}
+    .wn-dash-popover button{display:block;margin-top:12px;padding:8px 10px;border:1px solid var(--border);border-radius:9px;background:#15233b;color:#e4edfb;cursor:pointer}
+    .wn-dash-main{width:min(100%,1500px);min-width:0;margin:0 auto;padding:26px clamp(16px,3vw,36px) 48px}
+    .wn-dash-intro{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:24px}
+    .wn-dash-intro h2{margin:0;font-size:clamp(22px,3vw,30px);letter-spacing:-.04em}
+    .wn-dash-intro p,.wn-dash-card-heading p,.wn-dash-hint,.wn-dash-row-description{margin:6px 0 0;color:var(--muted-foreground);font-size:12px;line-height:1.5}
+    .wn-dash-primary-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:0 16px;border:1px solid #4687fb;border-radius:11px;background:#2563eb;color:#fff;font:650 13px Inter,ui-sans-serif,system-ui,sans-serif;cursor:pointer;white-space:nowrap}
+    .wn-dash-primary-button:hover{background:#3b82f6}
+    .wn-dash-stats{display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
+    .wn-dash-card{min-width:0;border:1px solid var(--border);border-radius:17px;background:linear-gradient(145deg,#0d1523,#0a0f19);box-shadow:0 16px 32px #0002}
+    .wn-dash-stat{padding:19px;animation:wnDashEnter .5s ease both}
+    .wn-dash-stat:nth-child(2){animation-delay:.07s}.wn-dash-stat:nth-child(3){animation-delay:.14s}.wn-dash-stat:nth-child(4){animation-delay:.21s}
+    .wn-dash-stat-label{color:#b5c3d8;font-size:12px;font-weight:600}
+    .wn-dash-stat-icon{display:grid;place-items:center;width:32px;height:32px;border:1px solid #254775;border-radius:10px;background:#142a4a;color:#91bdff}
+    .wn-dash-stat-value{display:block;margin:16px 0 0;font-size:27px;font-weight:750;font-variant-numeric:tabular-nums;letter-spacing:-.04em}
+    .wn-dash-card-heading{padding:19px 19px 0}
+    .wn-dash-card-heading h3{margin:0;font-size:16px;font-weight:680}
+    .wn-dash-chart-card{margin-top:18px;animation:wnDashEnter .56s .13s ease both}
+    .wn-dash-chart-wrap{position:relative;min-width:0;padding:12px 16px 0}
+    .wn-dash-chart-wrap svg{display:block;width:100%;height:auto;min-height:170px;overflow:visible}
+    .wn-dash-chart-wrap svg text{font:11px Inter,ui-sans-serif,system-ui,sans-serif;fill:#9baac1}
+    .wn-dash-chart-wrap svg .wn-dash-chart-point{cursor:pointer}
+    .wn-dash-chart-tooltip{position:absolute;top:16px;left:58px;z-index:2;padding:9px 11px;border:1px solid #355287;border-radius:10px;background:#111d32;box-shadow:0 12px 30px #0008;color:#f1f6ff;font-size:12px;pointer-events:none}
+    .wn-dash-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:18px;padding:10px 14px 18px;color:#c3d0e2;font-size:11px}
+    .wn-dash-legend span{display:inline-flex;align-items:center;gap:7px}
+    .wn-dash-line-dashed,.wn-dash-line-solid{display:inline-block;width:20px;border-top:2px solid #77b3ff}.wn-dash-line-dashed{border-top-style:dashed}.wn-dash-line-solid{border-color:#408aff}
+    .wn-dash-columns{display:grid;grid-template-columns:minmax(0,1fr);gap:18px;margin-top:18px}
+    .wn-dash-columns .wn-dash-card{animation:wnDashEnter .56s .2s ease both}
+    .wn-dash-list{display:grid;gap:16px;margin:0;padding:18px;list-style:none}
+    .wn-dash-site-row{min-width:0;padding-bottom:15px;border-bottom:1px solid var(--border)}
+    .wn-dash-site-row:last-child{border-bottom:0;padding-bottom:0}
+    .wn-dash-row-top strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px}
+    .wn-dash-badge{flex:none;padding:5px 8px;border-radius:7px;background:#245bb4;color:#fff;font-size:10px}.wn-dash-badge-secondary{background:#1d344d;color:#b9d6f8}.wn-dash-badge-outline{border:1px solid #536785;background:transparent;color:#c8d3e3}
+    .wn-dash-progress{width:100%;height:7px;margin:12px 0 8px;overflow:hidden;border-radius:9px;background:#1a2b42}.wn-dash-progress span{display:block;height:100%;border-radius:9px;background:var(--primary)}
+    .wn-dash-row-footer{color:var(--muted-foreground);font-size:11px}.wn-dash-row-footer>span:first-child{display:flex;gap:4px}
+    .wn-dash-empty{padding:32px 20px;text-align:center;color:var(--muted-foreground);font-size:13px;line-height:1.5}
+    .wn-dash-empty strong{display:block;margin-bottom:5px;color:#e5efff;font-size:14px}
+    .wn-dash-empty .wn-dash-primary-button{margin-top:14px}
+    .wn-dash-leads{margin-top:18px}
+    .wn-dash-lead-tools{display:flex;flex-wrap:wrap;gap:10px;padding:18px}
+    .wn-dash-lead-tools input{flex:1;min-width:min(100%,240px);min-height:42px;padding:0 12px;border:1px solid #34455d;border-radius:10px;background:#0b1524;color:#edf4ff;font:inherit}
+    .wn-dash-lead-tools button{padding:0 12px;border:1px solid #34455d;border-radius:10px;background:#13223a;color:#e0eafa;cursor:pointer}.wn-dash-lead-tools button:disabled{opacity:.45;cursor:not-allowed}
+    .wn-dash-table-scroll{max-width:100%;overflow-x:auto}
+    .wn-dash-table{width:100%;min-width:620px;border-collapse:collapse;text-align:left;font-size:12px}.wn-dash-table th,.wn-dash-table td{padding:12px 16px;border-top:1px solid var(--border)}.wn-dash-table th{color:#bac8db;font-weight:600}.wn-dash-table td{color:#d9e3f1}
+    .wn-dash-overlay{display:none}
+    .wn-dash-collapsed .wn-dash-sidebar{flex-basis:74px;padding-inline:10px}
+    .wn-dash-collapsed .wn-dash-logo,.wn-dash-collapsed .wn-dash-sidebar-label,.wn-dash-collapsed .wn-dash-nav-text,.wn-dash-collapsed .wn-dash-sidebar-bottom{display:none}
+    .wn-dash-collapsed .wn-dash-nav-button{justify-content:center;padding-inline:0}
+    @keyframes wnDashEnter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    @media(min-width:640px){.wn-dash-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:639px){.wn-dash-chart-wrap{overflow-x:auto}.wn-dash-chart-wrap svg{min-width:560px}}
+    @media(min-width:1024px){.wn-dash-columns{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(min-width:1280px){.wn-dash-stats{grid-template-columns:repeat(4,minmax(0,1fr))}}
+    @media(min-width:768px){#dashboard-page #close-menu{display:none}}
+    @media(max-width:767px){#dashboard-page #collapse-sidebar{display:none}.wn-dash-sidebar{position:fixed;inset:0 auto 0 0;width:min(280px,85vw);min-height:100dvh;transform:translateX(-101%);box-shadow:16px 0 35px #0005}.wn-dash-root.wn-dash-drawer-open .wn-dash-sidebar{transform:translateX(0)}.wn-dash-overlay{position:fixed;inset:0;z-index:41;display:block;width:100%;border:0;background:#000a}.wn-dash-intro{align-items:flex-start;flex-direction:column}.wn-dash-header{padding:0 12px}.wn-dash-icon-button{width:34px;height:34px}.wn-dash-collapsed .wn-dash-sidebar{width:min(280px,85vw);padding-inline:14px}.wn-dash-collapsed .wn-dash-logo,.wn-dash-collapsed .wn-dash-sidebar-label,.wn-dash-collapsed .wn-dash-nav-text,.wn-dash-collapsed .wn-dash-sidebar-bottom{display:block}.wn-dash-collapsed .wn-dash-nav-button{justify-content:flex-start;padding-inline:12px}}
+    @media(prefers-reduced-motion:reduce){.wn-dash-root .wn-dash-card,.wn-dash-sidebar{animation:none!important;transition:none!important}}
+
 </style>
 </head>
 <body>
@@ -150,17 +235,59 @@
     </div>
   </section>
 
-  <section id="dashboard-page" class="page min-h-screen bg-[#030509] text-white"><div class="flex min-h-screen">
-    <div id="mobile-backdrop" class="fixed inset-0 z-40 hidden bg-black/70 backdrop-blur-sm lg:hidden"></div>
-    <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 flex w-[270px] -translate-x-full flex-col border-r border-white/[.07] bg-[#070a10] p-5 transition-transform lg:static lg:translate-x-0">
-      <div class="flex items-center justify-between gap-2"><button data-route="/" class="flex min-w-0 items-center gap-2.5 font-bold" aria-label="WEBNOVA IA"><span class="webnova-logo whitespace-nowrap">WEBNOVA IA</span></button><button id="close-menu" class="rounded-lg p-2 text-slate-500 hover:bg-white/5 hover:text-white lg:hidden" aria-label="Fechar menu">×</button><button id="collapse-sidebar" class="hidden rounded-lg p-2 text-slate-500 transition hover:bg-white/5 hover:text-white lg:block" aria-label="Recolher sidebar" title="Recolher sidebar">‹</button></div>
-      <div class="mt-9"><p class="mb-3 px-3 text-[10px] font-semibold uppercase tracking-[.18em] text-slate-600">Workspace</p><nav class="space-y-1.5"><button data-side="Painel central" class="side-btn active">▦ <span>Painel central</span></button><button data-side="Encontrar leads" class="side-btn">⌕ <span>Encontrar leads</span><b>NEW</b></button><button data-side="Minhas listas" class="side-btn">▤ <span>Minhas listas</span></button><button data-side="Relatórios" class="side-btn">▥ <span>Relatórios</span></button><button data-side="Configurações" class="side-btn">⚙ <span>Configurações</span></button></nav></div>
-      <div class="mt-auto"><div class="rounded-2xl border border-blue-500/15 bg-blue-500/[.08] p-4"><div class="flex justify-between text-xs font-semibold"><span>Plano Starter</span><span>↯</span></div><p class="mt-1 text-[11px] text-slate-500">740 de 1.000 leads usados</p><div class="mt-3 h-1.5 overflow-hidden rounded-full bg-white/[.07]"><div class="h-full w-[74%] rounded-full bg-blue-500"></div></div><button data-route="/#planos" class="mt-3 text-xs font-semibold text-blue-400">Fazer upgrade →</button></div><button data-route="/" class="mt-5 flex items-center gap-3 px-3 py-2.5 text-sm text-slate-600 hover:text-white">↪ Sair</button></div>
-    </aside>
-    <section class="min-w-0 flex-1"><header class="sticky top-0 z-30 flex h-[72px] items-center justify-between border-b border-white/[.06] bg-[#030509]/90 px-4 backdrop-blur-xl sm:px-6 lg:px-9"><div class="flex min-w-0 items-center gap-3"><button id="open-menu" class="rounded-xl border border-white/[.07] p-2.5 text-slate-400 transition hover:border-blue-500/30 hover:bg-blue-500/10 hover:text-blue-300 lg:hidden" aria-label="Abrir menu">☰</button><div class="min-w-0"><p id="page-title" class="truncate text-sm font-semibold">Painel central</p><p class="hidden truncate text-[11px] text-slate-600 sm:block">Gerencie sua prospecção em um só lugar</p></div></div><div class="relative flex items-center gap-2.5"><button id="notifications-button" class="relative grid h-10 w-10 place-items-center rounded-xl border border-white/[.07] text-slate-500 transition hover:border-blue-500/30 hover:bg-blue-500/10 hover:text-blue-300" aria-label="Abrir notificações" aria-expanded="false">●<span class="absolute right-2 top-2 h-1.5 w-1.5 rounded-full bg-blue-400"></span></button><div id="notifications-panel" class="dashboard-popover absolute right-0 top-12 z-50 hidden w-[280px] rounded-2xl border border-white/[.08] bg-[#0a0f18] p-4 shadow-2xl shadow-black/40"><div class="flex items-center justify-between"><strong class="text-sm">Notificações</strong><span class="rounded-full bg-blue-500/10 px-2 py-1 text-[9px] font-semibold text-blue-300">3 novas</span></div><div class="mt-3 space-y-2"><div class="rounded-xl bg-white/[.025] p-3"><p class="text-xs font-medium">Sua pesquisa terminou</p><p class="mt-1 text-[10px] text-slate-500">42 empresas estão prontas para análise.</p></div><div class="rounded-xl bg-white/[.025] p-3"><p class="text-xs font-medium">Plano Starter</p><p class="mt-1 text-[10px] text-slate-500">Você já utilizou 74% do limite mensal.</p></div></div></div><button id="user-menu-button" class="flex items-center gap-2 rounded-xl border border-white/[.07] px-2.5 py-1.5 transition hover:border-blue-500/30 hover:bg-white/[.03]" aria-label="Abrir menu do usuário" aria-expanded="false"><span class="grid h-8 w-8 place-items-center rounded-lg bg-blue-500/10 text-xs font-bold text-blue-300">RU</span><span class="hidden text-xs font-medium sm:block">Ruan</span><span class="text-slate-600">⌄</span></button><div id="user-menu-panel" class="dashboard-popover absolute right-0 top-12 z-50 hidden w-48 rounded-2xl border border-white/[.08] bg-[#0a0f18] p-2 shadow-2xl shadow-black/40"><div class="border-b border-white/[.06] px-3 py-2"><p class="text-xs font-semibold">Ruan</p><p class="mt-0.5 text-[10px] text-slate-600">Workspace WEBNOVA IA</p></div><button id="dashboard-settings" class="mt-1 w-full rounded-xl px-3 py-2 text-left text-xs text-slate-400 transition hover:bg-white/[.04] hover:text-white">Configurações</button><button data-route="/" class="w-full rounded-xl px-3 py-2 text-left text-xs text-slate-400 transition hover:bg-white/[.04] hover:text-white">Sair</button></div></div></header>
-      <div class="mx-auto max-w-[1500px] p-4 sm:p-6 lg:p-9"><div id="dashboard-content"></div></div>
-    </section>
-  </div></section>
+  <section id="dashboard-page" class="page">
+    <div id="wn-dash-root" class="wn-dash-root">
+      <button id="mobile-backdrop" class="wn-dash-overlay" type="button" aria-label="Fechar menu" hidden></button>
+      <aside id="sidebar" class="wn-dash-sidebar" aria-label="Navegação do painel">
+        <div class="wn-dash-sidebar-top">
+          <a href="/" data-route="/" class="wn-dash-logo"><span class="wn-dash-brand-mark" aria-hidden="true">W</span> WEBNOVA IA</a>
+          <button id="close-menu" class="wn-dash-icon-button" type="button" aria-label="Fechar menu">×</button>
+          <button id="collapse-sidebar" class="wn-dash-icon-button" type="button" aria-label="Recolher sidebar" title="Recolher sidebar">‹</button>
+        </div>
+        <div><p class="wn-dash-sidebar-label">Workspace</p>
+          <nav class="wn-dash-nav" aria-label="Menu principal">
+            <button class="wn-dash-nav-button" type="button" data-side="Criar site" title="Criar site"><span class="wn-dash-nav-icon" aria-hidden="true">＋</span><span class="wn-dash-nav-text">Criar site</span></button>
+            <button class="wn-dash-nav-button wn-dash-active" type="button" data-side="Sites gerados" title="Sites gerados" aria-current="page"><span class="wn-dash-nav-icon" aria-hidden="true">▦</span><span class="wn-dash-nav-text">Sites gerados</span></button>
+            <button class="wn-dash-nav-button" type="button" data-side="Financeiro" title="Financeiro"><span class="wn-dash-nav-icon" aria-hidden="true">◇</span><span class="wn-dash-nav-text">Financeiro</span></button>
+            <button class="wn-dash-nav-button" type="button" data-side="Crédito" title="Crédito"><span class="wn-dash-nav-icon" aria-hidden="true">✦</span><span class="wn-dash-nav-text">Crédito</span></button>
+            <button class="wn-dash-nav-button" type="button" data-side="Suporte" title="Suporte"><span class="wn-dash-nav-icon" aria-hidden="true">◌</span><span class="wn-dash-nav-text">Suporte</span></button>
+            <button class="wn-dash-nav-button" type="button" data-side="Configurações" title="Configurações"><span class="wn-dash-nav-icon" aria-hidden="true">⚙</span><span class="wn-dash-nav-text">Configurações</span></button>
+          </nav>
+        </div>
+        <div class="wn-dash-sidebar-bottom"><p id="wn-dash-plan-summary">Plano não informado</p><button type="button" data-route="/">↪ Sair</button></div>
+      </aside>
+      <div class="wn-dash-inset">
+        <header class="wn-dash-header">
+          <div class="wn-dash-header-left"><button id="open-menu" class="wn-dash-icon-button" type="button" aria-label="Alternar menu" aria-expanded="false" aria-controls="sidebar">☰</button><h1 id="page-title" class="wn-dash-header-title">Bem-vindo de volta</h1></div>
+          <div class="wn-dash-header-right">
+            <button id="wn-dash-search-button" class="wn-dash-icon-button" type="button" aria-label="Buscar no painel" title="Buscar no painel"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m16 16 4 4"></path></svg></button>
+            <button id="notifications-button" class="wn-dash-icon-button" type="button" aria-label="Abrir notificações" aria-expanded="false" aria-controls="notifications-panel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"></path></svg></button>
+            <button id="user-menu-button" class="wn-dash-icon-button" type="button" aria-label="Abrir menu do usuário" aria-expanded="false" aria-controls="user-menu-panel"><span id="wn-dash-user-avatar" class="wn-dash-avatar">?</span></button>
+          </div>
+          <div id="notifications-panel" class="wn-dash-popover" hidden><strong>Notificações</strong><p id="wn-dash-notifications-empty">Nenhuma notificação por enquanto.</p></div>
+          <div id="user-menu-panel" class="wn-dash-popover" hidden><strong id="wn-dash-user-name">Conta</strong><p>Workspace WEBNOVA IA</p><button id="dashboard-settings" type="button">Configurações</button><button type="button" data-route="/">Sair</button></div>
+        </header>
+        <main id="dashboard-content" class="wn-dash-main">
+          <div id="wn-dash-overview">
+            <div class="wn-dash-intro"><div><h2>Seu espaço de criação</h2><p>Acompanhe seus sites, créditos e atividade em um só lugar.</p></div><button id="wn-dash-create" class="wn-dash-primary-button" type="button">＋ Criar site</button></div>
+            <div class="wn-dash-stats">
+              <article class="wn-dash-card wn-dash-stat"><div class="wn-dash-card-top"><span class="wn-dash-stat-label">Sites criados</span><span class="wn-dash-stat-icon" aria-hidden="true">▦</span></div><strong id="wn-dash-created" class="wn-dash-stat-value">0</strong><p class="wn-dash-hint">Total de sites gerados</p></article>
+              <article class="wn-dash-card wn-dash-stat"><div class="wn-dash-card-top"><span class="wn-dash-stat-label">Créditos disponíveis</span><span class="wn-dash-stat-icon" aria-hidden="true">✦</span></div><strong id="wn-dash-credits" class="wn-dash-stat-value">0</strong><p class="wn-dash-hint">Saldo atual</p></article>
+              <article class="wn-dash-card wn-dash-stat"><div class="wn-dash-card-top"><span class="wn-dash-stat-label">Sites baixados/publicados</span><span class="wn-dash-stat-icon" aria-hidden="true">↥</span></div><strong id="wn-dash-published" class="wn-dash-stat-value">0</strong><p class="wn-dash-hint">Concluídos e entregues</p></article>
+              <article class="wn-dash-card wn-dash-stat"><div class="wn-dash-card-top"><span class="wn-dash-stat-label">Plano atual</span><span class="wn-dash-stat-icon" aria-hidden="true">◇</span></div><strong id="wn-dash-plan" class="wn-dash-stat-value">—</strong><p class="wn-dash-hint">Plano não informado</p></article>
+            </div>
+            <section class="wn-dash-card wn-dash-chart-card" aria-labelledby="wn-dash-chart-title"><div class="wn-dash-card-heading"><h3 id="wn-dash-chart-title">Desempenho ao longo das últimas 8 semanas</h3><p>Sites criados por semana e sites concluídos.</p></div><div class="wn-dash-chart-wrap"><svg id="wn-dash-chart" role="img" aria-label="Sem dados de sites nas últimas oito semanas" viewBox="0 0 800 245" preserveAspectRatio="xMidYMid meet"></svg><div id="wn-dash-chart-tooltip" class="wn-dash-chart-tooltip" role="status" aria-live="polite" hidden></div></div><div class="wn-dash-legend"><span><i class="wn-dash-line-dashed" aria-hidden="true"></i>Sites criados</span><span><i class="wn-dash-line-solid" aria-hidden="true"></i>Sites concluídos</span></div><p id="wn-dash-chart-empty" class="wn-dash-empty">Ainda não há dados para mostrar no gráfico.</p></section>
+            <div class="wn-dash-columns">
+              <section class="wn-dash-card" aria-labelledby="wn-dash-sites-title"><div class="wn-dash-card-heading"><h3 id="wn-dash-sites-title">Sites gerados recentes</h3><p>Acompanhe o status e o progresso dos seus projetos.</p></div><ol id="wn-dash-sites-list" class="wn-dash-list"></ol><div id="wn-dash-sites-empty" class="wn-dash-empty"><strong>Você ainda não criou nenhum site.</strong><span>Quando criar um site, ele aparecerá aqui.</span><br><button class="wn-dash-primary-button" type="button" data-dash-section="Criar site">Criar site</button></div></section>
+              <section class="wn-dash-card" aria-labelledby="wn-dash-activity-title"><div class="wn-dash-card-heading"><h3 id="wn-dash-activity-title">Atividade recente</h3><p>As últimas ações registradas na sua conta.</p></div><ol id="wn-dash-activity-list" class="wn-dash-list"></ol><div id="wn-dash-activity-empty" class="wn-dash-empty"><strong>Nenhuma atividade registrada.</strong><span>Suas ações aparecerão aqui quando estiverem disponíveis.</span></div></section>
+            </div>
+            <section class="wn-dash-card wn-dash-leads" aria-labelledby="wn-dash-leads-title"><div class="wn-dash-card-heading"><h3 id="wn-dash-leads-title">Resultados de leads</h3><p>A busca na lista foi preservada; não há empresas de demonstração.</p></div><div class="wn-dash-lead-tools"><input id="lead-search" type="search" aria-label="Filtrar resultados de leads" placeholder="Filtrar resultados existentes"><button id="export-leads" type="button">Exportar CSV</button></div><div class="wn-dash-table-scroll"><table class="wn-dash-table"><thead><tr><th>Empresa</th><th>Segmento</th><th>Localização</th><th>Website</th><th>Etapa</th></tr></thead><tbody id="lead-body"><tr><td colspan="5">Nenhum resultado disponível.</td></tr></tbody></table></div><p class="wn-dash-empty">Mostrando <span id="lead-count">0</span> resultado(s).</p></section>
+          </div>
+          <section id="wn-dash-section-empty" class="wn-dash-card" hidden><div class="wn-dash-card-heading"><h3 id="wn-dash-section-title">Seção</h3><p>Este módulo ainda não está conectado a dados ou ações nesta versão do painel.</p></div><div class="wn-dash-empty">Nenhuma informação disponível nesta seção.</div></section>
+        </main>
+      </div>
+    </div>
+  </section>
 
 <script>
 (function(){
@@ -202,30 +329,143 @@ document.querySelectorAll('.faq-btn').forEach(btn=>btn.addEventListener('click',
 document.getElementById('login-form').addEventListener('submit',e=>{e.preventDefault();go('/dashboard')});
 document.getElementById('toggle-password').addEventListener('click',e=>{const i=document.getElementById('password'),show=i.type==='password';i.type=show?'text':'password';e.currentTarget.setAttribute('aria-label',show?'Hide password':'Show password');e.currentTarget.innerHTML=show?'<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m2 2 20 20"/><path d="M6.71 6.71C4.93 7.9 3.52 9.6 2.66 11.65a1 1 0 0 0 0 .7C4.34 16.4 8.24 19 12.6 19c1.5 0 2.93-.31 4.22-.88"/><path d="M10.73 5.08A10.9 10.9 0 0 1 12.6 5c4.36 0 8.26 2.6 9.94 6.65a1 1 0 0 1 0 .7 12.1 12.1 0 0 1-1.73 2.9"/><path d="M14.72 14.72a3 3 0 0 1-4.24-4.24"/></svg>':'<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.06 12.35a1 1 0 0 1 0-.7C3.74 7.6 7.64 5 12 5c4.36 0 8.26 2.6 9.94 6.65a1 1 0 0 1 0 .7C20.26 16.4 16.36 19 12 19c-4.36 0-8.26-2.6-9.94-6.65Z"/><circle cx="12" cy="12" r="3"/></svg>'});
 document.getElementById('forgot').addEventListener('click',e=>{e.preventDefault();notify('Recuperação de senha — conectar rota futura')});
-document.getElementById('open-menu').addEventListener('click',()=>{document.getElementById('sidebar').classList.remove('-translate-x-full');document.getElementById('sidebar').classList.add('translate-x-0');document.getElementById('mobile-backdrop').classList.remove('hidden')});
-document.getElementById('close-menu').addEventListener('click',closeMenu);document.getElementById('mobile-backdrop').addEventListener('click',closeMenu);
-function closeMenu(){document.getElementById('sidebar').classList.add('-translate-x-full');document.getElementById('sidebar').classList.remove('translate-x-0');document.getElementById('mobile-backdrop').classList.add('hidden')}
-document.querySelectorAll('.side-btn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.side-btn').forEach(x=>x.classList.remove('active'));btn.classList.add('active');document.getElementById('page-title').textContent=btn.dataset.side;closeMenu()}));
+const wnDashRoot=document.getElementById('wn-dash-root');
+const wnDashSidebar=document.getElementById('sidebar');
+const wnDashToggle=document.getElementById('open-menu');
+const wnDashOverlay=document.getElementById('mobile-backdrop');
+const wnDashMobile=matchMedia('(max-width: 767px)');
+function closeMenu(){
+  wnDashRoot.classList.remove('wn-dash-drawer-open');
+  wnDashOverlay.hidden=true;
+  wnDashToggle.setAttribute('aria-expanded','false');
+  if(wnDashMobile.matches)wnDashSidebar.inert=true;
+}
+function syncDashboardMenu(){closeMenu();if(!wnDashMobile.matches)wnDashSidebar.inert=false}
+document.getElementById('close-menu').addEventListener('click',()=>{closeMenu();wnDashToggle.focus()});
+wnDashOverlay.addEventListener('click',()=>{closeMenu();wnDashToggle.focus()});
+wnDashToggle.addEventListener('click',()=>{
+  if(!wnDashMobile.matches){document.getElementById('collapse-sidebar').click();return}
+  const open=!wnDashRoot.classList.contains('wn-dash-drawer-open');
+  wnDashRoot.classList.toggle('wn-dash-drawer-open',open);
+  wnDashOverlay.hidden=!open;
+  wnDashSidebar.inert=!open;
+  wnDashToggle.setAttribute('aria-expanded',String(open));
+  if(open)document.getElementById('close-menu').focus();
+});
+wnDashMobile.addEventListener('change',syncDashboardMenu);
+document.addEventListener('keydown',event=>{if(event.key==='Escape'&&wnDashRoot.classList.contains('wn-dash-drawer-open')){closeMenu();wnDashToggle.focus()}});
+document.querySelectorAll('#dashboard-page [data-side]').forEach(btn=>btn.addEventListener('click',()=>{
+  document.querySelectorAll('#dashboard-page [data-side]').forEach(item=>{item.classList.remove('wn-dash-active');item.removeAttribute('aria-current')});
+  btn.classList.add('wn-dash-active');btn.setAttribute('aria-current','page');
+  renderDashboard(btn.dataset.side);closeMenu();
+}));
+
+function wnDashInitials(name){return String(name||'').trim().split(/\s+/).slice(0,2).map(part=>part[0]||'').join('').toLocaleUpperCase('pt-BR')||'?'}
+function wnDashDate(value){const date=new Date(value);return Number.isNaN(date.getTime())?'':new Intl.DateTimeFormat('pt-BR',{day:'2-digit',month:'short',year:'numeric'}).format(date)}
+function wnDashData(){return window.webnovaDashboardData&&typeof window.webnovaDashboardData==='object'?window.webnovaDashboardData:{}}
+function wnDashAvatar(user){
+  const avatar=document.createElement('span');avatar.className='wn-dash-avatar';avatar.textContent=wnDashInitials(user?.name);
+  if(user?.photoURL){const img=document.createElement('img');img.src=user.photoURL;img.alt=user.name||'Foto da conta';img.onerror=()=>img.remove();avatar.replaceChildren(img)}
+  return avatar;
+}
+function wnDashChart(sites){
+  const svg=document.getElementById('wn-dash-chart'),tip=document.getElementById('wn-dash-chart-tooltip');
+  const ns='http://www.w3.org/2000/svg',weeks=[];
+  const monday=new Date();monday.setHours(0,0,0,0);monday.setDate(monday.getDate()-(monday.getDay()+6)%7-49);
+  for(let i=0;i<8;i++){const from=new Date(monday);from.setDate(from.getDate()+i*7);weeks.push({from,created:0,completed:0})}
+  for(const site of sites){
+    for(const [field,key] of [['createdAt','created'],['completedAt','completed']]){
+      const date=new Date(site?.[field]);if(!site?.[field]||Number.isNaN(date.getTime()))continue;
+      const index=Math.floor((date-weeks[0].from)/604800000);if(index>=0&&index<8)weeks[index][key]++;
+    }
+  }
+  const hasData=weeks.some(week=>week.created||week.completed);
+  document.getElementById('wn-dash-chart-empty').hidden=hasData;
+  svg.setAttribute('aria-label',hasData?'Sites criados e concluídos nas últimas oito semanas. Use Tab para consultar cada semana.':'Sem dados de sites nas últimas oito semanas');
+  svg.replaceChildren();tip.hidden=true;
+  const add=(tag,attrs,parent=svg)=>{const node=document.createElementNS(ns,tag);for(const [name,value] of Object.entries(attrs))node.setAttribute(name,String(value));parent.appendChild(node);return node};
+  const left=44,right=776,top=20,bottom=203,max=Math.max(1,...weeks.flatMap(w=>[w.created,w.completed]));
+  const x=i=>left+(right-left)*i/7,y=n=>bottom-(bottom-top)*n/max;
+  for(let n=0;n<4;n++){const value=Math.round(max*n/3),cy=y(max*n/3);add('line',{x1:left,x2:right,y1:cy,y2:cy,stroke:'#34435a','stroke-dasharray':'4 5'});const label=add('text',{x:32,y:cy+4,'text-anchor':'end'});label.textContent=String(value)}
+  weeks.forEach((week,i)=>{const label=add('text',{x:x(i),y:229,'text-anchor':'middle'});label.textContent=new Intl.DateTimeFormat('pt-BR',{day:'2-digit',month:'short'}).format(week.from)});
+  if(!hasData)return;
+  const defs=add('defs',{}),gradient=add('linearGradient',{id:'wn-dash-chart-fill',x1:'0',y1:'0',x2:'0',y2:'1'},defs);
+  add('stop',{offset:'0%','stop-color':'#3b82f6','stop-opacity':'.28'},gradient);add('stop',{offset:'100%','stop-color':'#3b82f6','stop-opacity':'.01'},gradient);
+  const path=key=>weeks.map((w,i)=>(i?'L':'M')+x(i).toFixed(1)+' '+y(w[key]).toFixed(1)).join(' ');
+  add('path',{d:path('completed')+' L'+right+' '+bottom+' L'+left+' '+bottom+' Z',fill:'url(#wn-dash-chart-fill)'});
+  add('path',{d:path('created'),fill:'none',stroke:'#87b9ff','stroke-width':2.5,'stroke-dasharray':'7 6'});
+  add('path',{d:path('completed'),fill:'none',stroke:'#408aff','stroke-width':3});
+  weeks.forEach((week,i)=>{
+    const point=add('circle',{class:'wn-dash-chart-point',cx:x(i),cy:y(week.completed),r:6,fill:'#408aff',stroke:'#dbeafe','stroke-width':2,tabindex:0,role:'img','aria-label':`Semana de ${wnDashDate(week.from)}: ${week.created} sites criados e ${week.completed} concluídos`});
+    const show=()=>{tip.textContent=`Semana de ${wnDashDate(week.from)} · Criados: ${week.created} · Concluídos: ${week.completed}`;tip.hidden=false};
+    point.addEventListener('mouseenter',show);point.addEventListener('focus',show);point.addEventListener('mouseleave',()=>tip.hidden=true);point.addEventListener('blur',()=>tip.hidden=true);
+  });
+}
+function wnDashSites(sites){
+  const list=document.getElementById('wn-dash-sites-list');list.replaceChildren();document.getElementById('wn-dash-sites-empty').hidden=sites.length>0;
+  for(const site of sites.slice(-5).reverse()){
+    const li=document.createElement('li');li.className='wn-dash-site-row';
+    const top=document.createElement('div');top.className='wn-dash-row-top';
+    const name=document.createElement('strong');name.textContent=site.name||'Site sem nome';top.appendChild(name);
+    const badge=document.createElement('span');const status=['Gerando','Pronto','Rascunho'].includes(site.status)?site.status:'Rascunho';badge.className='wn-dash-badge'+(status==='Pronto'?' wn-dash-badge-secondary':status==='Rascunho'?' wn-dash-badge-outline':'');badge.textContent=status;top.appendChild(badge);li.appendChild(top);
+    if(site.description){const desc=document.createElement('p');desc.className='wn-dash-row-description';desc.textContent=site.description;li.appendChild(desc)}
+    const value=Math.min(100,Math.max(0,Number(site.progress)||0)),track=document.createElement('div');track.className='wn-dash-progress';track.setAttribute('role','progressbar');track.setAttribute('aria-label',`Progresso de ${name.textContent}`);track.setAttribute('aria-valuenow',String(value));track.setAttribute('aria-valuemin','0');track.setAttribute('aria-valuemax','100');const fill=document.createElement('span');fill.style.width=value+'%';track.appendChild(fill);li.appendChild(track);
+    const footer=document.createElement('div');footer.className='wn-dash-row-footer';const people=document.createElement('span');if(Array.isArray(site.team))site.team.forEach(member=>people.appendChild(wnDashAvatar(member)));footer.appendChild(people);const date=document.createElement('span');date.textContent=(site.createdAt?wnDashDate(site.createdAt):'')+' · '+value+'%';footer.appendChild(date);li.appendChild(footer);list.appendChild(li);
+  }
+}
+function wnDashActivity(entries,user){
+  const list=document.getElementById('wn-dash-activity-list');list.replaceChildren();document.getElementById('wn-dash-activity-empty').hidden=entries.length>0;
+  for(const entry of entries.slice(0,6)){
+    const li=document.createElement('li');li.className='wn-dash-row-top';li.style.justifyContent='flex-start';li.appendChild(wnDashAvatar(entry.user||user));const content=document.createElement('div');const actor=document.createElement('strong');actor.textContent=entry.user?.name||user?.name||'Conta';content.appendChild(actor);const action=document.createElement('span');action.className='wn-dash-row-description';action.textContent=' '+(entry.action||'');content.appendChild(action);const time=document.createElement('p');time.className='wn-dash-hint';time.textContent=entry.createdAt?wnDashDate(entry.createdAt):'';content.appendChild(time);li.appendChild(content);list.appendChild(li);
+  }
+}
+function wnDashLeads(leads){
+  const body=document.getElementById('lead-body'),input=document.getElementById('lead-search');body.replaceChildren();const query=input.value.trim().toLocaleLowerCase('pt-BR');
+  const filtered=leads.filter(row=>(Array.isArray(row)?row.join(' '):Object.values(row||{}).join(' ')).toLocaleLowerCase('pt-BR').includes(query));
+  document.getElementById('lead-count').textContent=String(filtered.length);document.getElementById('export-leads').disabled=!leads.length;
+  if(!filtered.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=5;td.textContent=leads.length?'Nenhum resultado para este filtro.':'Nenhum resultado disponível.';tr.appendChild(td);body.appendChild(tr);return}
+  for(const row of filtered){const tr=document.createElement('tr');const values=Array.isArray(row)?row:[row.name,row.segment,row.location,row.website,row.status];for(const value of values.slice(0,5)){const td=document.createElement('td');td.textContent=value==null?'':String(value);tr.appendChild(td)}body.appendChild(tr)}
+}
+function renderDashboard(section='Sites gerados'){
+  const state=wnDashData(),sites=Array.isArray(state.sites)?state.sites:[],activities=Array.isArray(state.activities)?state.activities:[],leads=Array.isArray(state.leads)?state.leads:[],user=state.user||{};
+  const home=section==='Sites gerados';document.getElementById('wn-dash-overview').hidden=!home;document.getElementById('wn-dash-section-empty').hidden=home;
+  const first=String(user.name||'').trim().split(/\s+/)[0];document.getElementById('page-title').textContent=home?'Bem-vindo de volta'+(first?', '+first:''):section;
+  if(!home){document.getElementById('wn-dash-section-title').textContent=section;return}
+  document.getElementById('wn-dash-created').textContent=String(sites.length);
+  document.getElementById('wn-dash-credits').textContent=String(Math.max(0,Number(state.credits)||0));
+  document.getElementById('wn-dash-published').textContent=String(sites.filter(site=>site.publishedAt||site.downloadedAt).length);
+  document.getElementById('wn-dash-plan').textContent=state.plan||'—';document.getElementById('wn-dash-plan-summary').textContent=state.plan?'Plano '+state.plan:'Plano não informado';
+  document.getElementById('wn-dash-user-name').textContent=user.name||'Conta';
+  document.getElementById('wn-dash-user-avatar').replaceWith(Object.assign(wnDashAvatar(user),{id:'wn-dash-user-avatar'}));
+  wnDashChart(sites);wnDashSites(sites);wnDashActivity(activities,user);wnDashLeads(leads);
+}
+document.getElementById('lead-search').addEventListener('input',()=>wnDashLeads(Array.isArray(wnDashData().leads)?wnDashData().leads:[]));
+document.getElementById('export-leads').addEventListener('click',()=>{
+  const leads=Array.isArray(wnDashData().leads)?wnDashData().leads:[];if(!leads.length)return;
+  const rows=[['Empresa','Segmento','Localização','Website','Etapa'],...leads.map(row=>Array.isArray(row)?row:[row.name,row.segment,row.location,row.website,row.status])];
+  const csv=rows.map(row=>row.map(value=>'"'+String(value??'').replace(/"/g,'""')+'"').join(',')).join('\n');const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='webnova-leads.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),0);
+});
+document.getElementById('wn-dash-search-button').addEventListener('click',()=>{document.querySelector('[data-side="Sites gerados"]').click();document.getElementById('lead-search').focus();document.getElementById('lead-search').scrollIntoView({block:'center'})});
+document.querySelectorAll('#dashboard-page [data-dash-section]').forEach(button=>button.addEventListener('click',()=>document.querySelector('#dashboard-page [data-side="'+button.dataset.dashSection+'"]').click()));
+document.getElementById('wn-dash-create').addEventListener('click',()=>document.querySelector('#dashboard-page [data-side="Criar site"]').click());
 
 function setupDashboardHeader() {
-  const nb=document.getElementById('notifications-button'), np=document.getElementById('notifications-panel'), ub=document.getElementById('user-menu-button'), up=document.getElementById('user-menu-panel');
-  if (!nb || !np || !ub || !up || nb.dataset.bound) return;
-  nb.dataset.bound='true';
-  nb.addEventListener('click',()=>{const open=np.classList.contains('hidden');np.classList.toggle('hidden',!open);up.classList.add('hidden');nb.setAttribute('aria-expanded',String(open));ub.setAttribute('aria-expanded','false');});
-  ub.addEventListener('click',()=>{const open=up.classList.contains('hidden');up.classList.toggle('hidden',!open);np.classList.add('hidden');ub.setAttribute('aria-expanded',String(open));nb.setAttribute('aria-expanded','false');});
-  document.getElementById('dashboard-settings')?.addEventListener('click',()=>{up.classList.add('hidden');document.querySelector('[data-side="Configurações"]')?.click();});
-  document.addEventListener('click',event=>{if (!(event.target instanceof Node)) return;if(!nb.contains(event.target)&&!np.contains(event.target))np.classList.add('hidden');if(!ub.contains(event.target)&&!up.contains(event.target))up.classList.add('hidden');});
+  const nb=document.getElementById('notifications-button'),np=document.getElementById('notifications-panel'),ub=document.getElementById('user-menu-button'),up=document.getElementById('user-menu-panel');
+  nb.addEventListener('click',()=>{const open=np.hidden;np.hidden=!open;up.hidden=true;nb.setAttribute('aria-expanded',String(open));ub.setAttribute('aria-expanded','false')});
+  ub.addEventListener('click',()=>{const open=up.hidden;up.hidden=!open;np.hidden=true;ub.setAttribute('aria-expanded',String(open));nb.setAttribute('aria-expanded','false')});
+  document.getElementById('dashboard-settings').addEventListener('click',()=>{up.hidden=true;ub.setAttribute('aria-expanded','false');document.querySelector('#dashboard-page [data-side="Configurações"]').click()});
+  document.addEventListener('click',event=>{if(!(event.target instanceof Node))return;if(!nb.contains(event.target)&&!np.contains(event.target)){np.hidden=true;nb.setAttribute('aria-expanded','false')}if(!ub.contains(event.target)&&!up.contains(event.target)){up.hidden=true;ub.setAttribute('aria-expanded','false')}});
 }
 
 function setupSidebarCollapse() {
-  const sidebar=document.getElementById('sidebar'), button=document.getElementById('collapse-sidebar');
-  if(!sidebar||!button||button.dataset.bound)return;
-  button.dataset.bound='true';
-  button.addEventListener('click',()=>{const collapsed=sidebar.classList.toggle('dashboard-sidebar-collapsed');button.textContent=collapsed?'›':'‹';button.setAttribute('aria-label',collapsed?'Expandir sidebar':'Recolher sidebar');button.title=collapsed?'Expandir sidebar':'Recolher sidebar';});
+  const button=document.getElementById('collapse-sidebar');
+  button.addEventListener('click',()=>{const collapsed=wnDashRoot.classList.toggle('wn-dash-collapsed');button.textContent=collapsed?'›':'‹';button.setAttribute('aria-label',collapsed?'Expandir sidebar':'Recolher sidebar');button.title=collapsed?'Expandir sidebar':'Recolher sidebar';wnDashToggle.setAttribute('aria-expanded',String(!collapsed))});
 }
 
 setupDashboardHeader();
 setupSidebarCollapse();
+syncDashboardMenu();
+renderDashboard();
 renderRoute();
 </script>
 <style>
