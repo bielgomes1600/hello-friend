@@ -1,9 +1,6 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { SignInPage, type Testimonial } from "@/components/ui/sign-in";
 
-export const Route = createFileRoute("/login")({ component: LoginPage });
-
-const testimonials: Testimonial[] = [
+const sampleTestimonials: Testimonial[] = [
   {
     avatarSrc:
       "https://cdn.21st.dev/assets/mirror/9f/9f797e4acee1a4de4f9b4c3aa1cc4e89d7c9efd5dbff1c463d88374ed601d719.jpg",
@@ -27,23 +24,13 @@ const testimonials: Testimonial[] = [
   },
 ];
 
-function LoginPage() {
-  const navigate = useNavigate();
-  const enterDashboard = () => navigate({ to: "/dashboard" });
-
+export default function SignInPageDemo() {
   return (
-    <main className="dark min-h-screen overflow-hidden bg-background text-foreground">
+    <div className="bg-background text-foreground">
       <SignInPage
         heroImageSrc="https://cdn.21st.dev/assets/mirror/ec/ecff1664e7fc3185d0e947571f984ea5fa3de9580fb0e73a03cd9c9b3461cb09.jpg"
-        testimonials={testimonials}
-        onSignIn={(event) => {
-          event.preventDefault();
-          enterDashboard();
-        }}
-        onGoogleSignIn={enterDashboard}
-        onResetPassword={() => console.log("[WEBNOVA IA] Reset Password clicked")}
-        onCreateAccount={() => navigate({ to: "/", hash: "planos" })}
+        testimonials={sampleTestimonials}
       />
-    </main>
+    </div>
   );
 }
