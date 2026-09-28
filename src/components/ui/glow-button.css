@@ -1,0 +1,59 @@
+/* Shared by the React component and the static landing page. */
+.glow-btn {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 180px;
+  min-height: 52px;
+  padding: 14px 24px;
+  overflow: hidden;
+  border: 1px solid rgba(147, 164, 255, .55);
+  border-radius: 14px;
+  background: linear-gradient(135deg, #172445, #24204b 60%, #132643);
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 22px;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(104, 102, 255, .18), inset 0 1px 0 rgba(255, 255, 255, .16);
+  transition: transform 160ms ease, border-color 180ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.glow-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(110deg, transparent 15%, rgba(175, 198, 255, .24) 50%, transparent 85%);
+  transform: translateX(-110%);
+  transition: transform 650ms ease;
+}
+.glow-btn > span {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  pointer-events: none;
+}
+.glow-btn svg { width: 16px; height: 16px; margin-left: 2px; flex-shrink: 0; }
+@media (hover: hover) {
+  .glow-btn:hover:not(:disabled) { border-color: rgba(192, 203, 255, .9); transform: translateY(-2px); }
+  .glow-btn:hover:not(:disabled)::before { transform: translateX(110%); }
+}
+.glow-btn:focus-visible { outline: 2px solid #a5b4fc; outline-offset: 4px; }
+.glow-btn:focus-visible::before { transform: translateX(110%); }
+.glow-btn:active:not(:disabled), .glow-btn[data-state="clicked"]:not(:disabled) { transform: translateY(0) scale(.97); }
+.glow-btn:disabled { opacity: .5; cursor: not-allowed; }
+@media (max-width: 639px) {
+  .hero-glow-actions > .glow-btn { width: 100%; min-width: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .glow-btn, .glow-btn::before { transition: none; }
+  .glow-btn:hover:not(:disabled), .glow-btn:active:not(:disabled), .glow-btn[data-state="clicked"]:not(:disabled) { transform: none; }
+}

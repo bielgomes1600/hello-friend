@@ -3,7 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 
-export function FloatingPaths({ position }: { position: number }) {
+export function FloatingPaths({ position, viewBox = "0 0 696 316" }: { position: number; viewBox?: string }) {
   const reduceMotion = useReducedMotion();
   const paths = Array.from({ length: 18 }, (_, line) => {
     // Sample the full original fan of 36 curves, not just its lower half.
@@ -25,9 +25,9 @@ export function FloatingPaths({ position }: { position: number }) {
     <div className="pointer-events-none absolute inset-0">
       <motion.svg
         className="absolute -inset-[10%] h-[120%] w-[120%] text-slate-950 dark:text-white"
-        viewBox="0 0 696 316"
+        viewBox={viewBox}
         fill="none"
-        preserveAspectRatio="xMidYMid slice"
+        preserveAspectRatio={viewBox === "0 0 696 632" ? "none" : "xMidYMid slice"}
         initial={false}
         style={{ willChange: reduceMotion ? "auto" : "transform" }}
         animate={
@@ -40,8 +40,8 @@ export function FloatingPaths({ position }: { position: number }) {
               }
         }
         transition={{
-          duration: position > 0 ? 14 : 18,
-          delay: position > 0 ? -3.5 : -7,
+          duration: 16,
+          delay: -4,
           repeat: Number.POSITIVE_INFINITY,
           ease: "easeInOut",
         }}

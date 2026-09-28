@@ -5,6 +5,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
 import { FloatingPaths } from "@/components/ui/background-paths";
+import { Component as GlowButton } from "@/components/ui/glow-button";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -195,25 +196,29 @@ function SalesPage() {
       <a href="/login" className="rounded-xl border border-white/10 bg-white/[0.05] px-4 py-2.5 text-sm font-semibold hover:bg-white/[0.09]">Entrar</a>
     </nav>
 
-    <section className="relative z-10 overflow-hidden px-6 pb-28 pt-20 lg:px-8 lg:pb-36 lg:pt-28">
-      <div aria-hidden="true" className="absolute inset-0 overflow-hidden opacity-55 [mask-image:linear-gradient(to_bottom,black_8%,black_76%,transparent_100%)]">
-        <FloatingPaths position={1} />
-        <FloatingPaths position={-1} />
+    <div className="relative isolate overflow-hidden bg-[#030509]">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden opacity-35 [mask-image:linear-gradient(to_bottom,black_0%,black_88%,transparent_100%)]">
+        <FloatingPaths position={1} viewBox="0 0 696 632" />
+        <FloatingPaths position={-1} viewBox="0 0 696 632" />
       </div>
-      <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(circle_at_50%_42%,rgba(37,99,235,.16),transparent_42%),linear-gradient(to_bottom,transparent_72%,#05070b_100%)]" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_22%,rgba(37,99,235,.16),transparent_42%),radial-gradient(ellipse_at_50%_70%,rgba(37,99,235,.08),transparent_44%)]" />
+    <section className="relative z-10 px-6 pb-28 pt-20 lg:px-8 lg:pb-36 lg:pt-28">
       <div className="relative z-10 mx-auto max-w-4xl text-center">
         <div className="mx-auto mb-7 inline-flex items-center gap-2 rounded-full border border-blue-400/20 bg-blue-500/10 px-4 py-2 text-xs font-semibold text-blue-300"><Sparkles className="h-3.5 w-3.5"/>SaaS de prospecção B2B</div>
         <h1 className="text-5xl font-semibold leading-[1.03] tracking-[-0.045em] sm:text-6xl lg:text-7xl">Pare de perder horas procurando clientes.<span className="mt-3 block bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500 bg-clip-text text-transparent">Encontre seus próximos leads.</span></h1>
         <p className="mx-auto mt-7 max-w-2xl text-base leading-7 text-slate-400 sm:text-lg">Tenha uma plataforma para descobrir empresas, filtrar oportunidades e criar listas de prospecção sem depender de pesquisas manuais.</p>
-        <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row"><a href="#planos" className="group inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-7 py-4 text-sm font-bold shadow-2xl shadow-blue-600/25 transition hover:bg-blue-500">Começar agora<ArrowRight className="h-4 w-4 transition group-hover:translate-x-1"/></a><a href="#como-funciona" className="inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] px-7 py-4 text-sm font-semibold text-slate-200 hover:bg-white/[0.07]">Ver como funciona</a></div>
+        <div className="hero-glow-actions mt-9 flex flex-col justify-center gap-3 sm:flex-row">
+          <GlowButton label="Começar agora" onClick={() => { window.location.hash = "planos"; }} />
+          <GlowButton label="Ver como funciona" onClick={() => { window.location.hash = "como-funciona"; }} />
+        </div>
         <div className="mt-5 flex items-center justify-center gap-5 text-xs text-slate-600"><span className="flex items-center gap-1.5"><Check className="h-3.5 w-3.5 text-emerald-400"/>Sem fidelidade</span><span className="flex items-center gap-1.5"><Check className="h-3.5 w-3.5 text-emerald-400"/>Cancele quando quiser</span></div>
       </div>
 
     </section>
 
-    <section id="como-funciona" className="relative z-10 mx-auto max-w-6xl px-6 pb-24 lg:px-8">
+    <section id="como-funciona" className="relative z-10 mx-auto max-w-6xl scroll-mt-20 px-6 pb-24 lg:px-8">
       <div>
-        <div className="rounded-3xl border border-white/10 bg-[#0b0f16]/90 p-6 shadow-2xl shadow-blue-950/30 sm:p-10">
+        <div className="p-6 sm:p-10">
           <div className="text-center"><p className="text-sm font-bold tracking-wider text-blue-400">COMO FUNCIONA</p><h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Encontre empresas em poucos passos.</h2><p className="mx-auto mt-4 max-w-2xl leading-7 text-slate-400">A WEBNOVA IA transforma a pesquisa manual em um processo simples para você descobrir, analisar e organizar novos leads.</p></div>
           <div className="mt-12 grid gap-5 md:grid-cols-3">
             <HowStep number="01" icon={<Target/>} title="Defina seu público" text="Informe o nicho, a localização e os critérios do tipo de empresa que você deseja encontrar."/>
@@ -228,6 +233,8 @@ function SalesPage() {
         </div>
       </div>
     </section>
+
+    </div>
 
     <section id="beneficios" className="relative z-10 border-y border-white/5 bg-white/[0.015]"><div className="mx-auto grid max-w-7xl gap-px px-6 py-20 lg:grid-cols-3 lg:px-8"><Feature icon={<SearchIcon/>} title="Encontre oportunidades" text="Pesquise empresas por nicho, cidade e critérios que fazem sentido para sua estratégia comercial."/><Feature icon={<Database/>} title="Organize seus leads" text="Tenha seus resultados em um só lugar, prontos para serem usados no seu processo de vendas."/><Feature icon={<Zap/>} title="Economize tempo" text="Troque horas de pesquisa manual por uma ferramenta criada para acelerar sua prospecção."/></div></section>
 
