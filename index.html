@@ -188,7 +188,6 @@ function createFloatingPaths(container,position){
   container.appendChild(svg);
 }
 createFloatingPaths(heroPaths,1);createFloatingPaths(heroPaths,-1);
-const leads=[["Odonto Prime","Clínica odontológica","São Paulo, SP","odonto-prime.com","Alto"],["Sorriso Center","Clínica odontológica","Campinas, SP","sorrisocenter.com","Alto"],["Clínica Nova Vida","Clínica médica","Santos, SP","novavida.com.br","Médio"],["Studio Vision","Estética","São Paulo, SP","studiovision.com","Alto"],["Alpha Contábil","Contabilidade","Guarulhos, SP","alphacontabil.com","Médio"]];
 function notify(message){console.log("[WEBNOVA IA]",message)}
 function go(path){if(path.includes("#")){const [p,h]=path.split("#");if(p&&p!==location.pathname)history.pushState({},'',p||'/');location.hash=h||''}else{history.pushState({},'',path);location.hash=''}renderRoute()}
 function renderRoute(){const p=location.pathname;document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));const page=p==='/login'?'login-page':p==='/dashboard'?'dashboard-page':'sales-page';document.getElementById(page).classList.add('active');if(page==='dashboard')renderDashboard();window.scrollTo(0,0)}
