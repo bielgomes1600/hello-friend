@@ -5,29 +5,43 @@ import { Button } from "@/components/ui/button";
 
 export function FloatingPaths({ position }: { position: number }) {
   const reduceMotion = useReducedMotion();
-  const paths = Array.from({ length: 18 }, (_, i) => ({
-    id: i,
-    d: `M-${380 - i * 5 * position} -${189 + i * 6}C-${
-      380 - i * 5 * position
-    } -${189 + i * 6} -${312 - i * 5 * position} ${216 - i * 6} ${
-      152 - i * 5 * position
-    } ${343 - i * 6}C${616 - i * 5 * position} ${470 - i * 6} ${
-      684 - i * 5 * position
-    } ${875 - i * 6} ${684 - i * 5 * position} ${875 - i * 6}`,
-    width: 0.5 + i * 0.03,
-  }));
+  const paths = Array.from({ length: 18 }, (_, line) => {
+    // Sample the full original fan of 36 curves, not just its lower half.
+    const i = line * 2;
+    return {
+      id: i,
+      d: `M-${380 - i * 5 * position} -${189 + i * 6}C-${
+        380 - i * 5 * position
+      } -${189 + i * 6} -${312 - i * 5 * position} ${216 - i * 6} ${
+        152 - i * 5 * position
+      } ${343 - i * 6}C${616 - i * 5 * position} ${470 - i * 6} ${
+        684 - i * 5 * position
+      } ${875 - i * 6} ${684 - i * 5 * position} ${875 - i * 6}`,
+      width: 0.5 + i * 0.03,
+    };
+  });
 
   return (
     <div className="pointer-events-none absolute inset-0">
       <motion.svg
-        className="h-full w-full text-slate-950 [transform:translateZ(0)] dark:text-white"
+        className="absolute -inset-[10%] h-[120%] w-[120%] text-slate-950 dark:text-white"
         viewBox="0 0 696 316"
         fill="none"
         preserveAspectRatio="xMidYMid slice"
         initial={false}
-        animate={reduceMotion ? { x: 0, y: 0 } : { x: [0, position * 12, 0], y: [0, -6, 0] }}
+        style={{ willChange: reduceMotion ? "auto" : "transform" }}
+        animate={
+          reduceMotion
+            ? { x: 0, y: 0, rotate: 0 }
+            : {
+                x: [`${-6 * position}%`, `${6 * position}%`, `${-6 * position}%`],
+                y: [`${3.5 * position}%`, `${-3.5 * position}%`, `${3.5 * position}%`],
+                rotate: [-2 * position, 2 * position, -2 * position],
+              }
+        }
         transition={{
-          duration: position > 0 ? 28 : 32,
+          duration: position > 0 ? 14 : 18,
+          delay: position > 0 ? -3.5 : -7,
           repeat: Number.POSITIVE_INFINITY,
           ease: "easeInOut",
         }}
@@ -39,7 +53,7 @@ export function FloatingPaths({ position }: { position: number }) {
             d={path.d}
             stroke="currentColor"
             strokeWidth={path.width}
-            strokeOpacity={0.1 + path.id * 0.03}
+            strokeOpacity={Math.min(0.1 + path.id * 0.03, 0.8)}
             vectorEffect="non-scaling-stroke"
           />
         ))}

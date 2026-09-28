@@ -15,12 +15,12 @@
     .glass{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);backdrop-filter:blur(16px)}
     .grid-bg{background-image:linear-gradient(rgba(59,130,246,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,.06) 1px,transparent 1px);background-size:42px 42px}
     .hero-paths{position:absolute;inset:0;overflow:hidden;pointer-events:none;opacity:.44;contain:paint;mask-image:linear-gradient(to bottom,#000 8%,#000 76%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,#000 8%,#000 76%,transparent 100%)}
-    .hero-paths svg{position:absolute;inset:-1%;width:102%;height:102%;color:#f8fafc;transform:translate3d(0,0,0);backface-visibility:hidden;will-change:transform;animation:heroPathDriftA 28s ease-in-out infinite}
-    .hero-paths svg:nth-child(2){animation-name:heroPathDriftB;animation-duration:32s}
+    .hero-paths svg{position:absolute;inset:-10%;width:120%;height:120%;color:#f8fafc;backface-visibility:hidden;will-change:transform;transform-origin:center;animation:heroPathDriftA 14s ease-in-out -3.5s infinite}
+    .hero-paths svg:nth-child(2){animation-name:heroPathDriftB;animation-duration:18s;animation-delay:-7s}
     .hero-paths path{fill:none;stroke:currentColor;stroke-linecap:round}
     .hero-paths-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 42%,rgba(37,99,235,.18),transparent 42%),linear-gradient(to bottom,transparent 72%,#05070b 100%)}
-    @keyframes heroPathDriftA{0%,100%{transform:translate3d(-.5%,0,0)}50%{transform:translate3d(1.25%,-1%,0)}}
-    @keyframes heroPathDriftB{0%,100%{transform:translate3d(.5%,0,0)}50%{transform:translate3d(-1.25%,1%,0)}}
+    @keyframes heroPathDriftA{0%,100%{transform:translate3d(-6%,3.5%,0) rotate(-2deg)}50%{transform:translate3d(6%,-3.5%,0) rotate(2deg)}}
+    @keyframes heroPathDriftB{0%,100%{transform:translate3d(6%,-3.5%,0) rotate(2deg)}50%{transform:translate3d(-6%,3.5%,0) rotate(-2deg)}}
     @media(prefers-reduced-motion:reduce){.hero-paths svg{animation:none;will-change:auto}}
     .glow{box-shadow:0 0 80px rgba(37,99,235,.18)}
     .intro{animation:introOut .7s ease 5.3s forwards}
@@ -132,10 +132,11 @@ const heroPaths=document.getElementById('hero-floating-paths');
 function createFloatingPaths(position){
   const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg');
   svg.setAttribute('viewBox','0 0 696 316');svg.setAttribute('preserveAspectRatio','xMidYMid slice');
-  for(let i=0;i<18;i++){
+  for(let line=0;line<18;line++){
+    const i=line*2;
     const path=document.createElementNS(ns,'path');
     const d=`M-${380-i*5*position} -${189+i*6}C-${380-i*5*position} -${189+i*6} -${312-i*5*position} ${216-i*6} ${152-i*5*position} ${343-i*6}C${616-i*5*position} ${470-i*6} ${684-i*5*position} ${875-i*6} ${684-i*5*position} ${875-i*6}`;
-    path.setAttribute('d',d);path.setAttribute('stroke-width',String(.5+i*.03));path.setAttribute('stroke-opacity',String(.1+i*.03));path.setAttribute('vector-effect','non-scaling-stroke');svg.appendChild(path);
+    path.setAttribute('d',d);path.setAttribute('stroke-width',String(.5+i*.03));path.setAttribute('stroke-opacity',String(Math.min(.1+i*.03,.8)));path.setAttribute('vector-effect','non-scaling-stroke');svg.appendChild(path);
   }
   heroPaths.appendChild(svg);
 }
