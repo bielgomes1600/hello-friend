@@ -14,12 +14,14 @@
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#030509;color:#fff;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
     .glass{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);backdrop-filter:blur(16px)}
     .grid-bg{background-image:linear-gradient(rgba(59,130,246,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,.06) 1px,transparent 1px);background-size:42px 42px}
-    .hero-paths{position:absolute;inset:0;overflow:hidden;pointer-events:none;opacity:.6;mask-image:linear-gradient(to bottom,#000 8%,#000 76%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,#000 8%,#000 76%,transparent 100%)}
-    .hero-paths svg{position:absolute;inset:0;width:100%;height:100%;color:#f8fafc}
-    .hero-paths path{fill:none;stroke:currentColor;stroke-linecap:round;animation:heroPathFlow linear infinite}
+    .hero-paths{position:absolute;inset:0;overflow:hidden;pointer-events:none;opacity:.44;contain:paint;mask-image:linear-gradient(to bottom,#000 8%,#000 76%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,#000 8%,#000 76%,transparent 100%)}
+    .hero-paths svg{position:absolute;inset:-1%;width:102%;height:102%;color:#f8fafc;transform:translate3d(0,0,0);backface-visibility:hidden;will-change:transform;animation:heroPathDriftA 28s ease-in-out infinite}
+    .hero-paths svg:nth-child(2){animation-name:heroPathDriftB;animation-duration:32s}
+    .hero-paths path{fill:none;stroke:currentColor;stroke-linecap:round}
     .hero-paths-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 42%,rgba(37,99,235,.18),transparent 42%),linear-gradient(to bottom,transparent 72%,#05070b 100%)}
-    @keyframes heroPathFlow{0%{stroke-dasharray:.3 .7;stroke-dashoffset:0;opacity:.3}50%{stroke-dasharray:1 0;stroke-dashoffset:-.5;opacity:.6}100%{stroke-dasharray:.3 .7;stroke-dashoffset:-1;opacity:.3}}
-    @media(prefers-reduced-motion:reduce){.hero-paths path{animation:none;stroke-dasharray:1 0;opacity:.35}}
+    @keyframes heroPathDriftA{0%,100%{transform:translate3d(-.5%,0,0)}50%{transform:translate3d(1.25%,-1%,0)}}
+    @keyframes heroPathDriftB{0%,100%{transform:translate3d(.5%,0,0)}50%{transform:translate3d(-1.25%,1%,0)}}
+    @media(prefers-reduced-motion:reduce){.hero-paths svg{animation:none;will-change:auto}}
     .glow{box-shadow:0 0 80px rgba(37,99,235,.18)}
     .intro{animation:introOut .7s ease 5.3s forwards}
     .loader-wrapper{color:#fff;-webkit-user-select:none;user-select:none;background-color:transparent;border-radius:50%;justify-content:center;align-items:center;width:180px;height:180px;font-family:Inter,sans-serif;font-size:1.2em;font-weight:300;display:flex;position:relative}
@@ -31,13 +33,12 @@
     @keyframes introOut{to{opacity:0;visibility:hidden;pointer-events:none}}
     .page{display:none}.page.active{display:block}.faq-answer{display:none}.faq.open .faq-answer{display:block}input::placeholder{color:#475569}
       
-    .liquid-btn{position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:180px;min-height:52px;padding:0 24px;border:1px solid rgba(96,165,250,.55);border-radius:14px;background:linear-gradient(135deg,#0b1020,#111827 45%,#0b1d4d);color:#fff;font-size:14px;font-weight:700;letter-spacing:.01em;cursor:pointer;text-decoration:none;overflow:hidden;isolation:isolate;box-shadow:0 8px 30px rgba(37,99,235,.18),inset 0 1px 0 rgba(255,255,255,.12);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
-    .webnova-logo{position:relative;color:#fff;font-weight:800;letter-spacing:-.035em;text-shadow:0 0 5px rgba(255,255,255,.65),0 0 14px rgba(173,95,255,.55),0 0 28px rgba(71,30,236,.5);animation:webnovaGlow 2s ease-in-out infinite}
-    .webnova-logo::after{content:"";position:absolute;left:-8%;right:-8%;top:50%;height:1px;background:linear-gradient(90deg,transparent,#fff,transparent);opacity:.65;filter:blur(1px);animation:webnovaSweep 2.2s ease-in-out infinite}
-    @keyframes webnovaGlow{0%,100%{filter:brightness(.95);text-shadow:0 0 5px rgba(255,255,255,.55),0 0 14px rgba(173,95,255,.45),0 0 28px rgba(71,30,236,.4)}50%{filter:brightness(1.18);text-shadow:0 0 7px #fff,0 0 18px rgba(173,95,255,.75),0 0 34px rgba(71,30,236,.65)}}
-    @keyframes webnovaSweep{0%,100%{transform:translateX(-18%);opacity:0}35%{opacity:.8}60%{transform:translateX(18%);opacity:.8}75%{opacity:0}}
+    .liquid-btn{position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:180px;min-height:52px;padding:0 24px;border:1px solid rgba(96,165,250,.55);border-radius:14px;background:linear-gradient(135deg,#0b1020,#111827 45%,#0b1d4d);color:#fff;font-size:14px;font-weight:700;letter-spacing:.01em;cursor:pointer;text-decoration:none;overflow:hidden;isolation:isolate;contain:paint;backface-visibility:hidden;box-shadow:0 8px 30px rgba(37,99,235,.18),inset 0 1px 0 rgba(255,255,255,.12);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+    .webnova-logo{position:relative;color:#fff;font-weight:800;letter-spacing:-.035em;text-shadow:0 0 5px rgba(255,255,255,.65),0 0 14px rgba(173,95,255,.55),0 0 28px rgba(71,30,236,.5)}
+    .webnova-logo::after{content:"";position:absolute;left:-8%;right:-8%;top:50%;height:1px;background:linear-gradient(90deg,transparent,#fff,transparent);opacity:.5;filter:blur(1px);animation:webnovaSweep 4s ease-in-out infinite;will-change:transform,opacity}
+    @keyframes webnovaSweep{0%,100%{transform:translate3d(-18%,0,0);opacity:0}35%{opacity:.6}60%{transform:translate3d(18%,0,0);opacity:.6}75%{opacity:0}}
 
-    .liquid-btn::before{content:"";position:absolute;inset:-70%;z-index:-2;background:conic-gradient(from 0deg,#ffffff 0deg,#2563eb 55deg,#60a5fa 110deg,#1d4ed8 180deg,#0b1020 250deg,#2563eb 315deg,#ffffff 360deg);filter:blur(22px);opacity:.7;animation:liquidSpin 5s linear infinite}
+    .liquid-btn::before{content:"";position:absolute;inset:-70%;z-index:-2;background:conic-gradient(from 0deg,#ffffff 0deg,#2563eb 55deg,#60a5fa 110deg,#1d4ed8 180deg,#0b1020 250deg,#2563eb 315deg,#ffffff 360deg);filter:blur(22px);opacity:.7;animation:liquidSpin 8s linear infinite;will-change:transform}
     .liquid-btn::after{content:"";position:absolute;inset:1px;z-index:-1;border-radius:13px;background:linear-gradient(135deg,rgba(15,23,42,.97),rgba(3,7,18,.96));}
     .liquid-btn:hover{transform:translateY(-2px);border-color:rgba(147,197,253,.9);box-shadow:0 12px 38px rgba(37,99,235,.3),inset 0 1px 0 rgba(255,255,255,.18)}
     .liquid-btn:active{transform:translateY(0) scale(.98)}
@@ -131,10 +132,10 @@ const heroPaths=document.getElementById('hero-floating-paths');
 function createFloatingPaths(position){
   const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg');
   svg.setAttribute('viewBox','0 0 696 316');svg.setAttribute('preserveAspectRatio','xMidYMid slice');
-  for(let i=0;i<36;i++){
+  for(let i=0;i<18;i++){
     const path=document.createElementNS(ns,'path');
     const d=`M-${380-i*5*position} -${189+i*6}C-${380-i*5*position} -${189+i*6} -${312-i*5*position} ${216-i*6} ${152-i*5*position} ${343-i*6}C${616-i*5*position} ${470-i*6} ${684-i*5*position} ${875-i*6} ${684-i*5*position} ${875-i*6}`;
-    path.setAttribute('d',d);path.setAttribute('pathLength','1');path.setAttribute('stroke-width',String(.5+i*.03));path.setAttribute('stroke-opacity',String(.1+i*.03));path.style.animationDuration=`${20+i%10}s`;path.style.animationDelay=`-${i*.38}s`;svg.appendChild(path);
+    path.setAttribute('d',d);path.setAttribute('stroke-width',String(.5+i*.03));path.setAttribute('stroke-opacity',String(.1+i*.03));path.setAttribute('vector-effect','non-scaling-stroke');svg.appendChild(path);
   }
   heroPaths.appendChild(svg);
 }

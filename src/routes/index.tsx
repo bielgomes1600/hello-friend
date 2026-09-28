@@ -180,16 +180,14 @@ function SalesPage() {
   return <><IntroOverlay /><main className="dark min-h-screen overflow-hidden bg-[#05070b] text-white">
     <style>{`
       @keyframes float{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-10px) scale(1.015)}}
-      @keyframes navLogoGlow{0%,100%{filter:drop-shadow(0 0 5px rgba(37,99,235,.4))}50%{filter:drop-shadow(0 0 11px rgba(59,130,246,.85))}}
       .nav-webnova-text {
         background: linear-gradient(180deg, #ffffff 0%, #dbeafe 24%, #64748b 48%, #ffffff 67%, #94a3b8 100%);
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
         text-shadow: 0 0 16px rgba(37,99,235,.38), 0 1px 0 rgba(255,255,255,.18);
-        animation: navLogoGlow 1.8s ease-in-out infinite;
+        filter: drop-shadow(0 0 7px rgba(59,130,246,.55));
       }
-      @media (prefers-reduced-motion: reduce) {.nav-webnova-text{animation:none}}
     `}</style>
     <div className="pointer-events-none fixed inset-0 -z-0 bg-[radial-gradient(circle_at_50%_-10%,rgba(37,99,235,.22),transparent_38%),radial-gradient(circle_at_100%_35%,rgba(14,165,233,.10),transparent_28%)]"/>
     <nav className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-8">
