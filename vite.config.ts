@@ -7,9 +7,5 @@ export default defineConfig({
     host: "0.0.0.0",
     port: 5173,
   },
-  plugins: [
-    tanstackStart(),
-    // TanStack Start must run before the React Vite plugin.
-    viteReact(),
-  ],
+  plugins: [tanstackStart(), viteReact()],
 });
