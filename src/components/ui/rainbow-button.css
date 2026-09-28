@@ -45,8 +45,8 @@
   pointer-events: none;
 }
 .dark .rainbow-btn {
-  color: #121213;
-  background-image: linear-gradient(#fff, #fff), linear-gradient(#fff 50%, rgba(255, 255, 255, 0.6) 80%, rgba(0, 0, 0, 0)), var(--rainbow-gradient);
+  color: #fff;
+  background-image: linear-gradient(#121213, #121213), linear-gradient(#121213 50%, rgba(18, 18, 19, 0.6) 80%, rgba(18, 18, 19, 0)), var(--rainbow-gradient);
 }
 .rainbow-btn:focus-visible { outline: 2px solid #a5b4fc; outline-offset: 4px; }
 .rainbow-btn:disabled { pointer-events: none; opacity: 0.5; }
