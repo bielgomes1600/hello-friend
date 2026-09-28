@@ -21,7 +21,6 @@ export const Route = createFileRoute("/")({
 });
 
 const faqs = [
-  ["O que é o SaaS?","É uma plataforma de prospecção que ajuda você a encontrar empresas e potenciais clientes usando filtros como nicho e localização, organizando os resultados para o seu processo comercial."],
   ["Preciso instalar algum programa?","Não. O sistema funciona diretamente pelo navegador. Você entra na sua conta e começa a pesquisar."],
   ["Posso cancelar minha assinatura?","Sim. Os planos são mensais e você pode cancelar a renovação quando quiser."],
   ["Como recebo os leads?","Os resultados ficam organizados dentro da plataforma e podem ser exportados conforme o plano contratado."],
