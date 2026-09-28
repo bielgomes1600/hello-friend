@@ -5,7 +5,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
 import { FloatingPaths } from "@/components/ui/background-paths";
-import { Component as GlowButton } from "@/components/ui/glow-button";
+import { RainbowButton } from "@/components/ui/rainbow-button";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -207,9 +207,9 @@ function SalesPage() {
         <div className="mx-auto mb-7 inline-flex items-center gap-2 rounded-full border border-blue-400/20 bg-blue-500/10 px-4 py-2 text-xs font-semibold text-blue-300"><Sparkles className="h-3.5 w-3.5"/>SaaS de prospecção B2B</div>
         <h1 className="text-5xl font-semibold leading-[1.03] tracking-[-0.045em] sm:text-6xl lg:text-7xl">Pare de perder horas procurando clientes.<span className="mt-3 block bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500 bg-clip-text text-transparent">Encontre seus próximos leads.</span></h1>
         <p className="mx-auto mt-7 max-w-2xl text-base leading-7 text-slate-400 sm:text-lg">Tenha uma plataforma para descobrir empresas, filtrar oportunidades e criar listas de prospecção sem depender de pesquisas manuais.</p>
-        <div className="hero-glow-actions mt-9 flex flex-col justify-center gap-3 sm:flex-row">
-          <GlowButton label="Começar agora" onClick={() => { window.location.hash = "planos"; }} />
-          <GlowButton label="Ver como funciona" onClick={() => { window.location.hash = "como-funciona"; }} />
+        <div className="hero-rainbow-actions mt-9 flex flex-col justify-center gap-3 sm:flex-row">
+          <RainbowButton onClick={() => { window.location.hash = "planos"; }}>Começar agora</RainbowButton>
+          <RainbowButton onClick={() => { window.location.hash = "como-funciona"; }}>Ver como funciona</RainbowButton>
         </div>
         <div className="mt-5 flex items-center justify-center gap-5 text-xs text-slate-600"><span className="flex items-center gap-1.5"><Check className="h-3.5 w-3.5 text-emerald-400"/>Sem fidelidade</span><span className="flex items-center gap-1.5"><Check className="h-3.5 w-3.5 text-emerald-400"/>Cancele quando quiser</span></div>
       </div>

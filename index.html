@@ -6,7 +6,7 @@
   <meta name="description" content="WEBNOVA IA — SaaS de prospecção para encontrar, filtrar e organizar leads.">
   <meta name="theme-color" content="#05070b">
   <title>WEBNOVA IA — Encontre seus próximos leads</title>
-  <link rel="stylesheet" href="./src/components/ui/glow-button.css">
+  <link rel="stylesheet" href="./src/components/ui/rainbow-button.css">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = { theme: { extend: { colors: { webnova: { 400:"#60a5fa",500:"#3b82f6",600:"#2563eb" } } } } };
@@ -80,7 +80,7 @@
         <div id="hero-floating-paths" class="hero-paths" aria-hidden="true"></div>
         <div class="hero-paths-glow" aria-hidden="true"></div>
       <section id="landing-hero" class="relative z-10 px-6 pb-24 pt-24 lg:px-8 lg:pt-32">
-        <div class="relative z-10 mx-auto max-w-5xl text-center"><p class="text-sm font-bold uppercase tracking-[.2em] text-blue-400">SaaS de prospecção B2B</p><h1 class="mt-5 text-5xl font-semibold tracking-[-.05em] sm:text-6xl lg:text-8xl">Pare de perder horas<br><span class="text-blue-500">procurando clientes.</span></h1><p class="mx-auto mt-6 max-w-2xl text-base leading-7 text-slate-400 sm:text-lg">Encontre seus próximos leads, organize oportunidades e acelere sua operação comercial em um só lugar.</p><div class="hero-glow-actions mt-9 flex flex-col justify-center gap-3 sm:flex-row"><button type="button" data-route="/login" aria-label="Começar agora" class="glow-btn"><span>Começar agora<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path><path d="M20 2v4"></path><path d="M22 4h-4"></path><circle cx="4" cy="20" r="2"></circle></svg></span></button><button type="button" data-scroll-to="como-funciona" aria-label="Ver como funciona" class="glow-btn"><span>Ver como funciona<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path><path d="M20 2v4"></path><path d="M22 4h-4"></path><circle cx="4" cy="20" r="2"></circle></svg></span></button></div><div class="mt-6 flex justify-center gap-5 text-xs text-slate-600"><span>Sem fidelidade</span><span>•</span><span>Cancele quando quiser</span></div></div>
+        <div class="relative z-10 mx-auto max-w-5xl text-center"><p class="text-sm font-bold uppercase tracking-[.2em] text-blue-400">SaaS de prospecção B2B</p><h1 class="mt-5 text-5xl font-semibold tracking-[-.05em] sm:text-6xl lg:text-8xl">Pare de perder horas<br><span class="text-blue-500">procurando clientes.</span></h1><p class="mx-auto mt-6 max-w-2xl text-base leading-7 text-slate-400 sm:text-lg">Encontre seus próximos leads, organize oportunidades e acelere sua operação comercial em um só lugar.</p><div class="hero-rainbow-actions dark mt-9 flex flex-col justify-center gap-3 sm:flex-row"><button type="button" data-route="/login" aria-label="Começar agora" class="rainbow-btn">Começar agora</button><button type="button" data-scroll-to="como-funciona" aria-label="Ver como funciona" class="rainbow-btn">Ver como funciona</button></div><div class="mt-6 flex justify-center gap-5 text-xs text-slate-600"><span>Sem fidelidade</span><span>•</span><span>Cancele quando quiser</span></div></div>
       </section>
 
       <section id="como-funciona" class="relative z-10 px-6 py-20 lg:px-8"><div class="relative z-10 mx-auto max-w-6xl"><div class="text-center"><p class="text-sm font-bold tracking-wider text-blue-400">COMO FUNCIONA</p><h2 class="mt-3 text-3xl font-semibold sm:text-4xl">Da pesquisa à oportunidade.</h2><p class="mx-auto mt-4 max-w-2xl text-sm leading-6 text-slate-500">Um fluxo simples para transformar critérios comerciais em uma lista organizada de empresas.</p></div>
@@ -135,25 +135,16 @@
   </div></section>
 
 <script>
-// Static entry point: same 200ms click feedback as the React component.
-const glowClickTimers = new WeakMap();
-document.querySelector('.hero-glow-actions').addEventListener('click', (event) => {
+// Preserve the secondary CTA's scrolling behavior without the old click timer.
+document.querySelector('.hero-rainbow-actions').addEventListener('click', (event) => {
   if (!(event.target instanceof Element)) return;
-  const button = event.target.closest('button.glow-btn');
-  if (!button || button.disabled) return;
-  clearTimeout(glowClickTimers.get(button));
-  button.dataset.state = 'clicked';
-  glowClickTimers.set(button, setTimeout(() => {
-    delete button.dataset.state;
-    glowClickTimers.delete(button);
-  }, 200));
+  const button = event.target.closest('button.rainbow-btn');
+  if (!button || button.disabled || !button.dataset.scrollTo) return;
   const target = button.dataset.scrollTo;
-  if (target) {
-    const section = document.getElementById(target);
-    if (section) {
-      history.pushState({}, '', '#' + target);
-      section.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' });
-    }
+  const section = document.getElementById(target);
+  if (section) {
+    history.pushState({}, '', '#' + target);
+    section.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' });
   }
 });
 const heroPaths=document.getElementById('hero-floating-paths');
