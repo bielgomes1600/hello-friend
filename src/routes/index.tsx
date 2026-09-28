@@ -5,7 +5,19 @@ import {
 } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
 
-export const Route = createFileRoute("/")({ component: SalesPage });
+export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "WEBNOVA IA | Prospecção B2B inteligente" },
+      { name: "description", content: "Encontre empresas, organize leads e acelere sua prospecção B2B com a WEBNOVA IA." },
+      { property: "og:title", content: "WEBNOVA IA | Prospecção B2B inteligente" },
+      { property: "og:description", content: "Encontre empresas, organize leads e acelere sua prospecção B2B com a WEBNOVA IA." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+    ],
+  }),
+  component: SalesPage,
+});
 
 const faqs = [
   ["O que é o SaaS?","É uma plataforma de prospecção que ajuda você a encontrar empresas e potenciais clientes usando filtros como nicho e localização, organizando os resultados para o seu processo comercial."],
@@ -165,10 +177,22 @@ function SalesPage() {
     { name:"Scale", price:"299", leads:"20.000 leads / mês", description:"Para operações comerciais em escala.", features:["20.000 leads por mês","Filtros avançados","Qualificação automática","Exportações ilimitadas","Suporte prioritário"] },
   ];
   return <><IntroOverlay /><main className="min-h-screen overflow-hidden bg-[#05070b] text-white">
-    <style>{`@keyframes float{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-10px) scale(1.015)}}`}</style>
+    <style>{`
+      @keyframes float{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-10px) scale(1.015)}}
+      @keyframes navLogoGlow{0%,100%{filter:drop-shadow(0 0 5px rgba(37,99,235,.4))}50%{filter:drop-shadow(0 0 11px rgba(59,130,246,.85))}}
+      .nav-webnova-text {
+        background: linear-gradient(180deg, #ffffff 0%, #dbeafe 24%, #64748b 48%, #ffffff 67%, #94a3b8 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 0 0 16px rgba(37,99,235,.38), 0 1px 0 rgba(255,255,255,.18);
+        animation: navLogoGlow 1.8s ease-in-out infinite;
+      }
+      @media (prefers-reduced-motion: reduce) {.nav-webnova-text{animation:none}}
+    `}</style>
     <div className="pointer-events-none fixed inset-0 -z-0 bg-[radial-gradient(circle_at_50%_-10%,rgba(37,99,235,.22),transparent_38%),radial-gradient(circle_at_100%_35%,rgba(14,165,233,.10),transparent_28%)]"/>
     <nav className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-8">
-      <a href="#" className="flex items-center gap-2.5 font-bold tracking-tight"><span className="grid h-9 w-9 place-items-center rounded-xl bg-blue-600 shadow-lg shadow-blue-600/25"><Target className="h-5 w-5"/></span><span className="text-lg">WEBNOVA IA</span></a>
+      <a href="#" className="font-black tracking-tight" aria-label="WEB NOVA IA"><span className="nav-webnova-text text-lg">WEB NOVA IA</span></a>
       <div className="hidden items-center gap-7 text-sm text-slate-400 md:flex"><a href="#beneficios" className="hover:text-white">Benefícios</a><a href="#como-funciona" className="hover:text-white">Como funciona</a><a href="#planos" className="hover:text-white">Planos</a><a href="#faq" className="hover:text-white">FAQ</a></div>
       <a href="/login" className="rounded-xl border border-white/10 bg-white/[0.05] px-4 py-2.5 text-sm font-semibold hover:bg-white/[0.09]">Entrar</a>
     </nav>
