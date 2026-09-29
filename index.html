@@ -60,90 +60,146 @@
     .custom-checkbox{width:1rem;height:1rem;accent-color:#8b5cf6}
     @media(prefers-reduced-motion:reduce){.animate-element,.animate-slide-right,.animate-testimonial{animation:none}}
 
-    #dashboard-page{--background:#05070d;--card:#0b101b;--border:#202b3e;--muted-foreground:#9baac1;--primary:#3b82f6;--foreground:#edf4ff;background:var(--background);color:var(--foreground)}
-    .wn-dash-root{display:flex;min-height:100dvh;max-width:100%;overflow:clip;font-family:Inter,ui-sans-serif,system-ui,sans-serif}
+    /* Workspace: estilos isolados do dashboard. */
+    #dashboard-page{--background:#05080e;--card:#0c121e;--border:rgba(162,189,232,.13);--muted-foreground:#9aaac2;--primary:#4b91ff;--foreground:#edf4ff;background:var(--background);color:var(--foreground)}
+    .wn-dash-root{display:flex;align-items:flex-start;min-height:100dvh;max-width:100%;overflow:clip;font-family:Inter,ui-sans-serif,system-ui,sans-serif}
     .wn-dash-root [hidden]{display:none!important}
-    .wn-dash-root :is(button,input):focus-visible{outline:2px solid #93c5fd;outline-offset:3px}
-    .wn-dash-sidebar{position:relative;z-index:42;display:flex;flex:0 0 260px;flex-direction:column;gap:26px;min-width:0;min-height:100dvh;padding:20px 14px;background:#080d17;border-right:1px solid var(--border);transition:flex-basis .24s ease,width .24s ease,transform .24s ease}
+    .wn-dash-root :is(button,input,select,textarea,a,summary):focus-visible{outline:2px solid #8ebeff;outline-offset:3px}
+    .wn-dash-root button,.wn-dash-root input,.wn-dash-root select,.wn-dash-root textarea{font:inherit}
+    .wn-dash-root button{cursor:pointer}
+    .wn-dash-root button:disabled{opacity:.45;cursor:not-allowed}
+    .wn-dash-icon{width:19px;height:19px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+    .wn-dash-sidebar{position:sticky;top:0;z-index:42;display:flex;flex:0 0 248px;flex-direction:column;gap:30px;min-width:0;height:100dvh;padding:24px 14px 18px;background:linear-gradient(165deg,#0d1624f2,#070c15f7);border-right:1px solid var(--border);transition:flex-basis .22s ease,transform .22s ease}
     .wn-dash-sidebar-top,.wn-dash-header,.wn-dash-header-left,.wn-dash-header-right,.wn-dash-card-top,.wn-dash-row-top,.wn-dash-row-footer{display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .wn-dash-logo{min-width:0;overflow:hidden;white-space:nowrap;font-size:15px;font-weight:800;letter-spacing:-.035em;color:#f8fafc;text-decoration:none}
-    .wn-dash-brand-mark{display:grid;flex:none;place-items:center;width:34px;height:34px;border:1px solid #365ca0;border-radius:11px;background:linear-gradient(145deg,#1d4ed8,#0b1840);color:#fff}
-    .wn-dash-icon-button{display:grid;flex:none;place-items:center;width:38px;height:38px;padding:0;border:1px solid transparent;border-radius:11px;background:transparent;color:#bac9e0;cursor:pointer;transition:background .2s,color .2s}
-    .wn-dash-icon-button:hover,.wn-dash-nav-button:hover{background:#14223a;color:#fff}
-    .wn-dash-icon-button svg,.wn-dash-stat-icon svg,.wn-dash-nav-icon svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-    .wn-dash-sidebar-label{margin:6px 12px 10px;color:var(--muted-foreground);font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
-    .wn-dash-nav{display:grid;gap:4px}
-    .wn-dash-nav-button{display:flex;align-items:center;gap:12px;min-height:44px;width:100%;padding:0 12px;border:0;border-radius:11px;background:transparent;color:#aabbd3;text-align:left;font:600 13px Inter,ui-sans-serif,system-ui,sans-serif;cursor:pointer;transition:background .2s,color .2s}
-    .wn-dash-nav-button.wn-dash-active{background:#17305a;color:#eaf2ff;box-shadow:inset 3px 0 0 var(--primary)}
-    .wn-dash-nav-icon{display:grid;flex:none;place-items:center;width:22px;height:22px;font-size:18px}
+    .wn-dash-logo{display:flex;align-items:center;gap:10px;min-width:0;white-space:nowrap;font-size:14px;font-weight:800;letter-spacing:.06em;color:#f8fafc;text-decoration:none}
+    .wn-dash-brand-mark{display:grid;flex:none;place-items:center;width:34px;height:38px;color:#c6ddff;filter:drop-shadow(0 0 9px #568bff55)}
+    .wn-dash-brand-mark .wn-dash-icon{width:30px;height:30px;stroke-width:1.8}
+    .wn-dash-icon-button{display:grid;flex:none;place-items:center;width:38px;height:38px;padding:0;border:1px solid transparent;border-radius:12px;background:transparent;color:#b7c9e2;transition:background .18s,border-color .18s,color .18s}
+    .wn-dash-icon-button:hover{background:#8cbaff12;border-color:var(--border);color:#fff}
+    .wn-dash-icon-button[aria-pressed="true"]{color:#a8ceff;background:#619bff19;border-color:#87b5ff33}
+    .wn-dash-icon-button[aria-pressed="true"] .wn-dash-icon{fill:#639bff33}
+    .wn-dash-sidebar-label{margin:0 12px 12px;color:#7589a8;font-size:10px;font-weight:650;letter-spacing:.18em;text-transform:uppercase}
+    .wn-dash-nav{display:grid;gap:7px}
+    .wn-dash-nav-button{display:flex;align-items:center;gap:12px;min-height:48px;width:100%;padding:0 13px;border:1px solid transparent;border-radius:14px;background:transparent;color:#9cadc6;text-align:left;font-size:13px!important;font-weight:550!important;transition:background .2s,border-color .2s,color .2s}
+    .wn-dash-nav-button:hover{background:#91b9ff0b;color:#eaf3ff}
+    .wn-dash-nav-button.wn-dash-active{background:linear-gradient(115deg,#6ca5ff24,#3970db12);border-color:#8cb9ff38;color:#deedff;box-shadow:inset 0 1px 0 #d6e7ff1c,0 7px 24px #0002;backdrop-filter:blur(12px)}
+    .wn-dash-nav-icon{display:grid;flex:none;place-items:center;width:24px;height:24px}
     .wn-dash-nav-text{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-    .wn-dash-sidebar-bottom{margin-top:auto;padding:14px 12px;border-top:1px solid var(--border);color:var(--muted-foreground);font-size:12px}
+    .wn-dash-sidebar-bottom{margin-top:auto;padding:16px 12px 4px;border-top:1px solid var(--border);color:var(--muted-foreground);font-size:12px}
     .wn-dash-sidebar-bottom p{margin:0 0 12px}
-    .wn-dash-sidebar-bottom button{border:0;background:none;color:#c4d6f3;cursor:pointer;font:inherit}
-    .wn-dash-inset{flex:1;min-width:0;max-width:100%;background:radial-gradient(ellipse 70% 280px at 60% 0%,#102043 0%,transparent 100%),var(--background)}
-    .wn-dash-header{position:sticky;top:0;z-index:30;min-height:64px;padding:0 18px;border-bottom:1px solid var(--border);background:rgba(5,7,13,.9);backdrop-filter:blur(16px)}
+    .wn-dash-sidebar-bottom button{display:flex;align-items:center;gap:9px;padding:8px 0;border:0;background:none;color:#c4d6f3}
+    .wn-dash-inset{flex:1;min-width:0;max-width:100%;min-height:100dvh;background:radial-gradient(ellipse 75% 450px at 65% 0%,#18366a40,transparent),var(--background)}
+    .wn-dash-header{position:sticky;top:0;z-index:30;height:64px;padding:0 24px;border-bottom:1px solid var(--border);background:#080d17b5;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
     .wn-dash-header-left{justify-content:flex-start;min-width:0;flex:1}
-    .wn-dash-header-title{margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:clamp(14px,2vw,18px);font-weight:650}
-    .wn-dash-header-right{flex:none;gap:2px}
-    .wn-dash-avatar{display:grid;flex:none;place-items:center;width:34px;height:34px;border:1px solid #4167aa;border-radius:50%;background:#172d56;color:#dceaff;font-size:12px;font-weight:750;overflow:hidden}
+    .wn-dash-header-title{margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px;font-weight:550;color:#becde3}
+    .wn-dash-header-right{flex:none;gap:6px}
+    .wn-dash-avatar{display:grid;flex:none;place-items:center;width:33px;height:33px;border:1px solid #b7d3ff3b;border-radius:50%;background:linear-gradient(140deg,#80adff2e,#172d565e);color:#dceaff;font-size:11px;font-weight:700;overflow:hidden}
     .wn-dash-avatar img{width:100%;height:100%;object-fit:cover}
-    .wn-dash-popover{position:absolute;right:16px;top:58px;z-index:55;width:min(300px,calc(100vw - 32px));padding:16px;border:1px solid var(--border);border-radius:16px;background:#10182a;box-shadow:0 20px 50px #0008;color:var(--foreground);font-size:13px}
-    .wn-dash-popover p{margin:8px 0 0;color:var(--muted-foreground);line-height:1.5}
-    .wn-dash-popover button{display:block;margin-top:12px;padding:8px 10px;border:1px solid var(--border);border-radius:9px;background:#15233b;color:#e4edfb;cursor:pointer}
-    .wn-dash-main{width:min(100%,1500px);min-width:0;margin:0 auto;padding:26px clamp(16px,3vw,36px) 48px}
-    .wn-dash-intro{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:24px}
-    .wn-dash-intro h2{margin:0;font-size:clamp(22px,3vw,30px);letter-spacing:-.04em}
-    .wn-dash-intro p,.wn-dash-card-heading p,.wn-dash-hint,.wn-dash-row-description{margin:6px 0 0;color:var(--muted-foreground);font-size:12px;line-height:1.5}
-    .wn-dash-primary-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:0 16px;border:1px solid #4687fb;border-radius:11px;background:#2563eb;color:#fff;font:650 13px Inter,ui-sans-serif,system-ui,sans-serif;cursor:pointer;white-space:nowrap}
-    .wn-dash-primary-button:hover{background:#3b82f6}
-    .wn-dash-stats{display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
-    .wn-dash-card{min-width:0;border:1px solid var(--border);border-radius:17px;background:linear-gradient(145deg,#0d1523,#0a0f19);box-shadow:0 16px 32px #0002}
-    .wn-dash-stat{padding:19px;animation:wnDashEnter .5s ease both}
-    .wn-dash-stat:nth-child(2){animation-delay:.07s}.wn-dash-stat:nth-child(3){animation-delay:.14s}.wn-dash-stat:nth-child(4){animation-delay:.21s}
-    .wn-dash-stat-label{color:#b5c3d8;font-size:12px;font-weight:600}
-    .wn-dash-stat-icon{display:grid;place-items:center;width:32px;height:32px;border:1px solid #254775;border-radius:10px;background:#142a4a;color:#91bdff}
-    .wn-dash-stat-value{display:block;margin:16px 0 0;font-size:27px;font-weight:750;font-variant-numeric:tabular-nums;letter-spacing:-.04em}
-    .wn-dash-card-heading{padding:19px 19px 0}
-    .wn-dash-card-heading h3{margin:0;font-size:16px;font-weight:680}
-    .wn-dash-chart-card{margin-top:18px;animation:wnDashEnter .56s .13s ease both}
-    .wn-dash-chart-wrap{position:relative;min-width:0;padding:12px 16px 0}
-    .wn-dash-chart-wrap svg{display:block;width:100%;height:auto;min-height:170px;overflow:visible}
-    .wn-dash-chart-wrap svg text{font:11px Inter,ui-sans-serif,system-ui,sans-serif;fill:#9baac1}
-    .wn-dash-chart-wrap svg .wn-dash-chart-point{cursor:pointer}
-    .wn-dash-chart-tooltip{position:absolute;top:16px;left:58px;z-index:2;padding:9px 11px;border:1px solid #355287;border-radius:10px;background:#111d32;box-shadow:0 12px 30px #0008;color:#f1f6ff;font-size:12px;pointer-events:none}
-    .wn-dash-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:18px;padding:10px 14px 18px;color:#c3d0e2;font-size:11px}
-    .wn-dash-legend span{display:inline-flex;align-items:center;gap:7px}
-    .wn-dash-line-dashed,.wn-dash-line-solid{display:inline-block;width:20px;border-top:2px solid #77b3ff}.wn-dash-line-dashed{border-top-style:dashed}.wn-dash-line-solid{border-color:#408aff}
-    .wn-dash-columns{display:grid;grid-template-columns:minmax(0,1fr);gap:18px;margin-top:18px}
-    .wn-dash-columns .wn-dash-card{animation:wnDashEnter .56s .2s ease both}
-    .wn-dash-list{display:grid;gap:16px;margin:0;padding:18px;list-style:none}
-    .wn-dash-site-row{min-width:0;padding-bottom:15px;border-bottom:1px solid var(--border)}
-    .wn-dash-site-row:last-child{border-bottom:0;padding-bottom:0}
-    .wn-dash-row-top strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px}
-    .wn-dash-badge{flex:none;padding:5px 8px;border-radius:7px;background:#245bb4;color:#fff;font-size:10px}.wn-dash-badge-secondary{background:#1d344d;color:#b9d6f8}.wn-dash-badge-outline{border:1px solid #536785;background:transparent;color:#c8d3e3}
-    .wn-dash-progress{width:100%;height:7px;margin:12px 0 8px;overflow:hidden;border-radius:9px;background:#1a2b42}.wn-dash-progress span{display:block;height:100%;border-radius:9px;background:var(--primary)}
-    .wn-dash-row-footer{color:var(--muted-foreground);font-size:11px}.wn-dash-row-footer>span:first-child{display:flex;gap:4px}
-    .wn-dash-empty{padding:32px 20px;text-align:center;color:var(--muted-foreground);font-size:13px;line-height:1.5}
-    .wn-dash-empty strong{display:block;margin-bottom:5px;color:#e5efff;font-size:14px}
-    .wn-dash-empty .wn-dash-primary-button{margin-top:14px}
-    .wn-dash-leads{margin-top:18px}
-    .wn-dash-lead-tools{display:flex;flex-wrap:wrap;gap:10px;padding:18px}
-    .wn-dash-lead-tools input{flex:1;min-width:min(100%,240px);min-height:42px;padding:0 12px;border:1px solid #34455d;border-radius:10px;background:#0b1524;color:#edf4ff;font:inherit}
-    .wn-dash-lead-tools button{padding:0 12px;border:1px solid #34455d;border-radius:10px;background:#13223a;color:#e0eafa;cursor:pointer}.wn-dash-lead-tools button:disabled{opacity:.45;cursor:not-allowed}
+    .wn-dash-popover{position:absolute;right:20px;top:58px;z-index:55;width:min(330px,calc(100vw - 32px));max-height:min(420px,75dvh);overflow:auto;padding:20px;border:1px solid #a7c8ff33;border-radius:20px;background:linear-gradient(145deg,#263550ed,#0f182ae8);backdrop-filter:blur(24px);box-shadow:inset 0 1px 0 #fff2,0 18px 50px #0006;color:var(--foreground);font-size:13px;animation:wnDashPopover .22s ease both}
+    .wn-dash-popover p{margin:8px 0 0;color:var(--muted-foreground);line-height:1.6}
+    .wn-dash-popover button{display:flex;align-items:center;gap:9px;margin-top:12px;padding:9px 11px;border:1px solid var(--border);border-radius:10px;background:#ffffff07;color:#e4edfb}
+    .wn-dash-main{width:min(100%,1420px);min-width:0;margin:auto;padding:32px clamp(16px,3vw,38px) 44px}
+    .wn-dash-panel{animation:wnDashEnter .3s ease both}
+    .wn-dash-intro{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:25px}
+    .wn-dash-eyebrow{margin:0 0 8px!important;color:#8abaff!important;font-size:10px!important;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+    .wn-dash-intro h2{margin:0;font-size:clamp(25px,3vw,32px);font-weight:600;letter-spacing:-.045em}
+    .wn-dash-intro p,.wn-dash-card-heading p,.wn-dash-hint{margin:7px 0 0;color:var(--muted-foreground);font-size:12px;line-height:1.6}
+    .wn-dash-primary-button,.wn-dash-secondary-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:0 16px;border:1px solid #78aaff55;border-radius:12px;background:linear-gradient(140deg,#377cea,#2256bc);box-shadow:inset 0 1px 0 #fff2;color:#fff;font-size:12px!important;font-weight:600!important;white-space:nowrap;transition:background .18s,box-shadow .18s}
+    .wn-dash-primary-button:hover{box-shadow:inset 0 1px 0 #fff3,0 4px 20px #2563eb30}
+    .wn-dash-secondary-button{background:linear-gradient(135deg,#bdd8ff0e,#759af708);border-color:var(--border);color:#d6e6ff;box-shadow:inset 0 1px 0 #fff09}
+    .wn-dash-secondary-button:hover{background:#86b1ff18}
+    .wn-dash-stats{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;margin-bottom:22px}
+    .wn-dash-card{min-width:0;border:1px solid var(--border);border-radius:18px;background:linear-gradient(155deg,#101a2a9e,#090f19e8);box-shadow:0 12px 25px #0001}
+    .wn-dash-glass{background:linear-gradient(135deg,#c1d9ff0e,#668cca09 65%,#c4ddff08);border-color:#b9d5ff29;box-shadow:inset 0 1px 0 #ffffff13,0 12px 28px #0002;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+    .wn-dash-stat{padding:18px 19px}
+    .wn-dash-stat-label{color:#9fadc4;font-size:11px;font-weight:500}
+    .wn-dash-stat-icon{display:grid;place-items:center;color:#819bc4}
+    .wn-dash-stat-value{display:block;margin:14px 0 0;font-size:27px;font-weight:550;font-variant-numeric:tabular-nums;letter-spacing:-.04em}
+    .wn-dash-stat-value,.wn-dash-balance{overflow-wrap:anywhere}
+    .wn-dash-card-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 22px 0}
+    .wn-dash-card-heading h3{margin:0;font-size:14px;font-weight:600;letter-spacing:-.01em}
+    .wn-dash-card-content{padding:22px}
+    .wn-dash-filters{display:grid;grid-template-columns:1fr;gap:14px}
+    .wn-dash-field{display:grid;align-content:start;gap:8px;min-width:0;font-size:11px;color:#acbdd5}
+    .wn-dash-field input,.wn-dash-field select,.wn-dash-field textarea,.wn-dash-search-input{width:100%;min-width:0;min-height:44px;border:1px solid #a4c8ff24;border-radius:11px;padding:11px 13px;background:#03091380;color:#e7f0ff;font-size:12px!important;outline-offset:2px}
+    .wn-dash-field input::placeholder,.wn-dash-field textarea::placeholder{color:#778aa7}
+    .wn-dash-field select option{background:#101b2c;color:#edf4ff}
+    .wn-dash-field textarea{min-height:130px;resize:vertical}
+    .wn-dash-filter-actions{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-top:18px;padding-top:18px;border-top:1px solid var(--border)}
+    .wn-dash-inline-actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px}
+    .wn-dash-check{display:inline-flex;align-items:center;gap:8px;font-size:11px;color:#bccce2;cursor:pointer}
+    .wn-dash-check input{accent-color:#4b91ff;width:15px;height:15px}
+    .wn-dash-results{margin-top:22px}
+    .wn-dash-results-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:20px 22px;border-bottom:1px solid var(--border)}
+    .wn-dash-results-top h3{margin:0;font-size:14px;font-weight:600}
+    .wn-dash-count{display:inline-flex;align-items:center;justify-content:center;min-width:23px;margin-left:7px;padding:3px 7px;border:1px solid var(--border);border-radius:7px;color:#abcfff;background:#7ebaff10;font-size:10px;font-variant-numeric:tabular-nums}
     .wn-dash-table-scroll{max-width:100%;overflow-x:auto}
-    .wn-dash-table{width:100%;min-width:620px;border-collapse:collapse;text-align:left;font-size:12px}.wn-dash-table th,.wn-dash-table td{padding:12px 16px;border-top:1px solid var(--border)}.wn-dash-table th{color:#bac8db;font-weight:600}.wn-dash-table td{color:#d9e3f1}
+    .wn-dash-table{width:100%;min-width:640px;border-collapse:collapse;text-align:left;font-size:12px}
+    .wn-dash-table th,.wn-dash-table td{padding:15px 20px;border-bottom:1px solid #a2bde810}
+    .wn-dash-table th{font-size:10px;letter-spacing:.04em;color:#7f94b3;font-weight:500}
+    .wn-dash-table td{color:#cbd8ec;vertical-align:middle}
+    .wn-dash-table td{max-width:300px;overflow-wrap:anywhere}
+    .wn-dash-pagination{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:16px 22px}
+    .wn-dash-pagination p{margin:0}
+    .wn-dash-table tbody tr:hover{background:#b2d2ff04}
+    .wn-dash-table td strong{font-weight:600;color:#e3edff}
+    .wn-dash-table a{color:#8dbdff;text-decoration:none}
+    .wn-dash-table a:hover{text-decoration:underline}
+    .wn-dash-compact .wn-dash-table td{padding-top:9px;padding-bottom:9px}
+    .wn-dash-badge{display:inline-flex;padding:5px 8px;border:1px solid #6b9ef333;border-radius:7px;background:#477bf217;color:#bfdbff;font-size:10px;white-space:nowrap}
+    .wn-dash-badge-secondary{background:#ffffff06;border-color:var(--border);color:#acbbd1}
+    .wn-dash-empty{padding:38px 22px;text-align:center;color:var(--muted-foreground);font-size:12px;line-height:1.7}
+    .wn-dash-empty strong{display:block;margin:12px 0 5px;color:#cbdaf0;font-size:14px;font-weight:550}
+    .wn-dash-empty-icon{display:grid;place-items:center;width:44px;height:44px;margin:auto;border:1px solid #9bbef224;border-radius:14px;background:linear-gradient(130deg,#bddaff0d,#6c9cff09);color:#7198cc;box-shadow:inset 0 1px 0 #fff0e}
+    .wn-dash-empty-icon .wn-dash-icon{width:22px;height:22px}
+    .wn-dash-columns{display:grid;grid-template-columns:minmax(0,1fr);gap:20px}
+    .wn-dash-stack{display:grid;gap:20px}
+    .wn-dash-list{display:grid;gap:0;margin:0;padding:0;list-style:none}
+    .wn-dash-list-item{display:flex;align-items:flex-start;gap:12px;padding:15px 0;border-bottom:1px solid var(--border);font-size:12px;line-height:1.5}
+    .wn-dash-list-item:last-child{border-bottom:0}
+    .wn-dash-list-item>div{flex:1;min-width:0;overflow-wrap:anywhere}
+    .wn-dash-list-item p{margin:3px 0 0;color:var(--muted-foreground);font-size:11px}
+    .wn-dash-list-item strong{font-weight:550}
+    .wn-dash-balance{font-size:42px;line-height:1.15;font-weight:500;letter-spacing:-.055em;font-variant-numeric:tabular-nums;margin:18px 0 8px}
+    .wn-dash-separator{height:1px;background:var(--border);margin:22px 0}
+    .wn-dash-kv{display:flex;justify-content:space-between;gap:15px;padding:10px 0;font-size:12px;color:#9caec9}
+    .wn-dash-kv strong{color:#d5e5fc;font-weight:550;text-align:right;overflow-wrap:anywhere}
+    .wn-dash-faq{border-bottom:1px solid var(--border);padding:15px 0;font-size:12px}
+    .wn-dash-faq summary{cursor:pointer;color:#d8e7fc;font-weight:550}
+    .wn-dash-faq p{margin:10px 0 0;color:var(--muted-foreground);line-height:1.7}
+    .wn-dash-setting{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:19px 0;border-bottom:1px solid var(--border)}
+    .wn-dash-setting:last-child{border-bottom:0}
+    .wn-dash-setting strong{display:block;font-size:12px;font-weight:550}
+    .wn-dash-setting p{margin:6px 0 0;line-height:1.5;font-size:11px;color:var(--muted-foreground)}
+    .wn-dash-switch{appearance:none;flex:none;position:relative;width:38px;height:22px;border:1px solid #91b4e43a;border-radius:20px;background:#101b2c;cursor:pointer;transition:background .18s}
+    .wn-dash-switch::after{content:"";position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:#a9b9d0;transition:transform .18s}
+    .wn-dash-switch:checked{background:#366ad1}
+    .wn-dash-switch:checked::after{background:white;transform:translateX(16px)}
+    .wn-dash-activity{margin-top:22px}
+    .wn-dash-activity summary{padding:18px 22px;color:#a2b7d5;font-size:12px;cursor:pointer}
+    .wn-dash-toast{position:fixed;z-index:65;bottom:24px;right:24px;display:flex;align-items:center;gap:12px;width:min(350px,calc(100vw - 32px));padding:15px 17px;border:1px solid #b7d7ff44;border-radius:17px;background:linear-gradient(130deg,#314665e8,#152238e8);backdrop-filter:blur(22px);box-shadow:inset 0 1px 0 #fff2,0 15px 35px #0006;color:#e7f2ff;font-size:12px;line-height:1.5;animation:wnDashPopover .25s ease both}
+    .wn-dash-dialog{width:min(480px,calc(100vw - 32px));max-height:85dvh;overflow:auto;padding:24px;border:1px solid #8fbaff44;border-radius:22px;background:linear-gradient(145deg,#17253bf7,#0b131ff7);color:#edf4ff;box-shadow:0 20px 80px #0009;backdrop-filter:blur(24px)}
+    .wn-dash-dialog::backdrop{background:#0009;backdrop-filter:blur(5px)}
+    .wn-dash-dialog h3{margin:0;font-size:18px}
+    .wn-dash-bell-ring .wn-dash-icon{animation:wnDashBell .58s ease}
     .wn-dash-overlay{display:none}
-    .wn-dash-collapsed .wn-dash-sidebar{flex-basis:74px;padding-inline:10px}
-    .wn-dash-collapsed .wn-dash-logo,.wn-dash-collapsed .wn-dash-sidebar-label,.wn-dash-collapsed .wn-dash-nav-text,.wn-dash-collapsed .wn-dash-sidebar-bottom{display:none}
-    .wn-dash-collapsed .wn-dash-nav-button{justify-content:center;padding-inline:0}
-    @keyframes wnDashEnter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-    @media(min-width:640px){.wn-dash-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
-    @media(max-width:639px){.wn-dash-chart-wrap{overflow-x:auto}.wn-dash-chart-wrap svg{min-width:560px}}
-    @media(min-width:1024px){.wn-dash-columns{grid-template-columns:repeat(2,minmax(0,1fr))}}
-    @media(min-width:1280px){.wn-dash-stats{grid-template-columns:repeat(4,minmax(0,1fr))}}
+    .wn-dash-collapsed .wn-dash-sidebar{flex-basis:78px;padding-inline:12px}
+    .wn-dash-collapsed .wn-dash-logo-text,.wn-dash-collapsed .wn-dash-sidebar-label,.wn-dash-collapsed .wn-dash-nav-text,.wn-dash-collapsed .wn-dash-sidebar-bottom{display:none}
+    .wn-dash-collapsed .wn-dash-nav-button{justify-content:center;padding:0}
+    .wn-dash-collapsed .wn-dash-sidebar-top{flex-direction:column;gap:6px}
+    .wn-dash-sidebar{overflow-y:auto}
+    .wn-dash-main{scroll-margin-top:64px}
+    .wn-dash-no-motion .wn-dash-switch::after{transition:none}
+    @media(prefers-reduced-motion:reduce){.wn-dash-switch::after{transition:none}}
+    @keyframes wnDashEnter{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes wnDashPopover{from{opacity:0;transform:translateY(7px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+    @keyframes wnDashBell{0%,100%{transform:rotate(0)}20%{transform:rotate(-14deg)}40%{transform:rotate(12deg)}60%{transform:rotate(-7deg)}80%{transform:rotate(4deg)}}
+    @media(min-width:640px){.wn-dash-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.wn-dash-filters{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(min-width:1100px){.wn-dash-stats{grid-template-columns:repeat(4,minmax(0,1fr))}.wn-dash-filters{grid-template-columns:1.4fr 1fr 1fr}.wn-dash-columns{grid-template-columns:minmax(0,1fr) minmax(0,1.45fr)}}
     @media(min-width:768px){#dashboard-page #close-menu{display:none}}
-    @media(max-width:767px){#dashboard-page #collapse-sidebar{display:none}.wn-dash-sidebar{position:fixed;inset:0 auto 0 0;width:min(280px,85vw);min-height:100dvh;transform:translateX(-101%);box-shadow:16px 0 35px #0005}.wn-dash-root.wn-dash-drawer-open .wn-dash-sidebar{transform:translateX(0)}.wn-dash-overlay{position:fixed;inset:0;z-index:41;display:block;width:100%;border:0;background:#000a}.wn-dash-intro{align-items:flex-start;flex-direction:column}.wn-dash-header{padding:0 12px}.wn-dash-icon-button{width:34px;height:34px}.wn-dash-collapsed .wn-dash-sidebar{width:min(280px,85vw);padding-inline:14px}.wn-dash-collapsed .wn-dash-logo,.wn-dash-collapsed .wn-dash-sidebar-label,.wn-dash-collapsed .wn-dash-nav-text,.wn-dash-collapsed .wn-dash-sidebar-bottom{display:block}.wn-dash-collapsed .wn-dash-nav-button{justify-content:flex-start;padding-inline:12px}}
-    @media(prefers-reduced-motion:reduce){.wn-dash-root .wn-dash-card,.wn-dash-sidebar{animation:none!important;transition:none!important}}
+    @media(max-width:767px){#dashboard-page #collapse-sidebar{display:none}.wn-dash-sidebar{position:fixed;inset:0 auto 0 0;width:min(282px,85vw);transform:translateX(-101%);background:#0b1422f5;backdrop-filter:blur(20px);box-shadow:16px 0 35px #0005}.wn-dash-drawer-open .wn-dash-sidebar{transform:translateX(0)}.wn-dash-overlay{position:fixed;inset:0;z-index:41;display:block;width:100%;border:0;background:#0009}.wn-dash-intro{align-items:flex-start;flex-direction:column}.wn-dash-header{padding:0 12px}.wn-dash-header-right{gap:1px}.wn-dash-icon-button{width:34px;height:34px}.wn-dash-main{padding-top:24px}.wn-dash-collapsed .wn-dash-sidebar{padding-inline:14px}.wn-dash-collapsed .wn-dash-logo-text,.wn-dash-collapsed .wn-dash-sidebar-label,.wn-dash-collapsed .wn-dash-nav-text,.wn-dash-collapsed .wn-dash-sidebar-bottom{display:block}.wn-dash-collapsed .wn-dash-nav-button{justify-content:flex-start;padding:0 13px}.wn-dash-collapsed .wn-dash-sidebar-top{flex-direction:row}.wn-dash-toast{right:16px;bottom:16px}}
+    .wn-dash-no-motion :is(.wn-dash-panel,.wn-dash-popover,.wn-dash-toast,.wn-dash-icon,.wn-dash-sidebar,.wn-dash-switch){animation:none!important;transition:none!important}
+    @media(prefers-reduced-motion:reduce){.wn-dash-root :is(.wn-dash-panel,.wn-dash-popover,.wn-dash-toast,.wn-dash-icon,.wn-dash-sidebar,.wn-dash-switch){animation:none!important;transition:none!important}}
 
 </style>
 </head>
@@ -240,52 +296,125 @@
       <button id="mobile-backdrop" class="wn-dash-overlay" type="button" aria-label="Fechar menu" hidden></button>
       <aside id="sidebar" class="wn-dash-sidebar" aria-label="Navegação do painel">
         <div class="wn-dash-sidebar-top">
-          <a href="/" data-route="/" class="wn-dash-logo"><span class="wn-dash-brand-mark" aria-hidden="true">W</span> WEBNOVA IA</a>
-          <button id="close-menu" class="wn-dash-icon-button" type="button" aria-label="Fechar menu">×</button>
-          <button id="collapse-sidebar" class="wn-dash-icon-button" type="button" aria-label="Recolher sidebar" title="Recolher sidebar">‹</button>
+          <a href="/" data-route="/" class="wn-dash-logo" aria-label="WebNova, página inicial"><span class="wn-dash-brand-mark"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 5 4 14 5-10 5 10 4-14M7 19l5-10 5 10"/></svg></span><span class="wn-dash-logo-text">WEBNOVA</span></a>
+          <button id="close-menu" class="wn-dash-icon-button" type="button" aria-label="Fechar menu"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button>
+          <button id="collapse-sidebar" class="wn-dash-icon-button" type="button" aria-label="Recolher menu" aria-expanded="true" aria-controls="sidebar" title="Recolher menu"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16m7-12-4 4 4 4"/></svg></button>
         </div>
         <div><p class="wn-dash-sidebar-label">Workspace</p>
           <nav class="wn-dash-nav" aria-label="Menu principal">
-            <button class="wn-dash-nav-button" type="button" data-side="Criar site" title="Criar site"><span class="wn-dash-nav-icon" aria-hidden="true">＋</span><span class="wn-dash-nav-text">Criar site</span></button>
-            <button class="wn-dash-nav-button wn-dash-active" type="button" data-side="Sites gerados" title="Sites gerados" aria-current="page"><span class="wn-dash-nav-icon" aria-hidden="true">▦</span><span class="wn-dash-nav-text">Sites gerados</span></button>
-            <button class="wn-dash-nav-button" type="button" data-side="Financeiro" title="Financeiro"><span class="wn-dash-nav-icon" aria-hidden="true">◇</span><span class="wn-dash-nav-text">Financeiro</span></button>
-            <button class="wn-dash-nav-button" type="button" data-side="Crédito" title="Crédito"><span class="wn-dash-nav-icon" aria-hidden="true">✦</span><span class="wn-dash-nav-text">Crédito</span></button>
-            <button class="wn-dash-nav-button" type="button" data-side="Suporte" title="Suporte"><span class="wn-dash-nav-icon" aria-hidden="true">◌</span><span class="wn-dash-nav-text">Suporte</span></button>
-            <button class="wn-dash-nav-button" type="button" data-side="Configurações" title="Configurações"><span class="wn-dash-nav-icon" aria-hidden="true">⚙</span><span class="wn-dash-nav-text">Configurações</span></button>
+            <button class="wn-dash-nav-button wn-dash-active" type="button" data-side="Procurar leads" aria-label="Procurar leads" title="Procurar leads" aria-current="page"><span class="wn-dash-nav-icon"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg></span><span class="wn-dash-nav-text">Procurar leads</span></button>
+            <button class="wn-dash-nav-button" type="button" data-side="Financeiro" aria-label="Financeiro" title="Financeiro"><span class="wn-dash-nav-icon"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7V5a2 2 0 0 1 2-2h13v4M4 7h16a1 1 0 0 1 1 1v12H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z"/><path d="M21 12h-5v4h5"/></svg></span><span class="wn-dash-nav-text">Financeiro</span></button>
+            <button class="wn-dash-nav-button" type="button" data-side="Créditos" aria-label="Créditos" title="Créditos"><span class="wn-dash-nav-icon"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="9" r="6"/><path d="M15 9a6 6 0 1 1-6 6M9 6v6M7.5 7.5h3M15 13v4"/></svg></span><span class="wn-dash-nav-text">Créditos</span></button>
+            <button class="wn-dash-nav-button" type="button" data-side="Suporte" aria-label="Suporte" title="Suporte"><span class="wn-dash-nav-icon"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13v-2a8 8 0 0 1 16 0v2M4 12H3v6h4v-6H4Zm16 0h1v6h-4v-6h3ZM20 18a3 3 0 0 1-3 3h-4"/></svg></span><span class="wn-dash-nav-text">Suporte</span></button>
+            <button class="wn-dash-nav-button" type="button" data-side="Configurações" aria-label="Configurações" title="Configurações"><span class="wn-dash-nav-icon"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h6m4 0h6M4 12h12m4 0h0M4 18h2m4 0h10"/><circle cx="12" cy="6" r="2"/><circle cx="18" cy="12" r="2"/><circle cx="8" cy="18" r="2"/></svg></span><span class="wn-dash-nav-text">Configurações</span></button>
           </nav>
         </div>
-        <div class="wn-dash-sidebar-bottom"><p id="wn-dash-plan-summary">Plano não informado</p><button type="button" data-route="/">↪ Sair</button></div>
+        <div class="wn-dash-sidebar-bottom"><p id="wn-dash-plan-summary">Plano não informado</p><button type="button" data-route="/"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v16h5m6-12 4 4-4 4M9 12h11"/></svg> Sair</button></div>
       </aside>
-      <div class="wn-dash-inset">
+      <div id="wn-dash-inset" class="wn-dash-inset">
         <header class="wn-dash-header">
-          <div class="wn-dash-header-left"><button id="open-menu" class="wn-dash-icon-button" type="button" aria-label="Alternar menu" aria-expanded="false" aria-controls="sidebar">☰</button><h1 id="page-title" class="wn-dash-header-title">Bem-vindo de volta</h1></div>
+          <div class="wn-dash-header-left"><button id="open-menu" class="wn-dash-icon-button" type="button" aria-label="Alternar menu" aria-expanded="false" aria-controls="sidebar"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button><h1 id="page-title" class="wn-dash-header-title">Seu workspace</h1></div>
           <div class="wn-dash-header-right">
-            <button id="wn-dash-search-button" class="wn-dash-icon-button" type="button" aria-label="Buscar no painel" title="Buscar no painel"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m16 16 4 4"></path></svg></button>
-            <button id="notifications-button" class="wn-dash-icon-button" type="button" aria-label="Abrir notificações" aria-expanded="false" aria-controls="notifications-panel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"></path></svg></button>
+            <button id="wn-dash-search-button" class="wn-dash-icon-button" type="button" aria-label="Procurar leads" title="Procurar leads"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg></button>
+            <button id="notifications-button" class="wn-dash-icon-button" type="button" aria-label="Abrir notificações" aria-expanded="false" aria-controls="notifications-panel"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 6-3 6-3 9h18c0-3-3-3-3-9M10 21h4"/></svg></button>
             <button id="user-menu-button" class="wn-dash-icon-button" type="button" aria-label="Abrir menu do usuário" aria-expanded="false" aria-controls="user-menu-panel"><span id="wn-dash-user-avatar" class="wn-dash-avatar">?</span></button>
           </div>
-          <div id="notifications-panel" class="wn-dash-popover" hidden><strong>Notificações</strong><p id="wn-dash-notifications-empty">Nenhuma notificação por enquanto.</p></div>
-          <div id="user-menu-panel" class="wn-dash-popover" hidden><strong id="wn-dash-user-name">Conta</strong><p>Workspace WEBNOVA IA</p><button id="dashboard-settings" type="button">Configurações</button><button type="button" data-route="/">Sair</button></div>
+          <div id="notifications-panel" class="wn-dash-popover" hidden><strong>Notificações</strong><ul id="wn-dash-notifications-list" class="wn-dash-list"></ul><p id="wn-dash-notifications-empty">Tudo tranquilo por aqui. Você não tem novas notificações.</p></div>
+          <div id="user-menu-panel" class="wn-dash-popover" hidden><strong id="wn-dash-user-name">Conta</strong><p>Workspace WebNova</p><button id="dashboard-settings" type="button"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h6m4 0h6M4 12h12m4 0h0M4 18h2m4 0h10"/><circle cx="12" cy="6" r="2"/><circle cx="18" cy="12" r="2"/><circle cx="8" cy="18" r="2"/></svg> Configurações</button><button type="button" data-route="/"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v16h5m6-12 4 4-4 4M9 12h11"/></svg> Sair</button></div>
         </header>
         <main id="dashboard-content" class="wn-dash-main">
-          <div id="wn-dash-overview">
-            <div class="wn-dash-intro"><div><h2>Seu espaço de criação</h2><p>Acompanhe seus sites, créditos e atividade em um só lugar.</p></div><button id="wn-dash-create" class="wn-dash-primary-button" type="button">＋ Criar site</button></div>
+          <section id="wn-dash-overview" class="wn-dash-panel" data-panel="Procurar leads" aria-labelledby="wn-dash-leads-heading">
+            <div class="wn-dash-intro"><div><p class="wn-dash-eyebrow">Workspace / Prospecção</p><h2 id="wn-dash-leads-heading" tabindex="-1" data-panel-title>Encontre sua próxima oportunidade.</h2><p>Pesquise, filtre e organize os leads da sua base.</p></div></div>
             <div class="wn-dash-stats">
-              <article class="wn-dash-card wn-dash-stat"><div class="wn-dash-card-top"><span class="wn-dash-stat-label">Sites criados</span><span class="wn-dash-stat-icon" aria-hidden="true">▦</span></div><strong id="wn-dash-created" class="wn-dash-stat-value">0</strong><p class="wn-dash-hint">Total de sites gerados</p></article>
-              <article class="wn-dash-card wn-dash-stat"><div class="wn-dash-card-top"><span class="wn-dash-stat-label">Créditos disponíveis</span><span class="wn-dash-stat-icon" aria-hidden="true">✦</span></div><strong id="wn-dash-credits" class="wn-dash-stat-value">0</strong><p class="wn-dash-hint">Saldo atual</p></article>
-              <article class="wn-dash-card wn-dash-stat"><div class="wn-dash-card-top"><span class="wn-dash-stat-label">Sites baixados/publicados</span><span class="wn-dash-stat-icon" aria-hidden="true">↥</span></div><strong id="wn-dash-published" class="wn-dash-stat-value">0</strong><p class="wn-dash-hint">Concluídos e entregues</p></article>
-              <article class="wn-dash-card wn-dash-stat"><div class="wn-dash-card-top"><span class="wn-dash-stat-label">Plano atual</span><span class="wn-dash-stat-icon" aria-hidden="true">◇</span></div><strong id="wn-dash-plan" class="wn-dash-stat-value">—</strong><p class="wn-dash-hint">Plano não informado</p></article>
+              <article class="wn-dash-card wn-dash-stat"><div class="wn-dash-card-top"><span class="wn-dash-stat-label">Leads na base</span><span class="wn-dash-stat-icon"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg></span></div><strong id="wn-dash-total-leads" class="wn-dash-stat-value">0</strong><p class="wn-dash-hint">Empresas disponíveis</p></article>
+              <article class="wn-dash-card wn-dash-stat"><div class="wn-dash-card-top"><span class="wn-dash-stat-label">Favoritos</span><span class="wn-dash-stat-icon"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9Z"/></svg></span></div><strong id="wn-dash-total-favorites" class="wn-dash-stat-value">0</strong><p class="wn-dash-hint">Suas oportunidades salvas</p></article>
+              <article class="wn-dash-card wn-dash-stat"><div class="wn-dash-card-top"><span class="wn-dash-stat-label">Com contato</span><span class="wn-dash-stat-icon"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg></span></div><strong id="wn-dash-total-contacts" class="wn-dash-stat-value">0</strong><p class="wn-dash-hint">E-mail ou telefone disponível</p></article>
+              <article class="wn-dash-card wn-dash-stat"><div class="wn-dash-card-top"><span class="wn-dash-stat-label">Créditos disponíveis</span><span class="wn-dash-stat-icon"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="9" r="6"/><path d="M15 9a6 6 0 1 1-6 6M9 6v6M7.5 7.5h3M15 13v4"/></svg></span></div><strong id="wn-dash-credits" class="wn-dash-stat-value">0</strong><p class="wn-dash-hint">Saldo da sua conta</p></article>
             </div>
-            <section class="wn-dash-card wn-dash-chart-card" aria-labelledby="wn-dash-chart-title"><div class="wn-dash-card-heading"><h3 id="wn-dash-chart-title">Desempenho ao longo das últimas 8 semanas</h3><p>Sites criados por semana e sites concluídos.</p></div><div class="wn-dash-chart-wrap"><svg id="wn-dash-chart" role="img" aria-label="Sem dados de sites nas últimas oito semanas" viewBox="0 0 800 245" preserveAspectRatio="xMidYMid meet"></svg><div id="wn-dash-chart-tooltip" class="wn-dash-chart-tooltip" role="status" aria-live="polite" hidden></div></div><div class="wn-dash-legend"><span><i class="wn-dash-line-dashed" aria-hidden="true"></i>Sites criados</span><span><i class="wn-dash-line-solid" aria-hidden="true"></i>Sites concluídos</span></div><p id="wn-dash-chart-empty" class="wn-dash-empty">Ainda não há dados para mostrar no gráfico.</p></section>
+            <section class="wn-dash-card wn-dash-glass" aria-labelledby="wn-dash-filter-title">
+              <div class="wn-dash-card-heading"><div><h3 id="wn-dash-filter-title">Procurar leads</h3><p>Combine os filtros para encontrar as empresas certas.</p></div><span class="wn-dash-stat-icon"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h6m4 0h6M4 12h12m4 0h0M4 18h2m4 0h10"/><circle cx="12" cy="6" r="2"/><circle cx="18" cy="12" r="2"/><circle cx="8" cy="18" r="2"/></svg></span></div>
+              <form id="wn-dash-lead-form" class="wn-dash-card-content" role="search">
+                <div class="wn-dash-filters">
+                  <label class="wn-dash-field" for="lead-search">Empresa ou palavra-chave<input id="lead-search" type="search" placeholder="Pesquisar na sua base" autocomplete="off" maxlength="150"></label>
+                  <label class="wn-dash-field" for="wn-dash-segment">Segmento<select id="wn-dash-segment"><option value="">Todos os segmentos</option></select></label>
+                  <label class="wn-dash-field" for="wn-dash-location">Localização<input id="wn-dash-location" type="search" placeholder="Cidade, estado ou região" autocomplete="off" maxlength="120"></label>
+                </div>
+                <div class="wn-dash-filter-actions">
+                  <div class="wn-dash-inline-actions"><label class="wn-dash-check"><input id="wn-dash-only-favorites" type="checkbox">Só favoritos</label><label class="wn-dash-check"><input id="wn-dash-with-contact" type="checkbox">Com contato</label></div>
+                  <div class="wn-dash-inline-actions"><button id="wn-dash-clear-filters" class="wn-dash-secondary-button" type="button">Limpar</button><button class="wn-dash-primary-button" type="submit"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg> Procurar leads</button></div>
+                </div>
+                <p class="wn-dash-hint">A pesquisa consulta os leads disponíveis na sua conta.</p>
+              </form>
+            </section>
+            <section class="wn-dash-card wn-dash-results" aria-labelledby="wn-dash-results-title">
+              <div class="wn-dash-results-top"><h3 id="wn-dash-results-title">Sua base de leads <span id="lead-count" class="wn-dash-count" aria-live="polite" aria-atomic="true">0</span></h3><button id="export-leads" class="wn-dash-secondary-button" type="button" disabled><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg> Exportar CSV</button></div>
+              <div id="wn-dash-lead-table" class="wn-dash-table-scroll" role="region" aria-label="Resultados de leads, role para ver todas as colunas" tabindex="0" hidden><table class="wn-dash-table"><thead><tr><th scope="col">Favorito</th><th scope="col">Empresa</th><th scope="col">Segmento</th><th scope="col">Localização</th><th scope="col">Contato</th><th scope="col">Detalhes</th></tr></thead><tbody id="lead-body"></tbody></table></div>
+              <div id="wn-dash-pagination" class="wn-dash-pagination" hidden><p id="wn-dash-page-info" class="wn-dash-hint" aria-live="polite"></p><div class="wn-dash-inline-actions"><button id="wn-dash-prev-page" class="wn-dash-secondary-button" type="button">Anterior</button><button id="wn-dash-next-page" class="wn-dash-secondary-button" type="button">Próxima</button></div></div>
+              <div id="wn-dash-leads-empty" class="wn-dash-empty"><span class="wn-dash-empty-icon"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg></span><strong>Sua próxima oportunidade começa aqui.</strong><span>Quando houver leads na sua conta, você poderá pesquisar, favoritar e exportar os resultados.</span></div>
+            </section>
+            <details class="wn-dash-card wn-dash-activity"><summary>Atividade da conta</summary><div class="wn-dash-card-content"><ol id="wn-dash-activity-list" class="wn-dash-list"></ol><p id="wn-dash-activity-empty" class="wn-dash-hint">Nenhuma atividade registrada por enquanto.</p></div></details>
+          </section>
+
+          <section id="wn-dash-finance" class="wn-dash-panel" data-panel="Financeiro" aria-labelledby="wn-dash-finance-title" hidden>
+            <div class="wn-dash-intro"><div><p class="wn-dash-eyebrow">Conta / Financeiro</p><h2 id="wn-dash-finance-title" tabindex="-1" data-panel-title>Suas finanças, em ordem.</h2><p>Acompanhe o plano, as cobranças e o histórico de pagamentos.</p></div><button id="wn-dash-export-finance" class="wn-dash-secondary-button" type="button" disabled><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg> Exportar extrato</button></div>
+            <div class="wn-dash-stats">
+              <article class="wn-dash-card wn-dash-stat"><div class="wn-dash-card-top"><span class="wn-dash-stat-label">Total pago</span><span class="wn-dash-stat-icon"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg></span></div><strong id="wn-dash-finance-paid" class="wn-dash-stat-value">0</strong><p class="wn-dash-hint">Pagamentos confirmados</p></article>
+              <article class="wn-dash-card wn-dash-stat"><div class="wn-dash-card-top"><span class="wn-dash-stat-label">Em aberto</span><span class="wn-dash-stat-icon"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7V5a2 2 0 0 1 2-2h13v4M4 7h16a1 1 0 0 1 1 1v12H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z"/><path d="M21 12h-5v4h5"/></svg></span></div><strong id="wn-dash-finance-pending" class="wn-dash-stat-value">0</strong><p class="wn-dash-hint">Cobranças pendentes</p></article>
+              <article class="wn-dash-card wn-dash-stat"><div class="wn-dash-card-top"><span class="wn-dash-stat-label">Em atraso</span><span class="wn-dash-stat-icon"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H5v18h14V8l-5-5Zm0 0v5h5M8 12h8m-8 4h5"/></svg></span></div><strong id="wn-dash-finance-overdue" class="wn-dash-stat-value">0</strong><p class="wn-dash-hint">Cobranças vencidas</p></article>
+              <article class="wn-dash-card wn-dash-stat"><div class="wn-dash-card-top"><span class="wn-dash-stat-label">Plano atual</span><span class="wn-dash-stat-icon"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="9" r="6"/><path d="M15 9a6 6 0 1 1-6 6M9 6v6M7.5 7.5h3M15 13v4"/></svg></span></div><strong id="wn-dash-finance-plan" class="wn-dash-stat-value">0</strong><p class="wn-dash-hint">Vinculado à sua conta</p></article>
+            </div>
+            <section class="wn-dash-card" aria-labelledby="wn-dash-invoices-title">
+              <div class="wn-dash-results-top"><h3 id="wn-dash-invoices-title">Histórico de cobranças</h3><label class="wn-dash-field" for="wn-dash-invoice-filter"><select id="wn-dash-invoice-filter" aria-label="Filtrar cobranças"><option value="">Todos os status</option><option value="paid">Pagas</option><option value="pending">Pendentes</option><option value="overdue">Em atraso</option></select></label></div>
+              <div id="wn-dash-invoice-table" class="wn-dash-table-scroll" role="region" aria-label="Histórico de cobranças" tabindex="0" hidden><table class="wn-dash-table"><thead><tr><th scope="col">Descrição</th><th scope="col">Vencimento</th><th scope="col">Valor</th><th scope="col">Status</th><th scope="col">Documento</th></tr></thead><tbody id="wn-dash-invoice-body"></tbody></table></div>
+              <div id="wn-dash-invoice-empty" class="wn-dash-empty"><span class="wn-dash-empty-icon"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7V5a2 2 0 0 1 2-2h13v4M4 7h16a1 1 0 0 1 1 1v12H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z"/><path d="M21 12h-5v4h5"/></svg></span><strong>Nenhuma cobrança registrada.</strong><span>As cobranças vinculadas à sua conta aparecerão aqui.</span></div>
+            </section>
+            <div class="wn-dash-filter-actions"><p class="wn-dash-hint">Precisa de ajuda com uma cobrança?</p><button class="wn-dash-secondary-button" type="button" data-support-topic="Financeiro">Falar sobre financeiro <svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></button></div>
+          </section>
+
+          <section id="wn-dash-credit-panel" class="wn-dash-panel" data-panel="Créditos" aria-labelledby="wn-dash-credit-title" hidden>
+            <div class="wn-dash-intro"><div><p class="wn-dash-eyebrow">Conta / Créditos</p><h2 id="wn-dash-credit-title" tabindex="-1" data-panel-title>Mais clareza sobre seu saldo.</h2><p>Consulte os créditos disponíveis e acompanhe cada movimentação.</p></div></div>
             <div class="wn-dash-columns">
-              <section class="wn-dash-card" aria-labelledby="wn-dash-sites-title"><div class="wn-dash-card-heading"><h3 id="wn-dash-sites-title">Sites gerados recentes</h3><p>Acompanhe o status e o progresso dos seus projetos.</p></div><ol id="wn-dash-sites-list" class="wn-dash-list"></ol><div id="wn-dash-sites-empty" class="wn-dash-empty"><strong>Você ainda não criou nenhum site.</strong><span>Quando criar um site, ele aparecerá aqui.</span><br><button class="wn-dash-primary-button" type="button" data-dash-section="Criar site">Criar site</button></div></section>
-              <section class="wn-dash-card" aria-labelledby="wn-dash-activity-title"><div class="wn-dash-card-heading"><h3 id="wn-dash-activity-title">Atividade recente</h3><p>As últimas ações registradas na sua conta.</p></div><ol id="wn-dash-activity-list" class="wn-dash-list"></ol><div id="wn-dash-activity-empty" class="wn-dash-empty"><strong>Nenhuma atividade registrada.</strong><span>Suas ações aparecerão aqui quando estiverem disponíveis.</span></div></section>
+              <section class="wn-dash-card wn-dash-glass"><div class="wn-dash-card-heading"><h3>Seu saldo</h3><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="9" r="6"/><path d="M15 9a6 6 0 1 1-6 6M9 6v6M7.5 7.5h3M15 13v4"/></svg></div><div class="wn-dash-card-content"><p id="wn-dash-credit-balance" class="wn-dash-balance">0</p><p class="wn-dash-hint">créditos disponíveis</p><div class="wn-dash-separator"></div><div class="wn-dash-kv"><span>Entradas registradas</span><strong id="wn-dash-credit-in">0</strong></div><div class="wn-dash-kv"><span>Saídas registradas</span><strong id="wn-dash-credit-out">0</strong></div><div class="wn-dash-separator"></div><button class="wn-dash-primary-button" type="button" data-support-topic="Créditos">Consultar recarga <svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></button><p class="wn-dash-hint">Prepare uma solicitação de recarga para o suporte.</p></div></section>
+              <section class="wn-dash-card"><div class="wn-dash-results-top"><h3>Movimentações</h3><label class="wn-dash-field" for="wn-dash-credit-filter"><select id="wn-dash-credit-filter" aria-label="Filtrar movimentações"><option value="">Todas</option><option value="in">Entradas</option><option value="out">Saídas</option></select></label></div><div class="wn-dash-card-content"><ol id="wn-dash-credit-list" class="wn-dash-list"></ol></div><div id="wn-dash-credit-empty" class="wn-dash-empty"><span class="wn-dash-empty-icon"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="9" r="6"/><path d="M15 9a6 6 0 1 1-6 6M9 6v6M7.5 7.5h3M15 13v4"/></svg></span><strong>Seu extrato ainda está vazio.</strong><span>Entradas e utilizações de créditos aparecerão aqui.</span></div></section>
             </div>
-            <section class="wn-dash-card wn-dash-leads" aria-labelledby="wn-dash-leads-title"><div class="wn-dash-card-heading"><h3 id="wn-dash-leads-title">Resultados de leads</h3><p>A busca na lista foi preservada; não há empresas de demonstração.</p></div><div class="wn-dash-lead-tools"><input id="lead-search" type="search" aria-label="Filtrar resultados de leads" placeholder="Filtrar resultados existentes"><button id="export-leads" type="button">Exportar CSV</button></div><div class="wn-dash-table-scroll"><table class="wn-dash-table"><thead><tr><th>Empresa</th><th>Segmento</th><th>Localização</th><th>Website</th><th>Etapa</th></tr></thead><tbody id="lead-body"><tr><td colspan="5">Nenhum resultado disponível.</td></tr></tbody></table></div><p class="wn-dash-empty">Mostrando <span id="lead-count">0</span> resultado(s).</p></section>
-          </div>
-          <section id="wn-dash-section-empty" class="wn-dash-card" hidden><div class="wn-dash-card-heading"><h3 id="wn-dash-section-title">Seção</h3><p>Este módulo ainda não está conectado a dados ou ações nesta versão do painel.</p></div><div class="wn-dash-empty">Nenhuma informação disponível nesta seção.</div></section>
+          </section>
+
+          <section id="wn-dash-support" class="wn-dash-panel" data-panel="Suporte" aria-labelledby="wn-dash-support-title" hidden>
+            <div class="wn-dash-intro"><div><p class="wn-dash-eyebrow">Conta / Suporte</p><h2 id="wn-dash-support-title" tabindex="-1" data-panel-title>Como podemos ajudar?</h2><p>Encontre uma resposta rápida ou prepare sua solicitação.</p></div></div>
+            <div class="wn-dash-columns">
+              <section class="wn-dash-card"><div class="wn-dash-card-heading"><h3>Ajuda rápida</h3><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13v-2a8 8 0 0 1 16 0v2M4 12H3v6h4v-6H4Zm16 0h1v6h-4v-6h3ZM20 18a3 3 0 0 1-3 3h-4"/></svg></div><div class="wn-dash-card-content">
+                <details class="wn-dash-faq"><summary>Como procurar e organizar leads?</summary><p>Em Procurar leads, filtre por palavra-chave, segmento e localização. Use a estrela para salvar favoritos neste navegador e abra os detalhes para consultar as informações disponíveis.</p></details>
+                <details class="wn-dash-faq"><summary>O que vai na exportação?</summary><p>O arquivo CSV contém apenas os resultados dos filtros atuais, com os dados disponíveis na sua base. Abra o arquivo em uma planilha para trabalhar com a lista.</p></details>
+                <details class="wn-dash-faq"><summary>Onde vejo cobranças e créditos?</summary><p>Financeiro reúne as cobranças da conta. Em Créditos, você encontra o saldo e as movimentações registradas. Se estiverem vazios, ainda não há registros disponíveis.</p></details>
+                <details class="wn-dash-faq"><summary>Como enviar uma solicitação?</summary><p>Escolha o assunto e descreva sua dúvida. Você pode salvar um rascunho ou copiar a mensagem para o canal de atendimento que utiliza. Se sua conta tiver um e-mail de suporte cadastrado, o botão de envio por e-mail ficará disponível.</p></details>
+              </div></section>
+              <section class="wn-dash-card wn-dash-glass"><div class="wn-dash-card-heading"><div><h3>Preparar solicitação</h3><p>Descreva o que aconteceu. Não inclua senhas ou dados de pagamento.</p></div></div>
+                <form id="wn-dash-support-form" class="wn-dash-card-content">
+                  <div class="wn-dash-stack"><label class="wn-dash-field" for="wn-dash-support-topic">Assunto<select id="wn-dash-support-topic"><option>Procurar leads</option><option>Financeiro</option><option>Créditos</option><option>Minha conta</option><option>Outro assunto</option></select></label><label class="wn-dash-field" for="wn-dash-support-message">Como podemos ajudar?<textarea id="wn-dash-support-message" placeholder="Conte o que você precisa e, se houver um problema, como ele aconteceu." maxlength="4000" required></textarea></label></div>
+                  <div class="wn-dash-filter-actions"><button class="wn-dash-primary-button" type="submit">Salvar rascunho</button><button id="wn-dash-copy-support" class="wn-dash-secondary-button" type="button"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V3H3v13h5"/></svg> Copiar mensagem</button><button id="wn-dash-email-support" class="wn-dash-secondary-button" type="button" hidden><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg> Abrir e-mail</button></div>
+                  <p id="wn-dash-support-status" class="wn-dash-hint" role="status">O rascunho fica neste navegador. Salvar não envia uma solicitação.</p>
+                </form>
+              </section>
+            </div>
+          </section>
+
+          <section id="wn-dash-settings" class="wn-dash-panel" data-panel="Configurações" aria-labelledby="wn-dash-settings-title" hidden>
+            <div class="wn-dash-intro"><div><p class="wn-dash-eyebrow">Conta / Configurações</p><h2 id="wn-dash-settings-title" tabindex="-1" data-panel-title>Um workspace do seu jeito.</h2><p>Ajustes simples para trabalhar com mais conforto.</p></div></div>
+            <div class="wn-dash-columns">
+              <section class="wn-dash-card wn-dash-glass"><div class="wn-dash-card-heading"><h3>Sua conta</h3><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg></div><div class="wn-dash-card-content"><div class="wn-dash-kv"><span>Nome</span><strong id="wn-dash-profile-name">Não informado</strong></div><div class="wn-dash-kv"><span>E-mail</span><strong id="wn-dash-profile-email">Não informado</strong></div><div class="wn-dash-kv"><span>Plano</span><strong id="wn-dash-profile-plan">Não informado</strong></div><div class="wn-dash-separator"></div><p class="wn-dash-hint">Informações vinculadas à sua conta.</p><button class="wn-dash-secondary-button" type="button" data-support-topic="Minha conta">Preciso de ajuda <svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></button></div></section>
+              <form id="wn-dash-settings-form" class="wn-dash-card"><div class="wn-dash-card-heading"><h3>Preferências</h3><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h6m4 0h6M4 12h12m4 0h0M4 18h2m4 0h10"/><circle cx="12" cy="6" r="2"/><circle cx="18" cy="12" r="2"/><circle cx="8" cy="18" r="2"/></svg></div><div class="wn-dash-card-content">
+                <label class="wn-dash-setting"><span><strong>Notificações visuais</strong><p>Receba confirmações discretas das suas ações no painel.</p></span><input id="wn-dash-pref-notify" class="wn-dash-switch" type="checkbox" role="switch" checked></label>
+                <label class="wn-dash-setting"><span><strong>Animações suaves</strong><p>Ative transições leves. A preferência do sistema também é respeitada.</p></span><input id="wn-dash-pref-motion" class="wn-dash-switch" type="checkbox" role="switch" checked></label>
+                <label class="wn-dash-setting"><span><strong>Lista compacta</strong><p>Mostre mais leads usando menos espaço entre as linhas.</p></span><input id="wn-dash-pref-compact" class="wn-dash-switch" type="checkbox" role="switch"></label>
+                <label class="wn-dash-setting"><span><strong>Lembrar filtros</strong><p>Mantenha os filtros de pesquisa ao voltar neste navegador.</p></span><input id="wn-dash-pref-filters" class="wn-dash-switch" type="checkbox" role="switch"></label>
+                <div class="wn-dash-filter-actions"><button class="wn-dash-primary-button" type="submit">Salvar preferências</button><button id="wn-dash-reset-settings" class="wn-dash-secondary-button" type="button">Restaurar padrão</button></div><p id="wn-dash-settings-status" class="wn-dash-hint" role="status">As preferências são salvas somente neste navegador.</p>
+              </div></form>
+            </div>
+          </section>
         </main>
       </div>
+      <div id="wn-dash-toast" class="wn-dash-toast" role="status" aria-live="polite" hidden><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span id="wn-dash-toast-message"></span></div>
+      <dialog id="wn-dash-lead-dialog" class="wn-dash-dialog" aria-labelledby="wn-dash-detail-title"><div class="wn-dash-row-top"><h3 id="wn-dash-detail-title">Detalhes do lead</h3><button id="wn-dash-close-detail" class="wn-dash-icon-button" type="button" aria-label="Fechar detalhes"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button></div><div id="wn-dash-detail-body"></div></dialog>
     </div>
   </section>
 
@@ -329,143 +458,494 @@ document.querySelectorAll('.faq-btn').forEach(btn=>btn.addEventListener('click',
 document.getElementById('login-form').addEventListener('submit',e=>{e.preventDefault();go('/dashboard')});
 document.getElementById('toggle-password').addEventListener('click',e=>{const i=document.getElementById('password'),show=i.type==='password';i.type=show?'text':'password';e.currentTarget.setAttribute('aria-label',show?'Hide password':'Show password');e.currentTarget.innerHTML=show?'<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m2 2 20 20"/><path d="M6.71 6.71C4.93 7.9 3.52 9.6 2.66 11.65a1 1 0 0 0 0 .7C4.34 16.4 8.24 19 12.6 19c1.5 0 2.93-.31 4.22-.88"/><path d="M10.73 5.08A10.9 10.9 0 0 1 12.6 5c4.36 0 8.26 2.6 9.94 6.65a1 1 0 0 1 0 .7 12.1 12.1 0 0 1-1.73 2.9"/><path d="M14.72 14.72a3 3 0 0 1-4.24-4.24"/></svg>':'<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.06 12.35a1 1 0 0 1 0-.7C3.74 7.6 7.64 5 12 5c4.36 0 8.26 2.6 9.94 6.65a1 1 0 0 1 0 .7C20.26 16.4 16.36 19 12 19c-4.36 0-8.26-2.6-9.94-6.65Z"/><circle cx="12" cy="12" r="3"/></svg>'});
 document.getElementById('forgot').addEventListener('click',e=>{e.preventDefault();notify('Recuperação de senha — conectar rota futura')});
+// Dashboard: UI em JS puro; a fonte de dados existente continua sendo a mesma.
 const wnDashRoot=document.getElementById('wn-dash-root');
 const wnDashSidebar=document.getElementById('sidebar');
 const wnDashToggle=document.getElementById('open-menu');
 const wnDashOverlay=document.getElementById('mobile-backdrop');
+const wnDashInset=document.getElementById('wn-dash-inset');
 const wnDashMobile=matchMedia('(max-width: 767px)');
+const wnDashIcons={"brand":"<path d=\"m3 5 4 14 5-10 5 10 4-14M7 19l5-10 5 10\"/>","search":"<circle cx=\"10.8\" cy=\"10.8\" r=\"6.8\"/><path d=\"m16 16 4.5 4.5\"/>","wallet":"<path d=\"M4 7V5a2 2 0 0 1 2-2h13v4M4 7h16a1 1 0 0 1 1 1v12H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z\"/><path d=\"M21 12h-5v4h5\"/>","credits":"<circle cx=\"9\" cy=\"9\" r=\"6\"/><path d=\"M15 9a6 6 0 1 1-6 6M9 6v6M7.5 7.5h3M15 13v4\"/>","support":"<path d=\"M4 13v-2a8 8 0 0 1 16 0v2M4 12H3v6h4v-6H4Zm16 0h1v6h-4v-6h3ZM20 18a3 3 0 0 1-3 3h-4\"/>","settings":"<path d=\"M4 6h6m4 0h6M4 12h12m4 0h0M4 18h2m4 0h10\"/><circle cx=\"12\" cy=\"6\" r=\"2\"/><circle cx=\"18\" cy=\"12\" r=\"2\"/><circle cx=\"8\" cy=\"18\" r=\"2\"/>","menu":"<path d=\"M4 6h16M4 12h16M4 18h16\"/>","close":"<path d=\"m6 6 12 12M6 18 18 6\"/>","collapse":"<rect x=\"3\" y=\"4\" width=\"18\" height=\"16\" rx=\"3\"/><path d=\"M9 4v16m7-12-4 4 4 4\"/>","bell":"<path d=\"M18 8a6 6 0 0 0-12 0c0 6-3 6-3 9h18c0-3-3-3-3-9M10 21h4\"/>","logout":"<path d=\"M9 4H4v16h5m6-12 4 4-4 4M9 12h11\"/>","star":"<path d=\"m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9Z\"/>","contact":"<rect x=\"3\" y=\"5\" width=\"18\" height=\"14\" rx=\"3\"/><path d=\"m4 7 8 6 8-6\"/>","download":"<path d=\"M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5\"/>","arrow":"<path d=\"M4 12h16m-6-6 6 6-6 6\"/>","check":"<path d=\"m5 12 4 4L19 6\"/>","document":"<path d=\"M14 3H5v18h14V8l-5-5Zm0 0v5h5M8 12h8m-8 4h5\"/>","copy":"<rect x=\"8\" y=\"8\" width=\"12\" height=\"13\" rx=\"2\"/><path d=\"M16 8V3H3v13h5\"/>","external":"<path d=\"M14 3h7v7m0-7L10 14M10 3H3v18h18v-7\"/>"};
+const wnDashDefaults={notify:true,motion:true,compact:false,filters:false};
+let wnDashPrefs={...wnDashDefaults},wnDashFavorites=new Map(),wnDashAccount=null;
+let wnDashCurrentPanel='Procurar leads',wnDashFilteredLeads=[],wnDashFilteredInvoices=[],wnDashToastTimer,wnDashLeadPage=1;
+
+function wnDashEl(tag,className,text){
+  const node=document.createElement(tag);
+  if(className)node.className=className;
+  if(text!==undefined)node.textContent=String(text);
+  return node;
+}
+function wnDashSet(id,value){document.getElementById(id).textContent=String(value)}
+function wnDashText(value){return typeof value==='string'||typeof value==='number'?String(value):''}
+function wnDashData(){return window.webnovaDashboardData&&typeof window.webnovaDashboardData==='object'?window.webnovaDashboardData:{}}
+function wnDashArray(value){return Array.isArray(value)?value.filter(item=>item&&typeof item==='object'):[]}
+function wnDashNumber(value){
+  if(value===null||value===undefined||value==='')return null;
+  const number=Number(value);
+  return Number.isFinite(number)?number:null;
+}
+function wnDashCount(value){return new Intl.NumberFormat('pt-BR',{maximumFractionDigits:2}).format(value)}
+function wnDashMoney(value,currency='BRL'){
+  if(value===null)return '—';
+  try{return new Intl.NumberFormat('pt-BR',{style:'currency',currency}).format(value)}
+  catch{return new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(value)}
+}
+function wnDashDate(value){
+  if(!value)return '—';
+  const source=typeof value==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(value)?value+'T12:00:00':value;
+  const date=new Date(source);
+  return Number.isNaN(date.getTime())?'—':new Intl.DateTimeFormat('pt-BR',{day:'2-digit',month:'short',year:'numeric'}).format(date);
+}
+function wnDashNormalize(value){return wnDashText(value).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('pt-BR').trim()}
+function wnDashPlan(state){return wnDashText(typeof state.plan==='object'?state.plan?.name:state.plan)||'Não informado'}
+function wnDashSafeURL(value){
+  const text=wnDashText(value).trim();
+  if(!text)return '';
+  try{
+    const url=new URL(/^[\w.-]+\.[a-z]{2,}(?:[/:?#]|$)/i.test(text)?'https://'+text:text);
+    return ['https:','http:'].includes(url.protocol)&&!url.username&&!url.password?url.href:'';
+  }catch{return ''}
+}
+function wnDashIcon(name){
+  const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+  svg.setAttribute('class','wn-dash-icon');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('aria-hidden','true');
+  svg.innerHTML=wnDashIcons[name]||wnDashIcons.document; // Somente SVGs estáticos deste arquivo.
+  return svg;
+}
+function wnDashInitials(name){return wnDashText(name).trim().split(/\s+/).slice(0,2).map(part=>part[0]||'').join('').toLocaleUpperCase('pt-BR')||'?'}
+function wnDashAvatar(user){
+  const name=wnDashText(user?.name),avatar=wnDashEl('span','wn-dash-avatar',wnDashInitials(name));
+  const url=wnDashSafeURL(user?.photoURL);
+  if(url){
+    const img=document.createElement('img');img.src=url;img.alt='';img.referrerPolicy='no-referrer';
+    img.addEventListener('error',()=>{avatar.textContent=wnDashInitials(name)},{once:true});
+    avatar.replaceChildren(img);
+  }
+  return avatar;
+}
+function wnDashStorageKey(name){return 'webnova:dashboard:'+encodeURIComponent(wnDashAccount||'guest')+':'+name}
+function wnDashRead(name,fallback){
+  try{const raw=localStorage.getItem(wnDashStorageKey(name));return raw?JSON.parse(raw):fallback}
+  catch{return fallback}
+}
+function wnDashWrite(name,value){
+  try{localStorage.setItem(wnDashStorageKey(name),JSON.stringify(value));return true}catch{return false}
+}
+function wnDashRemove(name){try{localStorage.removeItem(wnDashStorageKey(name))}catch{}}
+function wnDashApplyPrefs(){
+  wnDashRoot.classList.toggle('wn-dash-no-motion',!wnDashPrefs.motion);
+  wnDashRoot.classList.toggle('wn-dash-compact',wnDashPrefs.compact);
+  if(!wnDashPrefs.notify)document.getElementById('wn-dash-toast').hidden=true;
+}
+function wnDashLoadAccount(state){
+  const key=wnDashText(state.user?.id||state.user?.email)||'guest';
+  if(key===wnDashAccount)return;
+  wnDashAccount=key;
+  wnDashLeadPage=1;
+  const saved=wnDashRead('preferences',{}),favorites=wnDashRead('favorites',{});
+  wnDashPrefs={...wnDashDefaults};
+  for(const name of Object.keys(wnDashDefaults))if(typeof saved?.[name]==='boolean')wnDashPrefs[name]=saved[name];
+  wnDashFavorites=new Map(Object.entries(favorites&&typeof favorites==='object'?favorites:{}).filter(([,value])=>typeof value==='boolean'));
+  document.getElementById('wn-dash-lead-form').reset();
+  const filters=wnDashPrefs.filters?wnDashRead('filters',{}):{};
+  document.getElementById('lead-search').value=wnDashText(filters?.query).slice(0,150);
+  document.getElementById('wn-dash-location').value=wnDashText(filters?.location).slice(0,120);
+  document.getElementById('wn-dash-only-favorites').checked=filters?.favorites===true;
+  document.getElementById('wn-dash-with-contact').checked=filters?.contact===true;
+  document.getElementById('wn-dash-segment').dataset.restore=wnDashText(filters?.segment);
+  const draft=wnDashRead('support-draft',{});
+  document.getElementById('wn-dash-support-form').reset();
+  document.getElementById('wn-dash-support-message').setCustomValidity('');
+  document.getElementById('wn-dash-support-message').value=wnDashText(draft?.message).slice(0,4000);
+  if(Array.from(document.getElementById('wn-dash-support-topic').options).some(option=>option.value===draft?.topic))document.getElementById('wn-dash-support-topic').value=draft.topic;
+  wnDashSet('wn-dash-support-status',draft?.message?'Rascunho recuperado deste navegador. Ele ainda não foi enviado.':'O rascunho fica neste navegador. Salvar não envia uma solicitação.');
+  wnDashSet('wn-dash-settings-status','As preferências são salvas somente neste navegador.');
+  document.getElementById('wn-dash-toast').hidden=true;
+  wnDashApplyPrefs();
+}
+function wnDashRing(){
+  const button=document.getElementById('notifications-button');
+  button.classList.remove('wn-dash-bell-ring');
+  requestAnimationFrame(()=>button.classList.add('wn-dash-bell-ring'));
+}
+function wnDashToast(message){
+  if(!wnDashPrefs.notify)return;
+  clearTimeout(wnDashToastTimer);
+  wnDashSet('wn-dash-toast-message',message);
+  document.getElementById('wn-dash-toast').hidden=false;
+  wnDashRing();
+  wnDashToastTimer=setTimeout(()=>{document.getElementById('wn-dash-toast').hidden=true},4500);
+}
+
 function closeMenu(){
   wnDashRoot.classList.remove('wn-dash-drawer-open');
-  wnDashOverlay.hidden=true;
-  wnDashToggle.setAttribute('aria-expanded','false');
-  if(wnDashMobile.matches)wnDashSidebar.inert=true;
+  wnDashOverlay.hidden=true;wnDashInset.inert=false;
+  wnDashSidebar.inert=wnDashMobile.matches;
+  wnDashToggle.setAttribute('aria-expanded',String(!wnDashMobile.matches&&!wnDashRoot.classList.contains('wn-dash-collapsed')));
 }
-function syncDashboardMenu(){closeMenu();if(!wnDashMobile.matches)wnDashSidebar.inert=false}
+function syncDashboardMenu(){closeMenu()}
 document.getElementById('close-menu').addEventListener('click',()=>{closeMenu();wnDashToggle.focus()});
 wnDashOverlay.addEventListener('click',()=>{closeMenu();wnDashToggle.focus()});
 wnDashToggle.addEventListener('click',()=>{
   if(!wnDashMobile.matches){document.getElementById('collapse-sidebar').click();return}
   const open=!wnDashRoot.classList.contains('wn-dash-drawer-open');
-  wnDashRoot.classList.toggle('wn-dash-drawer-open',open);
-  wnDashOverlay.hidden=!open;
-  wnDashSidebar.inert=!open;
-  wnDashToggle.setAttribute('aria-expanded',String(open));
-  if(open)document.getElementById('close-menu').focus();
+  if(!open){closeMenu();return}
+  wnDashRoot.classList.add('wn-dash-drawer-open');
+  wnDashOverlay.hidden=false;wnDashSidebar.inert=false;wnDashInset.inert=true;
+  wnDashToggle.setAttribute('aria-expanded','true');
+  document.getElementById('close-menu').focus();
 });
 wnDashMobile.addEventListener('change',syncDashboardMenu);
-document.addEventListener('keydown',event=>{if(event.key==='Escape'&&wnDashRoot.classList.contains('wn-dash-drawer-open')){closeMenu();wnDashToggle.focus()}});
-document.querySelectorAll('#dashboard-page [data-side]').forEach(btn=>btn.addEventListener('click',()=>{
-  document.querySelectorAll('#dashboard-page [data-side]').forEach(item=>{item.classList.remove('wn-dash-active');item.removeAttribute('aria-current')});
-  btn.classList.add('wn-dash-active');btn.setAttribute('aria-current','page');
-  renderDashboard(btn.dataset.side);closeMenu();
-}));
-
-function wnDashInitials(name){return String(name||'').trim().split(/\s+/).slice(0,2).map(part=>part[0]||'').join('').toLocaleUpperCase('pt-BR')||'?'}
-function wnDashDate(value){const date=new Date(value);return Number.isNaN(date.getTime())?'':new Intl.DateTimeFormat('pt-BR',{day:'2-digit',month:'short',year:'numeric'}).format(date)}
-function wnDashData(){return window.webnovaDashboardData&&typeof window.webnovaDashboardData==='object'?window.webnovaDashboardData:{}}
-function wnDashAvatar(user){
-  const avatar=document.createElement('span');avatar.className='wn-dash-avatar';avatar.textContent=wnDashInitials(user?.name);
-  if(user?.photoURL){const img=document.createElement('img');img.src=user.photoURL;img.alt=user.name||'Foto da conta';img.onerror=()=>img.remove();avatar.replaceChildren(img)}
-  return avatar;
-}
-function wnDashChart(sites){
-  const svg=document.getElementById('wn-dash-chart'),tip=document.getElementById('wn-dash-chart-tooltip');
-  const ns='http://www.w3.org/2000/svg',weeks=[];
-  const monday=new Date();monday.setHours(0,0,0,0);monday.setDate(monday.getDate()-(monday.getDay()+6)%7-49);
-  for(let i=0;i<8;i++){const from=new Date(monday);from.setDate(from.getDate()+i*7);weeks.push({from,created:0,completed:0})}
-  for(const site of sites){
-    for(const [field,key] of [['createdAt','created'],['completedAt','completed']]){
-      const date=new Date(site?.[field]);if(!site?.[field]||Number.isNaN(date.getTime()))continue;
-      const index=Math.floor((date-weeks[0].from)/604800000);if(index>=0&&index<8)weeks[index][key]++;
-    }
+document.addEventListener('keydown',event=>{
+  if(!wnDashRoot.classList.contains('wn-dash-drawer-open'))return;
+  if(event.key==='Escape'){closeMenu();wnDashToggle.focus();return}
+  if(event.key==='Tab'){
+    const nodes=Array.from(wnDashSidebar.querySelectorAll('a[href],button:not([disabled])')).filter(node=>node.getClientRects().length);
+    const first=nodes[0],last=nodes[nodes.length-1];
+    if(event.shiftKey&&document.activeElement===first){event.preventDefault();last?.focus()}
+    else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first?.focus()}
   }
-  const hasData=weeks.some(week=>week.created||week.completed);
-  document.getElementById('wn-dash-chart-empty').hidden=hasData;
-  svg.setAttribute('aria-label',hasData?'Sites criados e concluídos nas últimas oito semanas. Use Tab para consultar cada semana.':'Sem dados de sites nas últimas oito semanas');
-  svg.replaceChildren();tip.hidden=true;
-  const add=(tag,attrs,parent=svg)=>{const node=document.createElementNS(ns,tag);for(const [name,value] of Object.entries(attrs))node.setAttribute(name,String(value));parent.appendChild(node);return node};
-  const left=44,right=776,top=20,bottom=203,max=Math.max(1,...weeks.flatMap(w=>[w.created,w.completed]));
-  const x=i=>left+(right-left)*i/7,y=n=>bottom-(bottom-top)*n/max;
-  for(let n=0;n<4;n++){const value=Math.round(max*n/3),cy=y(max*n/3);add('line',{x1:left,x2:right,y1:cy,y2:cy,stroke:'#34435a','stroke-dasharray':'4 5'});const label=add('text',{x:32,y:cy+4,'text-anchor':'end'});label.textContent=String(value)}
-  weeks.forEach((week,i)=>{const label=add('text',{x:x(i),y:229,'text-anchor':'middle'});label.textContent=new Intl.DateTimeFormat('pt-BR',{day:'2-digit',month:'short'}).format(week.from)});
-  if(!hasData)return;
-  const defs=add('defs',{}),gradient=add('linearGradient',{id:'wn-dash-chart-fill',x1:'0',y1:'0',x2:'0',y2:'1'},defs);
-  add('stop',{offset:'0%','stop-color':'#3b82f6','stop-opacity':'.28'},gradient);add('stop',{offset:'100%','stop-color':'#3b82f6','stop-opacity':'.01'},gradient);
-  const path=key=>weeks.map((w,i)=>(i?'L':'M')+x(i).toFixed(1)+' '+y(w[key]).toFixed(1)).join(' ');
-  add('path',{d:path('completed')+' L'+right+' '+bottom+' L'+left+' '+bottom+' Z',fill:'url(#wn-dash-chart-fill)'});
-  add('path',{d:path('created'),fill:'none',stroke:'#87b9ff','stroke-width':2.5,'stroke-dasharray':'7 6'});
-  add('path',{d:path('completed'),fill:'none',stroke:'#408aff','stroke-width':3});
-  weeks.forEach((week,i)=>{
-    const point=add('circle',{class:'wn-dash-chart-point',cx:x(i),cy:y(week.completed),r:6,fill:'#408aff',stroke:'#dbeafe','stroke-width':2,tabindex:0,role:'img','aria-label':`Semana de ${wnDashDate(week.from)}: ${week.created} sites criados e ${week.completed} concluídos`});
-    const show=()=>{tip.textContent=`Semana de ${wnDashDate(week.from)} · Criados: ${week.created} · Concluídos: ${week.completed}`;tip.hidden=false};
-    point.addEventListener('mouseenter',show);point.addEventListener('focus',show);point.addEventListener('mouseleave',()=>tip.hidden=true);point.addEventListener('blur',()=>tip.hidden=true);
+});
+function wnDashNavigate(section){
+  renderDashboard(section);closeMenu();wnDashClosePopovers();
+  const heading=document.querySelector('#dashboard-page [data-panel]:not([hidden]) [data-panel-title]');
+  heading?.focus({preventScroll:true});
+  document.getElementById('dashboard-content').scrollIntoView({block:'start',behavior:'instant'});
+}
+document.querySelectorAll('#dashboard-page [data-side]').forEach(button=>button.addEventListener('click',()=>wnDashNavigate(button.dataset.side)));
+wnDashSidebar.querySelectorAll('[data-route]').forEach(link=>link.addEventListener('click',closeMenu));
+
+function wnDashLeadRows(){
+  return wnDashArray(wnDashData().leads).map(row=>{
+    const lead=Array.isArray(row)?{name:row[0],segment:row[1],location:row[2],website:row[3],status:row[4]}:row;
+    return {
+      id:wnDashText(lead.id),name:wnDashText(lead.name||lead.companyName||lead.company),
+      segment:wnDashText(lead.segment||lead.industry),location:wnDashText(lead.location)||[lead.city,lead.state].map(wnDashText).filter(Boolean).join(', '),
+      website:wnDashText(lead.website),status:wnDashText(lead.status),email:wnDashText(lead.email),phone:wnDashText(lead.phone),
+      favorite:lead.favorite===true,notes:wnDashText(lead.notes),createdAt:lead.createdAt
+    };
   });
 }
-function wnDashSites(sites){
-  const list=document.getElementById('wn-dash-sites-list');list.replaceChildren();document.getElementById('wn-dash-sites-empty').hidden=sites.length>0;
-  for(const site of sites.slice(-5).reverse()){
-    const li=document.createElement('li');li.className='wn-dash-site-row';
-    const top=document.createElement('div');top.className='wn-dash-row-top';
-    const name=document.createElement('strong');name.textContent=site.name||'Site sem nome';top.appendChild(name);
-    const badge=document.createElement('span');const status=['Gerando','Pronto','Rascunho'].includes(site.status)?site.status:'Rascunho';badge.className='wn-dash-badge'+(status==='Pronto'?' wn-dash-badge-secondary':status==='Rascunho'?' wn-dash-badge-outline':'');badge.textContent=status;top.appendChild(badge);li.appendChild(top);
-    if(site.description){const desc=document.createElement('p');desc.className='wn-dash-row-description';desc.textContent=site.description;li.appendChild(desc)}
-    const value=Math.min(100,Math.max(0,Number(site.progress)||0)),track=document.createElement('div');track.className='wn-dash-progress';track.setAttribute('role','progressbar');track.setAttribute('aria-label',`Progresso de ${name.textContent}`);track.setAttribute('aria-valuenow',String(value));track.setAttribute('aria-valuemin','0');track.setAttribute('aria-valuemax','100');const fill=document.createElement('span');fill.style.width=value+'%';track.appendChild(fill);li.appendChild(track);
-    const footer=document.createElement('div');footer.className='wn-dash-row-footer';const people=document.createElement('span');if(Array.isArray(site.team))site.team.forEach(member=>people.appendChild(wnDashAvatar(member)));footer.appendChild(people);const date=document.createElement('span');date.textContent=(site.createdAt?wnDashDate(site.createdAt):'')+' · '+value+'%';footer.appendChild(date);li.appendChild(footer);list.appendChild(li);
+function wnDashLeadKey(lead){return lead.id?'id:'+lead.id:'lead:'+JSON.stringify([lead.name,lead.segment,lead.location,lead.website,lead.email,lead.phone])}
+function wnDashIsFavorite(lead){const key=wnDashLeadKey(lead);return wnDashFavorites.has(key)?wnDashFavorites.get(key):lead.favorite}
+function wnDashHasContact(lead){return Boolean(lead.email.trim()||lead.phone.trim())}
+function wnDashFilterValues(){
+  return {query:document.getElementById('lead-search').value,segment:document.getElementById('wn-dash-segment').value,location:document.getElementById('wn-dash-location').value,favorites:document.getElementById('wn-dash-only-favorites').checked,contact:document.getElementById('wn-dash-with-contact').checked};
+}
+function wnDashFilterLeadRows(leads,filter){
+  const query=wnDashNormalize(filter.query),location=wnDashNormalize(filter.location);
+  return leads.filter(lead=>
+    wnDashNormalize([lead.name,lead.segment,lead.location,lead.email,lead.phone,lead.website,lead.status].join(' ')).includes(query)&&
+    (!filter.segment||lead.segment===filter.segment)&&wnDashNormalize(lead.location).includes(location)&&
+    (!filter.favorites||wnDashIsFavorite(lead))&&(!filter.contact||wnDashHasContact(lead))
+  );
+}
+function wnDashSaveFilters(){if(wnDashPrefs.filters)wnDashWrite('filters',wnDashFilterValues())}
+function wnDashSegments(leads){
+  const select=document.getElementById('wn-dash-segment'),selected=select.dataset.restore||select.value;
+  delete select.dataset.restore;
+  select.replaceChildren(new Option('Todos os segmentos',''));
+  [...new Set(leads.map(lead=>lead.segment).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'pt-BR')).forEach(value=>select.add(new Option(value,value)));
+  if(Array.from(select.options).some(option=>option.value===selected))select.value=selected;
+}
+function wnDashEmpty(id,title,message){
+  const box=document.getElementById(id);
+  box.querySelector('strong').textContent=title;
+  box.querySelector(':scope > span:last-child').textContent=message;
+}
+function wnDashLeads(resetPage=false){
+  if(resetPage)wnDashLeadPage=1;
+  const leads=wnDashLeadRows(),filter=wnDashFilterValues();
+  const body=document.getElementById('lead-body');
+  body.replaceChildren();
+  wnDashFilteredLeads=wnDashFilterLeadRows(leads,filter);
+  wnDashSet('wn-dash-total-leads',wnDashCount(leads.length));
+  wnDashSet('wn-dash-total-favorites',wnDashCount(leads.filter(wnDashIsFavorite).length));
+  wnDashSet('wn-dash-total-contacts',wnDashCount(leads.filter(wnDashHasContact).length));
+  wnDashSet('lead-count',wnDashCount(wnDashFilteredLeads.length));
+  document.getElementById('export-leads').disabled=!wnDashFilteredLeads.length;
+  document.getElementById('wn-dash-lead-table').hidden=!wnDashFilteredLeads.length;
+  document.getElementById('wn-dash-leads-empty').hidden=Boolean(wnDashFilteredLeads.length);
+  wnDashEmpty('wn-dash-leads-empty',leads.length?'Nenhum lead para estes filtros.':'Sua próxima oportunidade começa aqui.',leads.length?'Tente outra palavra-chave ou limpe os filtros para ver sua base.':'Quando houver leads na sua conta, você poderá pesquisar, favoritar e exportar os resultados.');
+  const pageCount=Math.max(1,Math.ceil(wnDashFilteredLeads.length/25));
+  wnDashLeadPage=Math.min(wnDashLeadPage,pageCount);
+  document.getElementById('wn-dash-pagination').hidden=!wnDashFilteredLeads.length;
+  document.getElementById('wn-dash-prev-page').disabled=wnDashLeadPage===1;
+  document.getElementById('wn-dash-next-page').disabled=wnDashLeadPage===pageCount;
+  wnDashSet('wn-dash-page-info','Página '+wnDashLeadPage+' de '+pageCount+' · até 25 leads por página');
+  for(const lead of wnDashFilteredLeads.slice((wnDashLeadPage-1)*25,wnDashLeadPage*25)){
+    const tr=document.createElement('tr'),favoriteCell=document.createElement('td'),favorite=wnDashEl('button','wn-dash-icon-button');
+    favorite.type='button';favorite.setAttribute('aria-label','Favoritar '+(lead.name||'lead'));favorite.setAttribute('aria-pressed',String(wnDashIsFavorite(lead)));
+    favorite.appendChild(wnDashIcon('star'));
+    favorite.addEventListener('click',()=>{
+      const next=!wnDashIsFavorite(lead),key=wnDashLeadKey(lead);
+      wnDashFavorites.set(key,next);
+      const saved=wnDashWrite('favorites',Object.fromEntries(wnDashFavorites));
+      // Atualize a estrela sem perder o foco; o filtro de favoritos pode remover a linha.
+      if(filter.favorites){
+        wnDashLeads();
+        const nextButton=body.querySelector('button');(nextButton||document.getElementById('wn-dash-only-favorites')).focus();
+      }else{
+        favorite.setAttribute('aria-pressed',String(next));
+        wnDashSet('wn-dash-total-favorites',wnDashCount(wnDashLeadRows().filter(wnDashIsFavorite).length));
+      }
+      wnDashToast(saved?(next?'Lead salvo nos favoritos.':'Lead removido dos favoritos.'):'Favorito atualizado nesta sessão. O navegador bloqueou o salvamento.');
+    });
+    favoriteCell.appendChild(favorite);tr.appendChild(favoriteCell);
+    const nameCell=document.createElement('td');nameCell.appendChild(wnDashEl('strong','',lead.name||'Nome não informado'));
+    if(lead.status)nameCell.appendChild(wnDashEl('p','wn-dash-hint',lead.status));
+    tr.appendChild(nameCell);
+    [lead.segment,lead.location,lead.email||lead.phone].forEach(value=>tr.appendChild(wnDashEl('td','',value||'—')));
+    const detailCell=document.createElement('td'),details=wnDashEl('button','wn-dash-icon-button');
+    details.type='button';details.setAttribute('aria-label','Ver detalhes de '+(lead.name||'lead'));details.appendChild(wnDashIcon('arrow'));
+    details.addEventListener('click',()=>wnDashLeadDetails(lead));detailCell.appendChild(details);tr.appendChild(detailCell);
+    body.appendChild(tr);
   }
 }
-function wnDashActivity(entries,user){
-  const list=document.getElementById('wn-dash-activity-list');list.replaceChildren();document.getElementById('wn-dash-activity-empty').hidden=entries.length>0;
-  for(const entry of entries.slice(0,6)){
-    const li=document.createElement('li');li.className='wn-dash-row-top';li.style.justifyContent='flex-start';li.appendChild(wnDashAvatar(entry.user||user));const content=document.createElement('div');const actor=document.createElement('strong');actor.textContent=entry.user?.name||user?.name||'Conta';content.appendChild(actor);const action=document.createElement('span');action.className='wn-dash-row-description';action.textContent=' '+(entry.action||'');content.appendChild(action);const time=document.createElement('p');time.className='wn-dash-hint';time.textContent=entry.createdAt?wnDashDate(entry.createdAt):'';content.appendChild(time);li.appendChild(content);list.appendChild(li);
+function wnDashLeadDetails(lead){
+  wnDashSet('wn-dash-detail-title',lead.name||'Detalhes do lead');
+  const body=document.getElementById('wn-dash-detail-body');body.replaceChildren();
+  for(const [label,value] of [['Segmento',lead.segment],['Localização',lead.location],['E-mail',lead.email],['Telefone',lead.phone],['Etapa',lead.status]]){
+    const row=wnDashEl('div','wn-dash-kv');row.append(wnDashEl('span','',label),wnDashEl('strong','',value||'Não informado'));body.appendChild(row);
   }
+  const website=wnDashSafeURL(lead.website);
+  if(website){
+    const link=wnDashEl('a','wn-dash-secondary-button','Abrir website');link.href=website;link.target='_blank';link.rel='noopener noreferrer';link.appendChild(wnDashIcon('external'));body.appendChild(link);
+  }
+  if(lead.notes)body.appendChild(wnDashEl('p','wn-dash-hint',lead.notes));
+  const dialog=document.getElementById('wn-dash-lead-dialog');
+  if(!dialog.open)dialog.showModal();
 }
-function wnDashLeads(leads){
-  const body=document.getElementById('lead-body'),input=document.getElementById('lead-search');body.replaceChildren();const query=input.value.trim().toLocaleLowerCase('pt-BR');
-  const filtered=leads.filter(row=>(Array.isArray(row)?row.join(' '):Object.values(row||{}).join(' ')).toLocaleLowerCase('pt-BR').includes(query));
-  document.getElementById('lead-count').textContent=String(filtered.length);document.getElementById('export-leads').disabled=!leads.length;
-  if(!filtered.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=5;td.textContent=leads.length?'Nenhum resultado para este filtro.':'Nenhum resultado disponível.';tr.appendChild(td);body.appendChild(tr);return}
-  for(const row of filtered){const tr=document.createElement('tr');const values=Array.isArray(row)?row:[row.name,row.segment,row.location,row.website,row.status];for(const value of values.slice(0,5)){const td=document.createElement('td');td.textContent=value==null?'':String(value);tr.appendChild(td)}body.appendChild(tr)}
-}
-function renderDashboard(section='Sites gerados'){
-  const state=wnDashData(),sites=Array.isArray(state.sites)?state.sites:[],activities=Array.isArray(state.activities)?state.activities:[],leads=Array.isArray(state.leads)?state.leads:[],user=state.user||{};
-  const home=section==='Sites gerados';document.getElementById('wn-dash-overview').hidden=!home;document.getElementById('wn-dash-section-empty').hidden=home;
-  const first=String(user.name||'').trim().split(/\s+/)[0];document.getElementById('page-title').textContent=home?'Bem-vindo de volta'+(first?', '+first:''):section;
-  if(!home){document.getElementById('wn-dash-section-title').textContent=section;return}
-  document.getElementById('wn-dash-created').textContent=String(sites.length);
-  document.getElementById('wn-dash-credits').textContent=String(Math.max(0,Number(state.credits)||0));
-  document.getElementById('wn-dash-published').textContent=String(sites.filter(site=>site.publishedAt||site.downloadedAt).length);
-  document.getElementById('wn-dash-plan').textContent=state.plan||'—';document.getElementById('wn-dash-plan-summary').textContent=state.plan?'Plano '+state.plan:'Plano não informado';
-  document.getElementById('wn-dash-user-name').textContent=user.name||'Conta';
-  document.getElementById('wn-dash-user-avatar').replaceWith(Object.assign(wnDashAvatar(user),{id:'wn-dash-user-avatar'}));
-  wnDashChart(sites);wnDashSites(sites);wnDashActivity(activities,user);wnDashLeads(leads);
-}
-document.getElementById('lead-search').addEventListener('input',()=>wnDashLeads(Array.isArray(wnDashData().leads)?wnDashData().leads:[]));
-document.getElementById('export-leads').addEventListener('click',()=>{
-  const leads=Array.isArray(wnDashData().leads)?wnDashData().leads:[];if(!leads.length)return;
-  const rows=[['Empresa','Segmento','Localização','Website','Etapa'],...leads.map(row=>Array.isArray(row)?row:[row.name,row.segment,row.location,row.website,row.status])];
-  const csv=rows.map(row=>row.map(value=>'"'+String(value??'').replace(/"/g,'""')+'"').join(',')).join('\n');const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='webnova-leads.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),0);
+document.getElementById('wn-dash-close-detail').addEventListener('click',()=>document.getElementById('wn-dash-lead-dialog').close());
+document.getElementById('wn-dash-lead-dialog').addEventListener('click',event=>{
+  if(event.target!==event.currentTarget)return;
+  const rect=event.currentTarget.getBoundingClientRect();
+  if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)event.currentTarget.close();
 });
-document.getElementById('wn-dash-search-button').addEventListener('click',()=>{document.querySelector('[data-side="Sites gerados"]').click();document.getElementById('lead-search').focus();document.getElementById('lead-search').scrollIntoView({block:'center'})});
-document.querySelectorAll('#dashboard-page [data-dash-section]').forEach(button=>button.addEventListener('click',()=>document.querySelector('#dashboard-page [data-side="'+button.dataset.dashSection+'"]').click()));
-document.getElementById('wn-dash-create').addEventListener('click',()=>document.querySelector('#dashboard-page [data-side="Criar site"]').click());
+document.getElementById('wn-dash-lead-form').addEventListener('submit',event=>{
+  event.preventDefault();wnDashLeads(true);wnDashSaveFilters();
+  wnDashToast(wnDashFilteredLeads.length?wnDashCount(wnDashFilteredLeads.length)+' lead(s) encontrado(s) na sua base.':'Nenhum lead encontrado para esta pesquisa.');
+});
+['lead-search','wn-dash-location'].forEach(id=>document.getElementById(id).addEventListener('input',()=>{wnDashLeads(true);wnDashSaveFilters()}));
+['wn-dash-segment','wn-dash-only-favorites','wn-dash-with-contact'].forEach(id=>document.getElementById(id).addEventListener('change',()=>{wnDashLeads(true);wnDashSaveFilters()}));
+document.getElementById('wn-dash-clear-filters').addEventListener('click',()=>{
+  document.getElementById('wn-dash-lead-form').reset();wnDashLeads(true);wnDashSaveFilters();document.getElementById('lead-search').focus();
+});
+document.getElementById('wn-dash-prev-page').addEventListener('click',()=>{wnDashLeadPage=Math.max(1,wnDashLeadPage-1);wnDashLeads();document.getElementById('wn-dash-lead-table').focus()});
+document.getElementById('wn-dash-next-page').addEventListener('click',()=>{wnDashLeadPage++;wnDashLeads();document.getElementById('wn-dash-lead-table').focus()});
+function wnDashDownloadCSV(rows,filename){
+  const csv='\uFEFF'+rows.map(row=>row.map(value=>{
+    const text=String(value??''),safe=/^\s*[=+\-@\t\r]/.test(text)?"'"+text:text;
+    return '"'+safe.replace(/"/g,'""')+'"';
+  }).join(';')).join('\r\n');
+  const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})),link=document.createElement('a');
+  link.href=url;link.download=filename;document.body.appendChild(link);link.click();link.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+document.getElementById('export-leads').addEventListener('click',()=>{
+  if(!wnDashFilteredLeads.length)return;
+  wnDashDownloadCSV([['Empresa','Segmento','Localização','Website','Etapa','E-mail','Telefone','Favorito'],...wnDashFilteredLeads.map(lead=>[lead.name,lead.segment,lead.location,lead.website,lead.status,lead.email,lead.phone,wnDashIsFavorite(lead)?'Sim':'Não'])],'webnova-leads.csv');
+  wnDashToast('Exportação dos resultados iniciada.');
+});
 
-function setupDashboardHeader() {
+function wnDashInvoiceStatus(invoice){
+  const status=wnDashNormalize(invoice.status);
+  if(['paid','pago','paga','succeeded'].includes(status)||(!status&&invoice.paidAt))return 'paid';
+  if(['overdue','vencida','vencido','atrasada','atrasado'].includes(status))return 'overdue';
+  if(['pending','pendente','open','aberta','aberto'].includes(status)){
+    const due=wnDashText(invoice.dueAt||invoice.dueDate),date=new Date(/^\d{4}-\d{2}-\d{2}$/.test(due)?due+'T23:59:59':due);
+    return due&&!Number.isNaN(date.getTime())&&date<new Date()?'overdue':'pending';
+  }
+  return status;
+}
+function wnDashInvoiceLabel(invoice){return ({paid:'Pago',pending:'Pendente',overdue:'Em atraso'})[wnDashInvoiceStatus(invoice)]||wnDashText(invoice.status)||'Não informado'}
+function wnDashFinance(){
+  const state=wnDashData(),invoices=wnDashArray(state.invoices),currency=wnDashText(state.currency)||'BRL';
+  for(const status of ['paid','pending','overdue']){
+    const total=invoices.filter(invoice=>wnDashInvoiceStatus(invoice)===status&&(!invoice.currency||invoice.currency===currency)).reduce((sum,invoice)=>sum+(wnDashNumber(invoice.amount)||0),0);
+    wnDashSet('wn-dash-finance-'+status,wnDashMoney(total,currency));
+  }
+  wnDashSet('wn-dash-finance-plan',wnDashPlan(state));
+  const filter=document.getElementById('wn-dash-invoice-filter').value,body=document.getElementById('wn-dash-invoice-body');body.replaceChildren();
+  wnDashFilteredInvoices=invoices.filter(invoice=>!filter||wnDashInvoiceStatus(invoice)===filter);
+  document.getElementById('wn-dash-export-finance').disabled=!wnDashFilteredInvoices.length;
+  document.getElementById('wn-dash-invoice-table').hidden=!wnDashFilteredInvoices.length;
+  document.getElementById('wn-dash-invoice-empty').hidden=Boolean(wnDashFilteredInvoices.length);
+  wnDashEmpty('wn-dash-invoice-empty',invoices.length?'Nenhuma cobrança neste filtro.':'Nenhuma cobrança registrada.',invoices.length?'Selecione outro status para consultar o histórico.':'As cobranças vinculadas à sua conta aparecerão aqui.');
+  for(const invoice of wnDashFilteredInvoices){
+    const tr=document.createElement('tr');
+    [wnDashText(invoice.description)||'Cobrança',wnDashDate(invoice.dueAt||invoice.dueDate||invoice.createdAt),wnDashMoney(wnDashNumber(invoice.amount),invoice.currency||currency)].forEach(value=>tr.appendChild(wnDashEl('td','',value)));
+    const status=document.createElement('td');status.appendChild(wnDashEl('span','wn-dash-badge'+(wnDashInvoiceStatus(invoice)==='paid'?'':' wn-dash-badge-secondary'),wnDashInvoiceLabel(invoice)));tr.appendChild(status);
+    const action=document.createElement('td'),url=wnDashSafeURL(invoice.receiptUrl||invoice.invoiceUrl);
+    if(url){const a=wnDashEl('a','','Abrir documento');a.href=url;a.target='_blank';a.rel='noopener noreferrer';action.appendChild(a)}else action.textContent='—';
+    tr.appendChild(action);body.appendChild(tr);
+  }
+}
+document.getElementById('wn-dash-invoice-filter').addEventListener('change',wnDashFinance);
+document.getElementById('wn-dash-export-finance').addEventListener('click',()=>{
+  if(!wnDashFilteredInvoices.length)return;
+  wnDashDownloadCSV([['Descrição','Vencimento','Valor','Moeda','Status'],...wnDashFilteredInvoices.map(invoice=>[invoice.description,wnDashDate(invoice.dueAt||invoice.dueDate||invoice.createdAt),wnDashNumber(invoice.amount)??'',invoice.currency||wnDashData().currency||'BRL',wnDashInvoiceLabel(invoice)])],'webnova-financeiro.csv');
+  wnDashToast('Exportação do extrato iniciada.');
+});
+function wnDashCreditDelta(entry){
+  const delta=wnDashNumber(entry.delta);
+  if(delta!==null)return delta;
+  const amount=wnDashNumber(entry.amount);
+  if(amount===null)return 0;
+  return ['debit','usage','consumo','saida'].includes(wnDashNormalize(entry.type))?-Math.abs(amount):amount;
+}
+function wnDashCredits(){
+  const entries=wnDashArray(wnDashData().creditTransactions),filter=document.getElementById('wn-dash-credit-filter').value;
+  wnDashSet('wn-dash-credit-balance',wnDashCount(Math.max(0,wnDashNumber(wnDashData().credits)||0)));
+  wnDashSet('wn-dash-credit-in',wnDashCount(entries.reduce((sum,entry)=>sum+Math.max(0,wnDashCreditDelta(entry)),0)));
+  wnDashSet('wn-dash-credit-out',wnDashCount(entries.reduce((sum,entry)=>sum+Math.abs(Math.min(0,wnDashCreditDelta(entry))),0)));
+  const filtered=entries.filter(entry=>!filter||(filter==='in'?wnDashCreditDelta(entry)>0:wnDashCreditDelta(entry)<0));
+  const list=document.getElementById('wn-dash-credit-list');list.replaceChildren();
+  document.getElementById('wn-dash-credit-empty').hidden=Boolean(filtered.length);
+  wnDashEmpty('wn-dash-credit-empty',entries.length?'Nenhuma movimentação neste filtro.':'Seu extrato ainda está vazio.',entries.length?'Selecione outro tipo para consultar o extrato.':'Entradas e utilizações de créditos aparecerão aqui.');
+  for(const entry of filtered){
+    const li=wnDashEl('li','wn-dash-list-item'),content=document.createElement('div'),delta=wnDashCreditDelta(entry);
+    content.append(wnDashEl('strong','',wnDashText(entry.description)||(delta<0?'Utilização de créditos':'Movimentação de créditos')),wnDashEl('p','',wnDashDate(entry.createdAt)));
+    li.append(wnDashIcon('credits'),content,wnDashEl('span','wn-dash-badge', (delta>0?'+':'')+wnDashCount(delta)));list.appendChild(li);
+  }
+}
+document.getElementById('wn-dash-credit-filter').addEventListener('change',wnDashCredits);
+
+function wnDashSupportText(){
+  return 'Assunto: '+document.getElementById('wn-dash-support-topic').value+'\n\n'+document.getElementById('wn-dash-support-message').value.trim();
+}
+function wnDashValidateSupport(){
+  const input=document.getElementById('wn-dash-support-message');
+  input.setCustomValidity(input.value.trim()?'':'Descreva sua solicitação.');
+  return input.reportValidity();
+}
+function wnDashSupportEmail(){
+  const email=wnDashText(wnDashData().support?.email).trim();
+  return /^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$/i.test(email)?email:'';
+}
+document.getElementById('wn-dash-support-message').addEventListener('input',event=>event.currentTarget.setCustomValidity(''));
+document.getElementById('wn-dash-support-form').addEventListener('submit',event=>{
+  event.preventDefault();if(!wnDashValidateSupport())return;
+  const saved=wnDashWrite('support-draft',{topic:document.getElementById('wn-dash-support-topic').value,message:document.getElementById('wn-dash-support-message').value.trim()});
+  const message=saved?'Rascunho salvo neste navegador. A solicitação ainda não foi enviada.':'Não foi possível salvar no navegador. Copie a mensagem para guardá-la.';
+  wnDashSet('wn-dash-support-status',message);wnDashToast(message);
+});
+document.getElementById('wn-dash-copy-support').addEventListener('click',async()=>{
+  if(!wnDashValidateSupport())return;
+  try{
+    await navigator.clipboard.writeText(wnDashSupportText());
+    wnDashSet('wn-dash-support-status','Mensagem copiada. Cole no seu canal de atendimento para enviar.');
+    wnDashToast('Mensagem copiada.');
+  }catch{
+    document.getElementById('wn-dash-support-message').focus();document.getElementById('wn-dash-support-message').select();
+    wnDashSet('wn-dash-support-status','Seu navegador não permitiu a cópia automática. Copie o texto selecionado.');
+  }
+});
+document.getElementById('wn-dash-email-support').addEventListener('click',()=>{
+  if(!wnDashValidateSupport())return;
+  const email=wnDashSupportEmail();if(!email)return;
+  window.location.href='mailto:'+email+'?subject='+encodeURIComponent('WebNova — '+document.getElementById('wn-dash-support-topic').value)+'&body='+encodeURIComponent(wnDashSupportText());
+});
+document.querySelectorAll('#dashboard-page [data-support-topic]').forEach(button=>button.addEventListener('click',()=>{
+  wnDashNavigate('Suporte');document.getElementById('wn-dash-support-topic').value=button.dataset.supportTopic;document.getElementById('wn-dash-support-message').focus();
+}));
+
+function wnDashSettings(){
+  const state=wnDashData();
+  wnDashSet('wn-dash-profile-name',wnDashText(state.user?.name)||'Não informado');
+  wnDashSet('wn-dash-profile-email',wnDashText(state.user?.email)||'Não informado');
+  wnDashSet('wn-dash-profile-plan',wnDashPlan(state));
+  for(const key of Object.keys(wnDashDefaults))document.getElementById('wn-dash-pref-'+key).checked=wnDashPrefs[key];
+}
+function wnDashSavePreferences(){
+  const saved=wnDashWrite('preferences',wnDashPrefs);wnDashApplyPrefs();
+  if(wnDashPrefs.filters)wnDashSaveFilters();else wnDashRemove('filters');
+  const message=saved?'Preferências salvas neste navegador.':'Preferências aplicadas nesta sessão. O navegador bloqueou o salvamento.';
+  wnDashSet('wn-dash-settings-status',message);wnDashToast(message);
+}
+document.getElementById('wn-dash-settings-form').addEventListener('submit',event=>{
+  event.preventDefault();
+  for(const key of Object.keys(wnDashDefaults))wnDashPrefs[key]=document.getElementById('wn-dash-pref-'+key).checked;
+  wnDashSavePreferences();
+});
+document.getElementById('wn-dash-reset-settings').addEventListener('click',()=>{
+  wnDashPrefs={...wnDashDefaults};wnDashSettings();wnDashSavePreferences();
+});
+function wnDashActivity(entries,user){
+  const list=document.getElementById('wn-dash-activity-list');list.replaceChildren();
+  document.getElementById('wn-dash-activity-empty').hidden=Boolean(entries.length);
+  for(const entry of entries.slice(0,10)){
+    const li=wnDashEl('li','wn-dash-list-item'),content=document.createElement('div');
+    content.append(wnDashEl('strong','',wnDashText(entry.user?.name||user?.name)||'Sua conta'),wnDashEl('span','',' '+wnDashText(entry.action)),wnDashEl('p','',wnDashDate(entry.createdAt)));
+    li.append(wnDashAvatar(entry.user||user),content);list.appendChild(li);
+  }
+}
+function wnDashNotifications(){
+  const entries=wnDashArray(wnDashData().notifications),list=document.getElementById('wn-dash-notifications-list');list.replaceChildren();
+  document.getElementById('wn-dash-notifications-empty').hidden=Boolean(entries.length);
+  for(const entry of entries){
+    const li=wnDashEl('li','wn-dash-list-item'),content=document.createElement('div');
+    content.append(wnDashEl('strong','',wnDashText(entry.title)||'Notificação'),wnDashEl('p','',wnDashText(entry.message)),wnDashEl('p','',wnDashDate(entry.createdAt)));
+    li.append(wnDashIcon('bell'),content);list.appendChild(li);
+  }
+}
+function renderDashboard(section=wnDashCurrentPanel){
+  const allowed=['Procurar leads','Financeiro','Créditos','Suporte','Configurações'];
+  wnDashCurrentPanel=allowed.includes(section)?section:'Procurar leads';
+  const state=wnDashData(),user=state.user||{};
+  wnDashLoadAccount(state);
+  document.querySelectorAll('#dashboard-page [data-panel]').forEach(panel=>{panel.hidden=panel.dataset.panel!==wnDashCurrentPanel});
+  document.querySelectorAll('#dashboard-page [data-side]').forEach(button=>{
+    const active=button.dataset.side===wnDashCurrentPanel;button.classList.toggle('wn-dash-active',active);
+    if(active)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');
+  });
+  const first=wnDashText(user.name).trim().split(/\s+/)[0];
+  wnDashSet('page-title',wnDashCurrentPanel==='Procurar leads'?'Seu workspace'+(first?', '+first:''):wnDashCurrentPanel);
+  wnDashSet('wn-dash-plan-summary',state.plan?'Plano '+wnDashPlan(state):'Plano não informado');
+  wnDashSet('wn-dash-user-name',wnDashText(user.name)||'Conta');
+  const avatar=wnDashAvatar(user);avatar.id='wn-dash-user-avatar';document.getElementById('wn-dash-user-avatar').replaceWith(avatar);
+  wnDashSet('wn-dash-credits',wnDashCount(Math.max(0,wnDashNumber(state.credits)||0)));
+  wnDashSegments(wnDashLeadRows());wnDashLeads();wnDashFinance();wnDashCredits();wnDashActivity(wnDashArray(state.activities),user);wnDashNotifications();
+  if(wnDashCurrentPanel==='Configurações')wnDashSettings();
+  document.getElementById('wn-dash-email-support').hidden=!wnDashSupportEmail();
+}
+function wnDashClosePopovers(){
+  for(const [panel,button] of [['notifications-panel','notifications-button'],['user-menu-panel','user-menu-button']]){
+    document.getElementById(panel).hidden=true;document.getElementById(button).setAttribute('aria-expanded','false');
+  }
+}
+function setupDashboardHeader(){
   const nb=document.getElementById('notifications-button'),np=document.getElementById('notifications-panel'),ub=document.getElementById('user-menu-button'),up=document.getElementById('user-menu-panel');
-  nb.addEventListener('click',()=>{const open=np.hidden;np.hidden=!open;up.hidden=true;nb.setAttribute('aria-expanded',String(open));ub.setAttribute('aria-expanded','false')});
-  ub.addEventListener('click',()=>{const open=up.hidden;up.hidden=!open;np.hidden=true;ub.setAttribute('aria-expanded',String(open));nb.setAttribute('aria-expanded','false')});
-  document.getElementById('dashboard-settings').addEventListener('click',()=>{up.hidden=true;ub.setAttribute('aria-expanded','false');document.querySelector('#dashboard-page [data-side="Configurações"]').click()});
-  document.addEventListener('click',event=>{if(!(event.target instanceof Node))return;if(!nb.contains(event.target)&&!np.contains(event.target)){np.hidden=true;nb.setAttribute('aria-expanded','false')}if(!ub.contains(event.target)&&!up.contains(event.target)){up.hidden=true;ub.setAttribute('aria-expanded','false')}});
+  nb.addEventListener('click',()=>{const open=np.hidden;wnDashClosePopovers();np.hidden=!open;nb.setAttribute('aria-expanded',String(open));if(open){wnDashNotifications();wnDashRing()}});
+  nb.addEventListener('animationend',()=>nb.classList.remove('wn-dash-bell-ring'));
+  ub.addEventListener('click',()=>{const open=up.hidden;wnDashClosePopovers();up.hidden=!open;ub.setAttribute('aria-expanded',String(open))});
+  document.getElementById('dashboard-settings').addEventListener('click',()=>wnDashNavigate('Configurações'));
+  document.getElementById('wn-dash-search-button').addEventListener('click',()=>{wnDashNavigate('Procurar leads');document.getElementById('lead-search').focus()});
+  document.addEventListener('click',event=>{
+    if(!(event.target instanceof Node))return;
+    if(!nb.contains(event.target)&&!np.contains(event.target)){np.hidden=true;nb.setAttribute('aria-expanded','false')}
+    if(!ub.contains(event.target)&&!up.contains(event.target)){up.hidden=true;ub.setAttribute('aria-expanded','false')}
+  });
+  document.addEventListener('keydown',event=>{
+    if(event.key!=='Escape')return;
+    if(!np.hidden){wnDashClosePopovers();nb.focus()}
+    else if(!up.hidden){wnDashClosePopovers();ub.focus()}
+  });
 }
-
-function setupSidebarCollapse() {
+function setupSidebarCollapse(){
   const button=document.getElementById('collapse-sidebar');
-  button.addEventListener('click',()=>{const collapsed=wnDashRoot.classList.toggle('wn-dash-collapsed');button.textContent=collapsed?'›':'‹';button.setAttribute('aria-label',collapsed?'Expandir sidebar':'Recolher sidebar');button.title=collapsed?'Expandir sidebar':'Recolher sidebar';wnDashToggle.setAttribute('aria-expanded',String(!collapsed))});
+  button.addEventListener('click',()=>{
+    const collapsed=wnDashRoot.classList.toggle('wn-dash-collapsed');
+    button.setAttribute('aria-label',collapsed?'Expandir menu':'Recolher menu');button.title=collapsed?'Expandir menu':'Recolher menu';
+    button.setAttribute('aria-expanded',String(!collapsed));wnDashToggle.setAttribute('aria-expanded',String(!collapsed));
+  });
 }
-
 setupDashboardHeader();
 setupSidebarCollapse();
 syncDashboardMenu();
 renderDashboard();
+window.addEventListener('webnova:dashboard-data',()=>renderDashboard());
 renderRoute();
 </script>
 <style>
