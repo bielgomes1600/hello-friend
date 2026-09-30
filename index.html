@@ -229,6 +229,8 @@
     .wn-dash-chat-chip:hover,.wn-dash-chat-chip[aria-pressed="true"]{background:#639aff1b;border-color:#8ebaff4d;color:#e1eeff}
     .wn-dash-chat-chip .wn-dash-icon{width:15px;height:15px}
     .wn-dash-chat-note{margin:12px auto 0;text-align:center;color:#92a5c0;font-size:11px;line-height:1.6}
+    .wn-dash-chat-auth{display:flex;align-items:flex-end;flex-wrap:wrap;gap:12px;margin:0 0 18px}
+    .wn-dash-chat-auth .wn-dash-field{flex:1;min-width:180px}
     .wn-dash-chat-log{display:grid;gap:17px;max-height:640px;overflow-y:auto;overscroll-behavior:contain;margin:24px 0;padding:2px;scrollbar-width:thin}
     .wn-dash-chat-message{min-width:0;padding:18px;border:1px solid #9bbcff21;border-radius:18px;background:#14213970;font-size:12px;line-height:1.7;overflow-wrap:anywhere}
     .wn-dash-chat-message>strong{display:block;margin-bottom:7px;color:#c5dcff;font-size:11px}
@@ -412,6 +414,8 @@
                   <label class="wn-dash-field" for="wn-dash-chat-lead">Consultar contatos de<select id="wn-dash-chat-lead"><option value="">Toda a base de leads</option></select></label>
                   <label class="wn-dash-field" for="wn-dash-chat-mode">Modo de consulta<select id="wn-dash-chat-mode"><option value="base">Consulta à base</option><option id="wn-dash-chat-ai-option" value="ai" disabled>IA · não conectada</option></select></label>
                 </div>
+                <div class="wn-dash-chat-auth"><label class="wn-dash-field" for="wn-dash-chat-access-code">Código privado de acesso aos testes<input id="wn-dash-chat-access-code" type="password" maxlength="256" autocomplete="off" placeholder="Código do teste, nunca a chave Groq" aria-describedby="wn-dash-chat-auth-help"></label><button id="wn-dash-chat-test" class="wn-dash-secondary-button" type="button">Testar conexão</button></div>
+                <p id="wn-dash-chat-auth-help" class="wn-dash-hint">A chave Groq fica no servidor. O código de teste permanece apenas nesta aba e não é salvo.</p>
                 <div class="wn-dash-chat-composer">
                   <label class="wn-dash-field" for="wn-dash-chat-prompt">Qual contato você procura?</label>
                   <textarea id="wn-dash-chat-prompt" maxlength="1200" rows="3" placeholder="Ex.: Mostre os WhatsApps dos leads de São Paulo" aria-describedby="wn-dash-chat-help" required></textarea>
@@ -612,6 +616,7 @@ function wnDashLoadAccount(state){
   const key=wnDashText(state.user?.id||state.user?.email)||'guest';
   if(key===wnDashAccount)return;
   wnDashAccount=key;
+  wnDashAIReady=false;document.getElementById('wn-dash-chat-access-code').value='';
   wnDashChatReset();
   wnDashLeadPage=1;
   const saved=wnDashRead('preferences',{}),favorites=wnDashRead('favorites',{});
@@ -1017,12 +1022,13 @@ function setupSidebarCollapse(){
   });
 }
 // Chat de contatos. Nunca completa contatos ausentes nem gera números.
-// Integração opcional: webnovaDashboardData.contactAI.endpoint deve apontar
-// para um POST autenticado da mesma origem em /api/. Nenhuma chave fica no cliente.
+// Backend Groq em /api/leads/contacts/chat. Chave do provedor somente no servidor.
+// Código temporário de teste em memória; nunca salvo em storage ou no repositório.
 // Entrada: {task, prompt, channels, candidates:[{key,name,segment,location,availableChannels}]}.
 // Saída: {leadKeys:string[]}. O servidor interpreta o pedido; o cliente mostra
 // apenas contatos existentes nos leads correspondentes, nunca texto livre da IA.
 let wnDashChatChannel='all',wnDashChatController=null,wnDashChatRun=0;
+let wnDashAIReady=false,wnDashAIEndpoint='',wnDashAITestController=null;
 const wnDashContactLabels={whatsapp:'WhatsApp',instagram:'Instagram',email:'E-mail',phone:'Telefone'};
 
 function wnDashWhatsApp(value){
@@ -1087,13 +1093,83 @@ function wnDashChatMatch(leads,terms){
   });
 }
 function wnDashChatEndpoint(){
-  const endpoint=wnDashText(wnDashData().contactAI?.endpoint);
-  if(!endpoint)return '';
+  const endpoint=wnDashText(wnDashData().contactAI?.endpoint)||'/api/leads/contacts/chat';
   try{
     const url=new URL(endpoint,location.origin);
     return url.origin===location.origin&&/^https?:$/.test(url.protocol)&&url.pathname.startsWith('/api/')&&!url.username&&!url.password?url.href:'';
   }catch{return ''}
 }
+function wnDashAIAccessCode(){
+  const code=document.getElementById('wn-dash-chat-access-code').value.trim();
+  if(code.startsWith('gsk_')){
+    document.getElementById('wn-dash-chat-access-code').value='';
+    wnDashSet('wn-dash-chat-status','Não use a chave Groq neste campo. Use apenas o código privado de testes configurado pelo administrador.');
+    return '';
+  }
+  if(code.length<32){wnDashSet('wn-dash-chat-status','Informe o código privado de testes (mínimo de 32 caracteres).');return ''}
+  return code;
+}
+async function wnDashAIReadResponse(response){
+  if(!(response.headers.get('content-type')||'').includes('application/json')){
+    const error=new Error();error.code='BACKEND_UNAVAILABLE';throw error;
+  }
+  let payload;
+  try{payload=await response.json()}catch{const error=new Error();error.code='INVALID_AI_RESPONSE';throw error}
+  if(!response.ok){
+    const error=new Error();error.code=payload?.code||'PROVIDER_UNAVAILABLE';
+    const retry=Number(response.headers.get('retry-after'));
+    error.retryAfter=Number.isFinite(retry)&&retry>0?Math.min(3600,Math.ceil(retry)):0;throw error;
+  }
+  return payload;
+}
+function wnDashAIError(error){
+  const messages={
+    BACKEND_UNAVAILABLE:'O backend de IA não está disponível nesta hospedagem. A consulta à base continua funcionando.',
+    NOT_CONFIGURED:'A IA ainda precisa ser ativada pelo administrador no servidor.',
+    UNAUTHORIZED:'Código de acesso incorreto. Confira o código privado de testes.',
+    ORIGIN_DENIED:'Esta origem não tem permissão para consultar o backend.',
+    PROVIDER_AUTH:'A chave ou as permissões da Groq precisam ser revisadas pelo administrador.',
+    PROVIDER_CONFIG:'O modelo da Groq precisa ser revisado pelo administrador.',
+    MODEL_UNAVAILABLE:'O modelo não está disponível na conta Groq configurada.',
+    RATE_LIMIT:'O limite de testes foi atingido.',
+    PROVIDER_RATE_LIMIT:'O limite da Groq foi atingido.',
+    BUSY:'Já existem consultas em andamento.',
+    TIMEOUT:'A consulta excedeu o tempo limite. Tente novamente.',
+    INVALID_AI_RESPONSE:'A resposta da IA não pôde ser validada. Nenhum contato foi criado.',
+    PAYLOAD_TOO_LARGE:'A consulta ficou muito grande. Selecione menos leads.',
+    INVALID_REQUEST:'Não foi possível validar a consulta. Confira os dados dos leads.',
+    INVALID_CANDIDATES:'Os leads selecionados não puderam ser validados.',
+  };
+  if(['UNAUTHORIZED','PROVIDER_AUTH','NOT_CONFIGURED','BACKEND_UNAVAILABLE'].includes(error.code)){wnDashAIReady=false;wnDashChatSync()}
+  return (messages[error.code]||'Não foi possível concluir a consulta de IA. Use Consulta à base ou tente novamente.')+(error.retryAfter?' Tente novamente em '+error.retryAfter+' segundos.':'');
+}
+async function wnDashTestAIConnection(){
+  if(wnDashAITestController||wnDashChatController)return;
+  const accessCode=wnDashAIAccessCode(),endpoint=wnDashChatEndpoint();
+  if(!accessCode)return;
+  if(!endpoint){wnDashSet('wn-dash-chat-status','Endereço de integração inválido.');return}
+  const run=++wnDashChatRun,controller=new AbortController();wnDashAITestController=controller;
+  const timeout=setTimeout(()=>controller.abort(),20000);wnDashChatBusy(true);
+  wnDashSet('wn-dash-chat-status','Verificando o servidor e a autorização na Groq…');
+  try{
+    const response=await fetch(endpoint,{method:'POST',credentials:'same-origin',cache:'no-store',headers:{'Content-Type':'application/json','Authorization':'Bearer '+accessCode},body:JSON.stringify({task:'check_connection'}),signal:controller.signal});
+    const payload=await wnDashAIReadResponse(response);
+    if(run!==wnDashChatRun)return;
+    if(payload?.service!=='webnova-contact-ai'||payload.ok!==true){const error=new Error();error.code='INVALID_AI_RESPONSE';throw error}
+    wnDashAIReady=true;wnDashAIEndpoint=endpoint;wnDashChatSync();
+    document.getElementById('wn-dash-chat-mode').value='ai';
+    wnDashSet('wn-dash-chat-status','Conexão com a Groq verificada. Você já pode testar a IA com os leads da sua base.');
+  }catch(error){
+    if(run!==wnDashChatRun)return;
+    wnDashAIReady=false;wnDashChatSync();
+    wnDashSet('wn-dash-chat-status',controller.signal.aborted?'Verificação cancelada ou tempo limite atingido.':wnDashAIError(error));
+  }finally{
+    clearTimeout(timeout);
+    if(run===wnDashChatRun){wnDashAITestController=null;wnDashChatBusy(false)}
+  }
+}
+document.getElementById('wn-dash-chat-test').addEventListener('click',wnDashTestAIConnection);
+document.getElementById('wn-dash-chat-access-code').addEventListener('input',()=>{wnDashAIReady=false;wnDashChatSync()});
 function wnDashChatSetChannel(channel){
   wnDashChatChannel=channel;
   document.querySelectorAll('#dashboard-page [data-contact-channel]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.contactChannel===channel)));
@@ -1103,23 +1179,26 @@ function wnDashChatSync(){
   select.replaceChildren(new Option('Toda a base de leads ('+wnDashCount(leads.length)+')',''));
   leads.forEach(lead=>select.add(new Option((lead.name||'Nome não informado')+(lead.location?' · '+lead.location:''),wnDashLeadKey(lead))));
   if(Array.from(select.options).some(option=>option.value===previous))select.value=previous;
-  const connected=Boolean(wnDashChatEndpoint()),option=document.getElementById('wn-dash-chat-ai-option');
-  option.disabled=!connected;option.textContent=connected?'IA conectada':'IA · não conectada';
+  const connected=wnDashAIReady&&wnDashAIEndpoint===wnDashChatEndpoint(),option=document.getElementById('wn-dash-chat-ai-option');
+  option.disabled=!connected;option.textContent=connected?'Groq · conexão verificada':'IA · testar conexão';
   if(!connected)document.getElementById('wn-dash-chat-mode').value='base';
-  wnDashSet('wn-dash-chat-connection',connected?'IA conectada ao servidor da sua conta. Os contatos exibidos são sempre os cadastrados na base.':'Consulta aos contatos cadastrados disponível. A IA ainda não está conectada.');
-  document.getElementById('wn-dash-chat-send').disabled=Boolean(wnDashChatController)||!document.getElementById('wn-dash-chat-prompt').value.trim();
+  wnDashSet('wn-dash-chat-connection',connected?'Conexão Groq verificada. A IA seleciona leads; os contatos vêm dos registros da sua base.':'A consulta à base está disponível. Para usar a IA, informe o código privado e teste a conexão.');
+  document.getElementById('wn-dash-chat-send').disabled=Boolean(wnDashChatController||wnDashAITestController)||!document.getElementById('wn-dash-chat-prompt').value.trim();
 }
 function wnDashChatBusy(busy){
   document.getElementById('wn-dash-chat-form').setAttribute('aria-busy',String(busy));
   document.getElementById('wn-dash-chat-cancel').hidden=!busy;
-  for(const id of ['wn-dash-chat-prompt','wn-dash-chat-lead','wn-dash-chat-mode','wn-dash-chat-favorites','wn-dash-chat-filtered'])document.getElementById(id).disabled=busy;
+  for(const id of ['wn-dash-chat-prompt','wn-dash-chat-lead','wn-dash-chat-mode','wn-dash-chat-favorites','wn-dash-chat-filtered','wn-dash-chat-access-code','wn-dash-chat-test'])document.getElementById(id).disabled=busy;
   document.querySelectorAll('#dashboard-page [data-contact-channel]').forEach(button=>{button.disabled=busy});
   document.getElementById('wn-dash-chat-send').disabled=busy||!document.getElementById('wn-dash-chat-prompt').value.trim();
 }
 function wnDashChatReset(){
   wnDashChatRun++;wnDashChatController?.abort();wnDashChatController=null;
+  wnDashAITestController?.abort();wnDashAITestController=null;
   const log=document.getElementById('wn-dash-chat-log');log.replaceChildren();log.hidden=true;
+  const accessCode=document.getElementById('wn-dash-chat-access-code').value;
   document.getElementById('wn-dash-chat-form').reset();
+  document.getElementById('wn-dash-chat-access-code').value=accessCode;
   document.getElementById('wn-dash-chat-prompt').setCustomValidity('');
   wnDashChatSetChannel('all');wnDashChatBusy(false);
   wnDashSet('wn-dash-chat-status','A conversa fica apenas nesta sessão.');
@@ -1188,13 +1267,13 @@ function wnDashChatResults(leads,channels,mode){
   }
   const log=document.getElementById('wn-dash-chat-log');log.scrollTop=article.offsetTop-log.offsetTop;
 }
-function wnDashChatValidateKeys(response,candidates){
-  const allowed=new Map(candidates.map(lead=>[wnDashLeadKey(lead),lead]));
+function wnDashChatValidateKeys(response,candidates,useAliases=false){
+  const allowed=new Map(candidates.map((lead,index)=>[useAliases?'lead-'+index:wnDashLeadKey(lead),lead]));
   if(!response||!Array.isArray(response.leadKeys)||response.leadKeys.length>candidates.length||response.leadKeys.some(key=>typeof key!=='string'||!allowed.has(key)))throw new Error('Resposta de IA inválida: nenhum contato foi exibido.');
   return [...new Set(response.leadKeys)].map(key=>allowed.get(key));
 }
 async function wnDashChatSubmit(event){
-  event.preventDefault();if(wnDashChatController)return;
+  event.preventDefault();if(wnDashChatController||wnDashAITestController)return;
   const input=document.getElementById('wn-dash-chat-prompt'),prompt=input.value.trim();
   if(!prompt){input.focus();return}
   const intent=wnDashChatIntent(prompt,wnDashChatChannel);
@@ -1219,26 +1298,27 @@ async function wnDashChatSubmit(event){
     input.value='';wnDashChatSync();wnDashSet('wn-dash-chat-status','Consulta concluída. Fonte: contatos cadastrados na sua base.');input.focus();return;
   }
   const endpoint=wnDashChatEndpoint();
-  if(!endpoint){wnDashChatMessage('Assistente de contatos','A IA ainda não está conectada. Selecione Consulta à base para consultar os contatos cadastrados.');wnDashChatSync();return}
+  const accessCode=wnDashAIAccessCode();
+  if(!endpoint||!wnDashAIReady||!accessCode){wnDashChatMessage('Assistente de contatos','Informe o código de acesso e use Testar conexão para ativar a IA. A consulta à base continua disponível.');return}
   if(candidates.length>200){wnDashChatMessage('Assistente de contatos','Selecione uma empresa ou ative os filtros de Procurar leads para limitar a consulta de IA a até 200 leads por vez.');return}
   if(!candidates.length){wnDashChatResults([],intent.channels,'ai');return}
   const controller=new AbortController(),run=++wnDashChatRun;wnDashChatController=controller;
   let timedOut=false;const timeout=setTimeout(()=>{timedOut=true;controller.abort()},20000);
   wnDashChatBusy(true);wnDashSet('wn-dash-chat-status','Consultando a IA com os leads selecionados…');
   try{
-    const response=await fetch(endpoint,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},signal:controller.signal,body:JSON.stringify({
+    const response=await fetch(endpoint,{method:'POST',credentials:'same-origin',cache:'no-store',headers:{'Content-Type':'application/json','Authorization':'Bearer '+accessCode},signal:controller.signal,body:JSON.stringify({
       task:'lookup_lead_contacts',prompt,channels:intent.channels,
-      candidates:candidates.map(lead=>({key:wnDashLeadKey(lead),name:lead.name,segment:lead.segment,location:lead.location,availableChannels:wnDashContactValues(lead).map(contact=>contact.type)}))
+      candidates:candidates.map((lead,index)=>({key:'lead-'+index,name:lead.name.slice(0,240),segment:lead.segment.slice(0,160),location:lead.location.slice(0,240),availableChannels:wnDashContactValues(lead).map(contact=>contact.type)}))
     })});
-    if(!response.ok)throw new Error('Não foi possível consultar a IA. Use Consulta à base ou tente novamente.');
-    const payload=await response.json();
+    const payload=await wnDashAIReadResponse(response);
     if(run!==wnDashChatRun)return;
-    const result=wnDashChatValidateKeys(payload,candidates);
+    const result=wnDashChatValidateKeys(payload,candidates,true);
+    if(payload.outOfScope){wnDashChatMessage('Assistente de contatos','A IA atende apenas consultas de canais de contato dos leads da base.');return}
     wnDashChatResults(result,intent.channels,'ai');input.value='';
     wnDashSet('wn-dash-chat-status','Consulta concluída. Contatos conferidos com os registros da base.');
   }catch(error){
     if(run!==wnDashChatRun)return;
-    const message=controller.signal.aborted?(timedOut?'A IA demorou para responder. Tente novamente ou use Consulta à base.':'Consulta cancelada.'):'Não foi possível concluir a consulta de IA. Nenhum contato foi criado. Use Consulta à base ou tente novamente.';
+    const message=controller.signal.aborted?(timedOut?'A IA demorou para responder. Tente novamente ou use Consulta à base.':'Consulta cancelada.'):wnDashAIError(error);
     wnDashChatMessage('Assistente de contatos',message);wnDashSet('wn-dash-chat-status',message);
   }finally{
     clearTimeout(timeout);
@@ -1252,7 +1332,7 @@ document.getElementById('wn-dash-chat-prompt').addEventListener('keydown',event=
   if(event.key==='Enter'&&!event.shiftKey&&!event.isComposing){event.preventDefault();document.getElementById('wn-dash-chat-form').requestSubmit()}
 });
 document.getElementById('wn-dash-chat-reset').addEventListener('click',()=>{wnDashChatReset();wnDashChatSync();document.getElementById('wn-dash-chat-prompt').focus()});
-document.getElementById('wn-dash-chat-cancel').addEventListener('click',()=>wnDashChatController?.abort());
+document.getElementById('wn-dash-chat-cancel').addEventListener('click',()=>{wnDashChatController?.abort();wnDashAITestController?.abort()});
 document.querySelectorAll('#dashboard-page [data-contact-channel]').forEach(button=>button.addEventListener('click',()=>{
   const channel=button.dataset.contactChannel;wnDashChatSetChannel(channel);
   document.getElementById('wn-dash-chat-prompt').value=channel==='all'?'Mostre os contatos dos leads.':'Mostre '+wnDashContactLabels[channel]+' dos leads.';
