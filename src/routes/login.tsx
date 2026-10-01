@@ -37,6 +37,7 @@ const testimonials: Testimonial[] = [
 
 function LoginPage() {
   const navigate = useNavigate();
+  const [notice, setNotice] = useState("");
   const enterDashboard = () => navigate({ to: "/dashboard" });
 
   return (
@@ -49,9 +50,17 @@ function LoginPage() {
           enterDashboard();
         }}
         onGoogleSignIn={enterDashboard}
-        onResetPassword={() => console.log("[WEBNOVA IA] Reset Password clicked")}
+        onResetPassword={() => setNotice("A recuperação de senha será disponibilizada quando o fluxo de conta estiver conectado.")}
         onCreateAccount={() => navigate({ to: "/", hash: "planos" })}
       />
+      {notice && (
+        <div className="fixed bottom-4 left-1/2 z-50 w-[min(92vw,32rem)] -translate-x-1/2 rounded-xl border border-white/10 bg-slate-950/95 px-4 py-3 text-sm text-slate-200 shadow-2xl" role="status">
+          <div className="flex items-center justify-between gap-3">
+            <span>{notice}</span>
+            <button type="button" aria-label="Fechar aviso" onClick={() => setNotice("")} className="rounded-md px-2 py-1 text-slate-400 hover:bg-white/5 hover:text-white">×</button>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
