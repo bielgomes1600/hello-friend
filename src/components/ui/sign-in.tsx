@@ -55,7 +55,7 @@ const TestimonialCard = ({ testimonial, delay }: { testimonial: Testimonial; del
   <div
     className={`animate-testimonial ${delay} flex w-64 items-start gap-3 rounded-3xl border border-white/10 bg-card/40 p-5 backdrop-blur-xl dark:bg-zinc-800/40`}
   >
-    <img src={testimonial.avatarSrc} className="h-10 w-10 rounded-2xl object-cover" alt="avatar" />
+    <img src={testimonial.avatarSrc} className="h-10 w-10 rounded-2xl object-cover" alt={testimonial.name} />
     <div className="text-sm leading-snug">
       <p className="flex items-center gap-1 font-medium">{testimonial.name}</p>
       <p className="text-muted-foreground">{testimonial.handle}</p>
@@ -87,11 +87,13 @@ export const SignInPage: React.FC<SignInPageProps> = ({
             <p className="animate-element animate-delay-200 text-muted-foreground">{description}</p>
             <form className="space-y-5" onSubmit={onSignIn}>
               <div className="animate-element animate-delay-300">
-                <label className="text-sm font-medium text-muted-foreground">Email Address</label>
+                <label htmlFor="sign-in-email" className="text-sm font-medium text-muted-foreground">E-mail</label>
                 <GlassInputWrapper>
                   <input
+                    id="sign-in-email"
                     name="email"
                     type="email"
+                    autoComplete="email"
                     required
                     placeholder="Enter your email address"
                     className="w-full rounded-2xl bg-transparent p-4 text-sm focus:outline-none"
@@ -99,12 +101,14 @@ export const SignInPage: React.FC<SignInPageProps> = ({
                 </GlassInputWrapper>
               </div>
               <div className="animate-element animate-delay-400">
-                <label className="text-sm font-medium text-muted-foreground">Password</label>
+                <label htmlFor="sign-in-password" className="text-sm font-medium text-muted-foreground">Senha</label>
                 <GlassInputWrapper>
                   <div className="relative">
                     <input
+                      id="sign-in-password"
                       name="password"
                       type={showPassword ? "text" : "password"}
+                      autoComplete="current-password"
                       required
                       placeholder="Enter your password"
                       className="w-full rounded-2xl bg-transparent p-4 pr-12 text-sm focus:outline-none"
