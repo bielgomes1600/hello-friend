@@ -248,8 +248,22 @@
     .wn-dash-contact-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:15px}
     .wn-dash-chat-busy{color:#aacbff}
     @media(max-width:639px){.wn-dash-chat-context{grid-template-columns:minmax(0,1fr)}.wn-dash-chat-top{margin-bottom:26px}.wn-dash-chat-toolbar p{max-width:170px}.wn-dash-chat-composer{padding:14px}.wn-dash-chat-message{padding:14px}}
+
+    /* Sidebar WEBNOVA IA */
+    :root{--blue:#2563eb;--blue-soft:rgba(37,99,235,.12);--blue-border:rgba(37,99,235,.28);--white:#fff;--gray-100:#f4f4f5;--gray-400:#a1a1aa;--gray-500:#8a8a93;--gray-800:#232329;--gray-900:#1a1a1f;--bg-sidebar:#07080c;--bg-hover:#12141a;--bg-card-from:#0d0f15;--bg-card-to:#08090d}
+    body.light{--bg-sidebar:#fff;--bg-hover:#f4f4f5;--gray-400:#52525b;--gray-500:#71717a;--gray-800:#e4e4e7;--gray-900:#e4e4e7;--bg-card-from:#fafafa;--bg-card-to:#f4f4f5;--white:#09090b}
+    .wn-sidebar{position:fixed;inset:0 auto 0 0;z-index:60;width:250px;height:100vh;display:flex;flex-direction:column;overflow:hidden;padding:8px;background:var(--bg-sidebar);border-right:1px solid var(--gray-900);font-family:Inter,system-ui,sans-serif;color:var(--white);animation:wnSidebarIn .45s ease both}
+    .wn-sidebar__top{display:flex;align-items:center;justify-content:space-between;min-height:52px;padding:0 6px}.wn-sidebar__brand{display:flex;align-items:center;gap:10px;color:var(--white);text-decoration:none;font-size:14px;font-weight:700}.wn-sidebar__brand-mark{display:grid;place-items:center;width:32px;height:32px;color:var(--blue)}.wn-sidebar__brand-mark svg{width:20px;height:20px;stroke-width:1.75}.wn-sidebar__actions{display:flex;gap:4px}.wn-sidebar__icon-button{display:grid;place-items:center;width:36px;height:36px;border:1px solid transparent;border-radius:10px;background:transparent;color:var(--gray-400);cursor:pointer;transition:.2s}.wn-sidebar__icon-button:hover{background:var(--bg-hover);color:var(--blue);border-color:var(--gray-800)}.wn-sidebar__icon-button svg{width:18px;height:18px;stroke-width:1.75}
+    .wn-sidebar__scroll{min-height:0;overflow-y:auto;overflow-x:hidden;padding:10px 0;scrollbar-width:thin;scrollbar-color:var(--gray-900) transparent}.wn-sidebar__scroll::-webkit-scrollbar{width:4px}.wn-sidebar__scroll::-webkit-scrollbar-thumb{background:var(--gray-900);border-radius:10px}
+    .wn-sidebar__nav{display:flex;flex-direction:column;gap:2px}.wn-sidebar__item{display:flex;align-items:center;gap:12px;width:100%;margin:0;padding:10px 14px;border:1px solid transparent;border-radius:10px;background:transparent;color:var(--gray-400);font:500 14px/1.2 Inter,system-ui,sans-serif;text-align:left;cursor:pointer;transition:background .2s,color .2s,border-color .2s}.wn-sidebar__item svg{width:18px;height:18px;flex:none;stroke-width:1.75}.wn-sidebar__item:hover{background:var(--bg-hover);color:var(--white)}.wn-sidebar__item.is-active{background:var(--blue-soft);border-color:var(--blue-border);color:var(--blue);font-weight:600}.wn-sidebar__item.is-active svg{color:var(--blue)}
+    .wn-sidebar__divider{height:1px;margin:12px 0;background:var(--gray-900)}.wn-sidebar__credits{margin:12px;padding:20px;border:1px solid var(--gray-800);border-radius:16px;background:linear-gradient(145deg,var(--bg-card-from),var(--bg-card-to));color:var(--white)}.wn-sidebar__credits-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.wn-sidebar__credits-head>span{font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--gray-400)}.wn-sidebar__credits strong{display:block;margin-top:14px;color:var(--white);font-size:28px;line-height:1;font-weight:700}.wn-sidebar__credits>span:last-child{display:block;margin-top:7px;color:var(--gray-500);font-size:12px}
+    .wn-sidebar__theme-button{display:grid;place-items:center;width:40px;height:40px;border:1px solid var(--gray-800);border-radius:50%;background:#0b0d12;color:var(--gray-400);cursor:pointer;transition:.2s}.wn-sidebar__theme-button:hover{border-color:var(--blue);color:var(--blue)}.wn-sidebar__theme-button svg{width:18px;height:18px;stroke-width:1.75}
+    .wn-sidebar__profile{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px 14px}.wn-sidebar__avatar{display:grid;flex:none;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--blue-soft);color:var(--blue);font-size:14px;font-weight:700}.wn-sidebar__profile-copy{display:flex;flex:1;min-width:0;flex-direction:column;gap:3px}.wn-sidebar__profile-copy strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--white);font-size:14px;font-weight:600}.wn-sidebar__profile-copy span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--gray-500);font-size:12px}.wn-sidebar__logout{padding:5px 0;border:0;background:none;color:var(--white);font:600 13px Inter,system-ui,sans-serif;cursor:pointer;transition:color .2s}.wn-sidebar__logout:hover{color:var(--blue)}
+    .wn-mobile-only{display:none}.wn-desktop-only{display:grid}#wn-dash-inset{margin-left:250px}.wn-sidebar~#wn-dash-inset{min-height:100vh}@keyframes wnSidebarIn{from{opacity:0;transform:translateX(-18px)}to{opacity:1;transform:translateX(0)}}
+    @media(max-width:767px){.wn-sidebar{transform:translateX(-100%);transition:transform .25s ease}.wn-dash-drawer-open .wn-sidebar{transform:translateX(0)}.wn-mobile-only{display:grid}.wn-desktop-only{display:none}#wn-dash-inset{margin-left:0}}
+    @media(min-width:768px){.wn-dash-collapsed .wn-sidebar{width:72px}.wn-dash-collapsed #wn-dash-inset{margin-left:72px}.wn-dash-collapsed .wn-sidebar__brand span:last-child,.wn-dash-collapsed .wn-sidebar__item span,.wn-dash-collapsed .wn-sidebar__credits,.wn-dash-collapsed .wn-sidebar__profile-copy,.wn-dash-collapsed .wn-sidebar__logout{display:none}.wn-dash-collapsed .wn-sidebar__item{justify-content:center;padding-inline:10px}.wn-dash-collapsed .wn-sidebar__profile{justify-content:center}.wn-dash-collapsed .wn-sidebar__top{justify-content:center}}
 </style>
-</head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">\n  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">\n  <script src="https://unpkg.com/lucide@latest"></script>\n</head>
 <body>
   <div id="intro" class="intro fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-black">
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(37,99,235,.22),transparent_28%),radial-gradient(circle_at_30%_50%,rgba(14,165,233,.12),transparent_32%),#000]"></div>
@@ -341,23 +355,49 @@
   <section id="dashboard-page" class="page">
     <div id="wn-dash-root" class="wn-dash-root">
       <button id="mobile-backdrop" class="wn-dash-overlay" type="button" aria-label="Fechar menu" hidden></button>
-      <aside id="sidebar" class="wn-dash-sidebar" aria-label="Navegação do painel">
-        <div class="wn-dash-sidebar-top">
-          <a href="/" data-route="/" class="wn-dash-logo" aria-label="WebNova, página inicial"><span class="wn-dash-brand-mark"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 5 4 14 5-10 5 10 4-14M7 19l5-10 5 10"/></svg></span><span class="wn-dash-logo-text">WEBNOVA</span></a>
-          <button id="close-menu" class="wn-dash-icon-button" type="button" aria-label="Fechar menu"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button>
-          <button id="collapse-sidebar" class="wn-dash-icon-button" type="button" aria-label="Recolher menu" aria-expanded="true" aria-controls="sidebar" title="Recolher menu"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16m7-12-4 4 4 4"/></svg></button>
+      <!-- Sidebar WEBNOVA IA -->
+      <aside id="sidebar" class="wn-sidebar" aria-label="Navegação do painel">
+        <div class="wn-sidebar__top">
+          <a href="/" data-route="/" class="wn-sidebar__brand" aria-label="WebNova, página inicial">
+            <span class="wn-sidebar__brand-mark"><i data-lucide="layout-grid"></i></span><span>WEBNOVA IA</span>
+          </a>
+          <div class="wn-sidebar__actions">
+            <button id="close-menu" class="wn-sidebar__icon-button wn-mobile-only" type="button" aria-label="Fechar menu"><i data-lucide="x"></i></button>
+            <button id="collapse-sidebar" class="wn-sidebar__icon-button wn-desktop-only" type="button" aria-label="Recolher menu" aria-expanded="true" aria-controls="sidebar" title="Recolher menu"><i data-lucide="panel-left-close"></i></button>
+          </div>
         </div>
-        <div><p class="wn-dash-sidebar-label">Workspace</p>
-          <nav class="wn-dash-nav" aria-label="Menu principal">
-            <button class="wn-dash-nav-button wn-dash-active" type="button" data-side="Procurar leads" aria-label="Procurar leads" title="Procurar leads" aria-current="page"><span class="wn-dash-nav-icon"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg></span><span class="wn-dash-nav-text">Procurar leads</span></button>
-            <button class="wn-dash-nav-button" type="button" data-side="Chat de contatos" aria-label="Chat de contatos" title="Chat de contatos"><span class="wn-dash-nav-icon"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.6 6.4L21 12l-6.4 2.6L12 21l-2.6-6.4L3 12l6.4-2.6Z"/></svg></span><span class="wn-dash-nav-text">Chat de contatos</span></button>
-            <button class="wn-dash-nav-button" type="button" data-side="Financeiro" aria-label="Financeiro" title="Financeiro"><span class="wn-dash-nav-icon"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7V5a2 2 0 0 1 2-2h13v4M4 7h16a1 1 0 0 1 1 1v12H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z"/><path d="M21 12h-5v4h5"/></svg></span><span class="wn-dash-nav-text">Financeiro</span></button>
-            <button class="wn-dash-nav-button" type="button" data-side="Créditos" aria-label="Créditos" title="Créditos"><span class="wn-dash-nav-icon"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="9" r="6"/><path d="M15 9a6 6 0 1 1-6 6M9 6v6M7.5 7.5h3M15 13v4"/></svg></span><span class="wn-dash-nav-text">Créditos</span></button>
-            <button class="wn-dash-nav-button" type="button" data-side="Suporte" aria-label="Suporte" title="Suporte"><span class="wn-dash-nav-icon"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13v-2a8 8 0 0 1 16 0v2M4 12H3v6h4v-6H4Zm16 0h1v6h-4v-6h3ZM20 18a3 3 0 0 1-3 3h-4"/></svg></span><span class="wn-dash-nav-text">Suporte</span></button>
-            <button class="wn-dash-nav-button" type="button" data-side="Configurações" aria-label="Configurações" title="Configurações"><span class="wn-dash-nav-icon"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h6m4 0h6M4 12h12m4 0h0M4 18h2m4 0h10"/><circle cx="12" cy="6" r="2"/><circle cx="18" cy="12" r="2"/><circle cx="8" cy="18" r="2"/></svg></span><span class="wn-dash-nav-text">Configurações</span></button>
+        <div class="wn-sidebar__scroll">
+          <nav class="wn-sidebar__nav" aria-label="Menu principal">
+            <button class="wn-sidebar__item is-active" type="button" data-side="Procurar leads"><i data-lucide="layout-grid"></i><span>Buscar leads</span></button>
+            <button class="wn-sidebar__item" type="button" data-side="Procurar leads"><i data-lucide="compass"></i><span>Oportunidades</span></button>
+            <button class="wn-sidebar__item" type="button" data-side="Procurar leads"><i data-lucide="wand-sparkles"></i><span>Criar site</span></button>
+            <button class="wn-sidebar__item" type="button" data-side="Chat de contatos"><i data-lucide="users"></i><span>Meus contatos</span></button>
+            <button class="wn-sidebar__item" type="button" data-side="Procurar leads"><i data-lucide="history"></i><span>Histórico de buscas</span></button>
+            <button class="wn-sidebar__item" type="button" data-side="Procurar leads"><i data-lucide="layout-grid"></i><span>Sites gerados</span></button>
+            <button class="wn-sidebar__item" type="button" data-side="Procurar leads"><i data-lucide="upload"></i><span>Hospedar site</span></button>
+          </nav>
+          <div class="wn-sidebar__divider"></div>
+          <nav class="wn-sidebar__nav" aria-label="Conta e financeiro">
+            <button class="wn-sidebar__item" type="button" data-side="Créditos"><i data-lucide="coins"></i><span>Créditos</span></button>
+            <button class="wn-sidebar__item" type="button" data-side="Procurar leads"><i data-lucide="gift"></i><span>Indique e ganhe</span></button>
+            <button class="wn-sidebar__item" type="button" data-side="Financeiro"><i data-lucide="trending-up"></i><span>Financeiro</span></button>
+          </nav>
+          <div class="wn-sidebar__divider"></div>
+          <nav class="wn-sidebar__nav" aria-label="Ajuda e preferências">
+            <button class="wn-sidebar__item" type="button" data-side="Suporte"><i data-lucide="message-square-heart"></i><span>Feedback</span></button>
+            <button class="wn-sidebar__item" type="button" data-side="Suporte"><i data-lucide="life-buoy"></i><span>Suporte</span></button>
+            <button class="wn-sidebar__item" type="button" data-side="Configurações"><i data-lucide="settings"></i><span>Configurações</span></button>
           </nav>
         </div>
-        <div class="wn-dash-sidebar-bottom"><p id="wn-dash-plan-summary">Plano não informado</p><button type="button" data-route="/"><svg class="wn-dash-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v16h5m6-12 4 4-4 4M9 12h11"/></svg> Sair</button></div>
+        <section class="wn-sidebar__credits" aria-label="Seus créditos">
+          <div class="wn-sidebar__credits-head"><span>SEUS CRÉDITOS</span><button id="theme-toggle" class="wn-sidebar__theme-button" type="button" aria-label="Alternar tema"><i data-lucide="sun"></i></button></div>
+          <strong id="wn-sidebar-credits">0</strong><span>créditos restantes</span>
+        </section>
+        <div class="wn-sidebar__profile">
+          <span id="wn-sidebar-avatar" class="wn-sidebar__avatar">A</span>
+          <div class="wn-sidebar__profile-copy"><strong id="wn-sidebar-account-name">Minha conta</strong><span id="wn-sidebar-plan">Sem assinatura</span></div>
+          <button class="wn-sidebar__logout" type="button" data-route="/" aria-label="Sair">Sair</button>
+        </div>
       </aside>
       <div id="wn-dash-inset" class="wn-dash-inset">
         <header class="wn-dash-header">
@@ -1344,6 +1384,25 @@ syncDashboardMenu();
 renderDashboard();
 window.addEventListener('webnova:dashboard-data',()=>{wnDashChatReset();renderDashboard()});
 renderRoute();
+
+    /* Sidebar: tema, créditos, perfil e Lucide */
+    (function(){
+      const root=document.getElementById('dashboard-page'),button=document.getElementById('theme-toggle');
+      if(!root)return;
+      const applyTheme=theme=>{document.body.classList.toggle('light',theme==='light');localStorage.setItem('webnova-theme',theme);if(button){button.innerHTML='<i data-lucide="'+(theme==='light'?'moon':'sun')+'"></i>';window.lucide?.createIcons()}};
+      applyTheme(localStorage.getItem('webnova-theme')||'dark');
+      button?.addEventListener('click',()=>applyTheme(document.body.classList.contains('light')?'dark':'light'));
+      const sync=()=>{
+        const credits=document.getElementById('wn-dash-credits')?.textContent?.trim();
+        if(credits)document.getElementById('wn-sidebar-credits').textContent=credits;
+        const name=document.getElementById('wn-dash-user-name')?.textContent?.trim()||localStorage.getItem('webnova-user-name')||'Minha conta';
+        document.getElementById('wn-sidebar-account-name').textContent=name==='Conta'?'Minha conta':name;
+        document.getElementById('wn-sidebar-avatar').textContent=(name==='Conta'||name==='Minha conta'?'A':name.charAt(0)).toUpperCase();
+        const summary=document.getElementById('wn-dash-plan-summary')?.textContent?.trim();
+        document.getElementById('wn-sidebar-plan').textContent=summary&&summary!=='Plano não informado'?summary:'Sem assinatura';
+      };
+      sync();window.addEventListener('webnova:dashboard-data',sync);window.lucide?.createIcons();
+    })();
 </script>
 <style>
 </style>
