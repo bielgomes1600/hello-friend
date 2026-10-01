@@ -11,6 +11,7 @@ import {
   LogOut,
   MapPin,
   Menu,
+  MessageSquare,
   Plus,
   Search,
   Settings,
@@ -43,7 +44,7 @@ const demoLeads: [string, string, string, string, string][] = [
 const navItems = [
   [LayoutDashboard, "Painel central"],
   [Search, "Encontrar leads"],
-  [Building2, "Minhas listas"],
+  [MessageSquare, "Chat de IA"],
   [BarChart3, "Relatórios"],
   [Settings, "Configurações"],
 ] as const;
@@ -127,9 +128,9 @@ function Dashboard() {
                 <button
                   key={label}
                   onClick={() => { setSidebar(label); setMobileOpen(false); }}
-                  className={`group flex w-full items-center gap-3 rounded-xl px-3.5 py-3 text-left text-sm transition-all ${sidebar === label ? "bg-blue-500/10 text-blue-300 ring-1 ring-inset ring-blue-500/10" : "text-slate-500 hover:bg-white/[0.035] hover:text-slate-200"}`}
+                  className={`group flex w-full items-center gap-3 rounded-xl px-3.5 py-3 text-left text-sm transition-all ${label === "Encontrar leads" ? "text-slate-500 hover:bg-white/[0.035] hover:text-slate-200" : sidebar === label ? "bg-blue-500/10 text-blue-300 ring-1 ring-inset ring-blue-500/10" : "text-slate-500 hover:bg-white/[0.035] hover:text-slate-200"}`}
                 >
-                  <Icon className={`h-[17px] w-[17px] ${sidebar === label ? "text-blue-400" : "text-slate-600 group-hover:text-slate-400"}`} />
+                  <Icon className={`h-[17px] w-[17px] ${label === "Encontrar leads" ? "text-slate-600 group-hover:text-slate-400" : sidebar === label ? "text-blue-400" : "text-slate-600 group-hover:text-slate-400"}`} />
                   {label}
                   {label === "Encontrar leads" && <span className="ml-auto rounded-md bg-blue-500/10 px-1.5 py-0.5 text-[9px] font-semibold text-blue-400">NEW</span>}
                 </button>
