@@ -20,7 +20,7 @@ import {
   Users,
   Zap,
 } from "lucide-react";
-import { useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
@@ -58,6 +58,15 @@ function Dashboard() {
   const [selectedLead, setSelectedLead] = useState<(typeof demoLeads)[number] | null>(null);
   const [notice, setNotice] = useState("");
   const notify = (message: string) => setNotice(message);
+
+  useEffect(() => {
+    if (!selectedLead) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setSelectedLead(null);
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [selectedLead]);
 
   const filtered = useMemo(
     () =>
