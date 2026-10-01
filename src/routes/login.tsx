@@ -39,7 +39,7 @@ const testimonials: Testimonial[] = [
 function LoginPage() {
   const navigate = useNavigate();
   const [notice, setNotice] = useState("");
-  const enterDashboard = () => navigate({ to: "/dashboard" });
+  const enterDashboard = () => window.location.assign("/dashboard.html");
 
   return (
     <main className="dark min-h-screen overflow-hidden bg-background text-foreground">
