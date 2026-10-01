@@ -1,7 +1,15 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { SignInPage, type Testimonial } from "@/components/ui/sign-in";
 
-export const Route = createFileRoute("/login")({ component: LoginPage });
+export const Route = createFileRoute("/login")({
+  head: () => ({
+    meta: [
+      { title: "Entrar | WEBNOVA IA" },
+      { name: "description", content: "Acesse sua conta da WEBNOVA IA." },
+    ],
+  }),
+  component: LoginPage,
+});
 
 const testimonials: Testimonial[] = [
   {
