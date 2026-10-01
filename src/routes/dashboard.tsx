@@ -116,7 +116,7 @@ function Dashboard() {
   const unreadCount = notifications.filter((item) => !item.read).length;
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setDebouncedSearch(search.trim()), 250);
+    const timer: ReturnType<typeof window.setTimeout> = window.setTimeout(() => setDebouncedSearch(search.trim()), 250);
     return () => window.clearTimeout(timer);
   }, [search]);
 
@@ -180,6 +180,7 @@ function Dashboard() {
 
       const first = focusables[0];
       const last = focusables[focusables.length - 1];
+      if (!first || !last) return;
 
       if (event.shiftKey && document.activeElement === first) {
         event.preventDefault();
@@ -220,6 +221,7 @@ function Dashboard() {
       }
       const first = focusables[0];
       const last = focusables[focusables.length - 1];
+      if (!first || !last) return;
 
       if (event.shiftKey && document.activeElement === first) {
         event.preventDefault();
@@ -278,7 +280,7 @@ function Dashboard() {
     notify("Todas as notificações foram marcadas como lidas.");
   };
 
-  const handleUserMenuKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
+  const handleUserMenuKeyDown = (event: KeyboardEvent<HTMLElement>) => {
     const enabledItems = userMenuItemsRef.current.filter(Boolean) as HTMLButtonElement[];
     if (!enabledItems.length) return;
 
