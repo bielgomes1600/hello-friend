@@ -54,18 +54,42 @@ function Dashboard() {
   const [query, setQuery] = useState("");
   const [location, setLocation] = useState("São Paulo, SP");
   const [mobileOpen, setMobileOpen] = useState(false);
-  const notify = (message: string) => console.log("[WEBNOVA IA]", message);
+  const [filterHighPotential, setFilterHighPotential] = useState(false);
+  const [selectedLead, setSelectedLead] = useState<(typeof demoLeads)[number] | null>(null);
+  const [notice, setNotice] = useState("");
+  const notify = (message: string) => setNotice(message);
 
   const filtered = useMemo(
-    () => demoLeads.filter((lead) => lead.join(" ").toLowerCase().includes(search.toLowerCase())),
-    [search],
+    () =>
+      demoLeads.filter(
+        (lead) =>
+          lead.join(" ").toLowerCase().includes(search.toLowerCase()) &&
+          (!filterHighPotential || lead[4] === "Alto"),
+      ),
+    [filterHighPotential, search],
   );
+
+  const exportLeads = () => {
+    const header = ["Empresa", "Segmento", "Localização", "Website", "Potencial"];
+    const rows = filtered.map((lead) => lead.map((value) => String(value)));
+    const csv = [header, ...rows]
+      .map((row) => row.map((value) => `"${value.replace(/"/g, '""')}"`).join(","))
+      .join("\n");
+    const url = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = "webnova-leads.csv";
+    anchor.click();
+    URL.revokeObjectURL(url);
+    notify(`Exportados ${filtered.length} leads.`);
+  };
 
   return (
     <main className="min-h-screen bg-[#030509] text-white selection:bg-blue-500/30">
       <div className="flex min-h-screen">
         {mobileOpen && (
           <button
+            type="button"
             aria-label="Fechar menu"
             onClick={() => setMobileOpen(false)}
             className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm lg:hidden"
@@ -82,7 +106,7 @@ function Dashboard() {
               </span>
               <span className="text-lg">WEBNOVA IA</span>
             </Link>
-            <button onClick={() => setMobileOpen(false)} className="rounded-lg p-2 text-slate-500 hover:bg-white/5 lg:hidden">
+            <button type="button" aria-label="Fechar menu lateral" onClick={() => setMobileOpen(false)} className="rounded-lg p-2 text-slate-500 hover:bg-white/5 lg:hidden">
               <Menu className="h-5 w-5" />
             </button>
           </div>
@@ -128,7 +152,7 @@ function Dashboard() {
         <section className="min-w-0 flex-1">
           <header className="sticky top-0 z-30 flex h-[72px] items-center justify-between border-b border-white/[0.06] bg-[#030509]/90 px-4 backdrop-blur-xl sm:px-6 lg:px-9">
             <div className="flex items-center gap-3">
-              <button onClick={() => setMobileOpen(true)} className="rounded-xl border border-white/[0.07] p-2.5 text-slate-400 hover:bg-white/5 lg:hidden">
+              <button type="button" aria-label="Abrir menu lateral" onClick={() => setMobileOpen(true)} className="rounded-xl border border-white/[0.07] p-2.5 text-slate-400 hover:bg-white/5 lg:hidden">
                 <Menu className="h-5 w-5" />
               </button>
               <div>
@@ -137,11 +161,11 @@ function Dashboard() {
               </div>
             </div>
             <div className="flex items-center gap-2.5">
-              <button onClick={() => notify("Notificações")} className="relative grid h-10 w-10 place-items-center rounded-xl border border-white/[0.07] bg-white/[0.015] text-slate-500 transition hover:border-white/10 hover:text-white">
+              <button type="button" aria-label="Abrir notificações" onClick={() => notify("As notificações estarão disponíveis nesta área.")} className="relative grid h-10 w-10 place-items-center rounded-xl border border-white/[0.07] bg-white/[0.015] text-slate-500 transition hover:border-white/10 hover:text-white">
                 <Bell className="h-4 w-4" />
                 <span className="absolute right-2 top-2 h-1.5 w-1.5 rounded-full bg-blue-500" />
               </button>
-              <button onClick={() => notify("Menu do usuário")} className="flex items-center gap-2 rounded-xl border border-white/[0.07] bg-white/[0.015] px-2.5 py-1.5">
+              <button type="button" aria-label="Abrir menu do usuário" onClick={() => notify("O menu da conta estará disponível nesta área.")} className="flex items-center gap-2 rounded-xl border border-white/[0.07] bg-white/[0.015] px-2.5 py-1.5">
                 <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-blue-500/20 to-blue-500/5 text-xs font-bold text-blue-300">RU</span>
                 <span className="hidden text-xs font-medium sm:block">Ruan</span>
                 <ChevronDown className="h-3 w-3 text-slate-600" />
@@ -160,7 +184,7 @@ function Dashboard() {
                 <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">Olá, Ruan. Vamos encontrar clientes?</h1>
                 <p className="mt-2 max-w-xl text-sm text-slate-500">Encontre empresas, organize seus leads e transforme oportunidades em novos negócios.</p>
               </div>
-              <button onClick={() => notify("Nova pesquisa")} className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold shadow-lg shadow-blue-600/10 transition hover:-translate-y-0.5 hover:bg-blue-500 md:w-auto">
+              <button type="button" onClick={() => { setSidebar("Encontrar leads"); notify("Formulário de pesquisa pronto. Defina os critérios abaixo."); }} className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold shadow-lg shadow-blue-600/10 transition hover:-translate-y-0.5 hover:bg-blue-500 md:w-auto">
                 <Plus className="h-4 w-4" /> Nova pesquisa
               </button>
             </div>
@@ -189,7 +213,7 @@ function Dashboard() {
                   <Field label="Nicho" value={query || "Clínicas odontológicas"} onChange={setQuery} icon={<Users />} />
                   <Field label="Localização" value={location} onChange={setLocation} icon={<MapPin />} />
                   <Field label="Website" value="Com website" icon={<Globe2 />} />
-                  <button onClick={() => notify("Pesquisar")} className="h-11 self-end rounded-xl bg-blue-600 text-sm font-semibold shadow-lg shadow-blue-600/10 transition hover:bg-blue-500">
+                  <button type="button" onClick={() => notify(`Pesquisa atualizada para ${query || "Clínicas odontológicas"} em ${location}.`)} className="h-11 self-end rounded-xl bg-blue-600 text-sm font-semibold shadow-lg shadow-blue-600/10 transition hover:bg-blue-500">
                     <Search className="mr-2 inline h-4 w-4" /> Pesquisar
                   </button>
                 </div>
@@ -215,17 +239,17 @@ function Dashboard() {
                 <div className="flex gap-2">
                   <div className="relative min-w-0 flex-1 sm:w-56">
                     <Search className="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-slate-600" />
-                    <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Buscar nos resultados..." className="h-9 w-full rounded-lg border border-white/[0.07] bg-white/[0.02] pl-9 pr-3 text-xs text-slate-300 outline-none placeholder:text-slate-700 focus:border-blue-500/30" />
+                    <input id="dashboard-search" aria-label="Buscar nos resultados" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Buscar nos resultados..." className="h-9 w-full rounded-lg border border-white/[0.07] bg-white/[0.02] pl-9 pr-3 text-xs text-slate-300 outline-none placeholder:text-slate-700 focus:border-blue-500/30" />
                   </div>
-                  <button className="grid h-9 w-9 place-items-center rounded-lg border border-white/[0.07] text-slate-500 transition hover:bg-white/[0.03] hover:text-white"><Filter className="h-3.5 w-3.5" /></button>
-                  <button onClick={() => notify("Exportar")} className="hidden items-center gap-2 rounded-lg border border-white/[0.07] px-3 text-xs text-slate-400 transition hover:bg-white/[0.03] hover:text-white sm:inline-flex"><Download className="h-3.5 w-3.5" /> Exportar</button>
+                  <button type="button" aria-label="Filtrar apenas leads de alto potencial" aria-pressed={filterHighPotential} onClick={() => setFilterHighPotential((current) => !current)} className={`grid h-9 w-9 place-items-center rounded-lg border border-white/[0.07] text-slate-500 transition hover:bg-white/[0.03] hover:text-white ${filterHighPotential ? "bg-blue-500/10 text-blue-300" : ""}`}><Filter className="h-3.5 w-3.5" /></button>
+                  <button type="button" onClick={exportLeads} disabled={!filtered.length} className="hidden items-center gap-2 rounded-lg border border-white/[0.07] px-3 text-xs text-slate-400 transition hover:bg-white/[0.03] hover:text-white sm:inline-flex"><Download className="h-3.5 w-3.5" /> Exportar</button>
                 </div>
               </div>
 
               <div className="overflow-x-auto">
                 <table className="w-full min-w-[800px] text-left">
                   <thead className="border-b border-white/[0.05] bg-white/[0.01] text-[9px] uppercase tracking-[0.16em] text-slate-600">
-                    <tr><th className="px-5 py-3.5 font-medium">Empresa</th><th className="px-5 py-3.5 font-medium">Segmento</th><th className="px-5 py-3.5 font-medium">Localização</th><th className="px-5 py-3.5 font-medium">Website</th><th className="px-5 py-3.5 font-medium">Potencial</th><th className="px-5 py-3.5" /></tr>
+                    <tr><th scope="col" className="px-5 py-3.5 font-medium">Empresa</th><th scope="col" className="px-5 py-3.5 font-medium">Segmento</th><th scope="col" className="px-5 py-3.5 font-medium">Localização</th><th scope="col" className="px-5 py-3.5 font-medium">Website</th><th scope="col" className="px-5 py-3.5 font-medium">Potencial</th><th scope="col" className="px-5 py-3.5" /></tr>
                   </thead>
                   <tbody>
                     {filtered.map((lead) => (
@@ -235,7 +259,7 @@ function Dashboard() {
                         <td className="px-5 py-4 text-xs text-slate-500">{lead[2]}</td>
                         <td className="px-5 py-4 text-xs text-blue-400">{lead[3]}</td>
                         <td className="px-5 py-4"><span className={`rounded-md px-2 py-1 text-[10px] font-medium ${lead[4] === "Alto" ? "bg-emerald-400/10 text-emerald-400" : "bg-amber-400/10 text-amber-400"}`}>{lead[4]}</span></td>
-                        <td className="px-5 py-4 text-right"><button onClick={() => notify("Ver detalhes")} className="rounded-lg px-2.5 py-1.5 text-[10px] font-medium text-slate-600 opacity-0 transition group-hover:opacity-100 hover:bg-white/5 hover:text-white">Ver detalhes</button></td>
+                        <td className="px-5 py-4 text-right"><button type="button" onClick={() => setSelectedLead(lead)} className="rounded-lg px-2.5 py-1.5 text-[10px] font-medium text-slate-600 opacity-0 transition group-hover:opacity-100 hover:bg-white/5 hover:text-white">Ver detalhes</button></td>
                       </tr>
                     ))}
                   </tbody>
@@ -244,7 +268,7 @@ function Dashboard() {
               </div>
               <div className="flex items-center justify-between border-t border-white/[0.05] px-5 py-3 text-[10px] text-slate-600">
                 <span>Mostrando {filtered.length} de 2.481 leads</span>
-                <button onClick={() => notify("Ver todos")} className="text-blue-400 hover:text-blue-300">Ver todos →</button>
+                <button type="button" onClick={() => { setSearch(""); setFilterHighPotential(false); notify("Filtros limpos. Todos os leads estão visíveis."); }} className="text-blue-400 hover:text-blue-300">Ver todos →</button>
               </div>
             </div>
             </>
@@ -253,12 +277,43 @@ function Dashboard() {
                 <div className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-blue-500/10 text-blue-400"><LayoutDashboard className="h-6 w-6" /></div>
                 <h2 className="mt-5 text-xl font-semibold">{sidebar}</h2>
                 <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-slate-500">Esta seção está preparada para receber a funcionalidade completa. A integração real deste módulo será conectada aqui.</p>
-                <button onClick={() => notify(sidebar)} className="mt-6 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold hover:bg-blue-500">Continuar</button>
+                <button type="button" onClick={() => notify(`A seção ${sidebar} ainda está em preparação.`)} className="mt-6 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold hover:bg-blue-500">Continuar</button>
               </div>
             )}
           </div>
         </section>
       </div>
+      {selectedLead && (
+        <div className="fixed inset-0 z-[80] grid place-items-center bg-black/70 p-4 backdrop-blur-sm" role="presentation" onClick={() => setSelectedLead(null)}>
+          <section
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="lead-details-title"
+            className="w-full max-w-lg rounded-2xl border border-white/10 bg-[#070a10] p-6 shadow-2xl"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <p className="text-xs text-slate-500">Detalhes do lead</p>
+                <h2 id="lead-details-title" className="mt-1 text-xl font-semibold">{selectedLead[0]}</h2>
+              </div>
+              <button type="button" aria-label="Fechar detalhes" onClick={() => setSelectedLead(null)} className="rounded-lg px-2 py-1 text-slate-500 hover:bg-white/5 hover:text-white">×</button>
+            </div>
+            <dl className="mt-6 grid gap-4 sm:grid-cols-2">
+              <div><dt className="text-[10px] uppercase tracking-wider text-slate-600">Segmento</dt><dd className="mt-1 text-sm text-slate-300">{selectedLead[1]}</dd></div>
+              <div><dt className="text-[10px] uppercase tracking-wider text-slate-600">Localização</dt><dd className="mt-1 text-sm text-slate-300">{selectedLead[2]}</dd></div>
+              <div><dt className="text-[10px] uppercase tracking-wider text-slate-600">Website</dt><dd className="mt-1 text-sm text-blue-300">{selectedLead[3]}</dd></div>
+              <div><dt className="text-[10px] uppercase tracking-wider text-slate-600">Potencial</dt><dd className="mt-1 text-sm text-slate-300">{selectedLead[4]}</dd></div>
+            </dl>
+          </section>
+        </div>
+      )}
+      {notice && (
+        <div className="fixed bottom-4 right-4 z-[90] flex max-w-sm items-center gap-3 rounded-xl border border-white/10 bg-[#0b1220]/95 px-4 py-3 text-sm text-slate-200 shadow-2xl" role="status">
+          <span className="min-w-0 flex-1">{notice}</span>
+          <button type="button" aria-label="Fechar aviso" onClick={() => setNotice("")} className="rounded-md px-2 py-1 text-slate-500 hover:bg-white/5 hover:text-white">×</button>
+        </div>
+      )}
     </main>
   );
 }
