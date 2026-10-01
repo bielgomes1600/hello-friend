@@ -1,14 +1,10 @@
-import { defineConfig } from "vite";
-import { tanstackStart } from "@tanstack/react-start/plugin/vite";
-import { nitro } from "nitro/vite";
-import react from "@vitejs/plugin-react";
-import tsconfigPaths from "vite-tsconfig-paths";
-import tailwindcss from "@tailwindcss/vite";
+// @lovable.dev/vite-tanstack-config already provides the TanStack Start, React,
+// Tailwind, tsconfig paths, sandbox preview, and error-diagnostics integration.
+// Do not register those plugins again here, or the preview can break with duplicates.
+import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
-  server: {
-    host: "0.0.0.0",
-    port: 5173,
+  tanstackStart: {
+    server: { entry: "server" },
   },
-  plugins: [tanstackStart(), nitro(), tailwindcss(), tsconfigPaths(), react()],
 });
