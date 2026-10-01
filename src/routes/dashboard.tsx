@@ -22,7 +22,15 @@ import {
 } from "lucide-react";
 import { useMemo, useState, type ReactNode } from "react";
 
-export const Route = createFileRoute("/dashboard")({ component: Dashboard });
+export const Route = createFileRoute("/dashboard")({
+  head: () => ({
+    meta: [
+      { title: "Dashboard | WEBNOVA IA" },
+      { name: "description", content: "Painel de prospecção e gestão de leads da WEBNOVA IA." },
+    ],
+  }),
+  component: Dashboard,
+});
 
 const demoLeads: [string, string, string, string, string][] = [
   ["Odonto Prime", "Clínica odontológica", "São Paulo, SP", "odonto-prime.com", "Alto"],
