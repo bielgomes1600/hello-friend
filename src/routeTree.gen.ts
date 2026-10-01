@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as DashboardInicioRouteImport } from './routes/dashboard-inicio'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -21,6 +22,11 @@ const IndexRoute = IndexRouteImport.update({
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardInicioRoute = DashboardInicioRouteImport.update({
+  id: '/dashboard-inicio',
+  path: '/dashboard-inicio',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -33,11 +39,13 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
+  '/dashboard-inicio': typeof DashboardInicioRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
+  '/dashboard-inicio': typeof DashboardInicioRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -75,6 +83,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard-inicio': {
+      id: '/dashboard-inicio'
+      path: '/dashboard-inicio'
+      fullPath: '/dashboard-inicio'
+      preLoaderRoute: typeof DashboardInicioRouteImport
+      parentRoute: typeof rootRouteImport
+    },
     '/login': {
       id: '/login'
       path: '/login'
@@ -89,6 +104,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DashboardRoute: DashboardRoute,
   LoginRoute: LoginRoute,
+  DashboardInicioRoute: DashboardInicioRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
