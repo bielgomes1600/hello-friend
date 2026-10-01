@@ -110,7 +110,7 @@ function Dashboard() {
   const notificationButtonRef = useRef<HTMLButtonElement>(null);
   const lastModalTriggerRef = useRef<HTMLElement | null>(null);
   const modalRef = useRef<HTMLElement>(null);
-  const toastTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const toastTimerRef = useRef<ReturnType<typeof window.setTimeout> | null>(null);
 
   const activeItem = navItems.find((item) => item.id === activeSection) ?? navItems[0];
   const unreadCount = notifications.filter((item) => !item.read).length;
