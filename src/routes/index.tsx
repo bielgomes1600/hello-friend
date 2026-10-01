@@ -192,7 +192,7 @@ function SalesPage() {
     <nav className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-8">
       <a href="#" className="font-black tracking-tight" aria-label="WEB NOVA IA"><span className="nav-webnova-text text-lg">WEB NOVA IA</span></a>
       <div className="hidden items-center gap-7 text-sm text-slate-400 md:flex"><a href="#beneficios" className="hover:text-white">Benefícios</a><a href="#como-funciona" className="hover:text-white">Como funciona</a><a href="#planos" className="hover:text-white">Planos</a><a href="#faq" className="hover:text-white">FAQ</a></div>
-      <a href="/login" className="rounded-xl border border-white/10 bg-white/[0.05] px-4 py-2.5 text-sm font-semibold hover:bg-white/[0.09]">Entrar</a>
+      <div className="flex items-center gap-2"><a href="/dashboard" className="rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-blue-950/30 transition hover:bg-blue-500">Visualizar dashboard</a><a href="/login" className="rounded-xl border border-white/10 bg-white/[0.05] px-4 py-2.5 text-sm font-semibold hover:bg-white/[0.09]">Entrar</a></div>
     </nav>
 
     <div className="relative isolate overflow-hidden bg-[#030509]">
@@ -208,7 +208,7 @@ function SalesPage() {
         <p className="mx-auto mt-7 max-w-2xl text-base leading-7 text-slate-400 sm:text-lg">Tenha uma plataforma para descobrir empresas, filtrar oportunidades e criar listas de prospecção sem depender de pesquisas manuais.</p>
         <div className="hero-rainbow-actions mt-9 flex flex-col justify-center gap-3 sm:flex-row">
           <RainbowButton onClick={() => { window.location.hash = "planos"; }}>Começar agora</RainbowButton>
-          <RainbowButton onClick={() => { window.location.hash = "como-funciona"; }}>Ver como funciona</RainbowButton>
+          <RainbowButton onClick={() => { window.location.hash = "como-funciona"; }}>Ver como funciona</RainbowButton><a href="/dashboard" className="inline-flex items-center justify-center rounded-xl border border-blue-400/20 bg-blue-500/10 px-5 py-3 text-sm font-semibold text-blue-200 transition hover:border-blue-400/40 hover:bg-blue-500/20">Abrir visualização do dashboard</a>
         </div>
         <div className="mt-5 flex items-center justify-center gap-5 text-xs text-slate-600"><span className="flex items-center gap-1.5"><Check className="h-3.5 w-3.5 text-emerald-400"/>Sem fidelidade</span><span className="flex items-center gap-1.5"><Check className="h-3.5 w-3.5 text-emerald-400"/>Cancele quando quiser</span></div>
       </div>
