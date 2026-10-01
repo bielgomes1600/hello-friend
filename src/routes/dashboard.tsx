@@ -200,10 +200,33 @@ function Dashboard() {
     const dialog = modalRef.current;
     if (!dialog) return;
 
+    const focusableSelector =
+      'button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+    const firstFocusable = dialog.querySelector<HTMLElement>(focusableSelector);
+    firstFocusable?.focus();
+
     const handleDialogKeyDown = (event: globalThis.KeyboardEvent) => {
       if (event.key === "Escape") {
         event.preventDefault();
         setLogoutConfirmOpen(false);
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+      const focusables = Array.from(dialog.querySelectorAll<HTMLElement>(focusableSelector));
+      if (!focusables.length) {
+        event.preventDefault();
+        return;
+      }
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
       }
     };
 
@@ -244,9 +267,9 @@ function Dashboard() {
     window.setTimeout(() => lastModalTriggerRef.current?.focus(), 0);
   };
 
-  const toggleNotification = (id: string) => {
+  const markNotificationRead = (id: string) => {
     setNotifications((current) =>
-      current.map((item) => (item.id === id ? { ...item, read: !item.read } : item)),
+      current.map((item) => (item.id === id ? { ...item, read: true } : item)),
     );
   };
 
@@ -562,7 +585,7 @@ function Dashboard() {
                             type="button"
                             role="listitem"
                             aria-pressed={item.read}
-                            onClick={() => toggleNotification(item.id)}
+                            onClick={() => markNotificationRead(item.id)}
                             className="dashboard-focus flex w-full items-start gap-3 rounded-xl p-3 text-left transition hover:bg-white/[0.035]"
                           >
                             <span
@@ -805,7 +828,7 @@ function DashboardOverview({
   onNewSearch: () => void;
 }) {
   return (
-    <>
+    <section id="painel" className="scroll-mt-24">
       <div className="mb-8 flex flex-col justify-between gap-5 md:flex-row md:items-end">
         <div>
           <div className="mb-2 flex items-center gap-2 text-xs font-medium text-blue-400">
@@ -890,7 +913,7 @@ function DashboardOverview({
           </p>
         </section>
       </div>
-    </>
+    </section>
   );
 }
 
@@ -914,7 +937,7 @@ function LeadsSection({
   onClear: () => void;
 }) {
   return (
-    <section className="overflow-hidden rounded-2xl border border-white/[0.07] bg-[#070a10]" aria-labelledby="leads-title">
+    <section id="leads" className="scroll-mt-24 overflow-hidden rounded-2xl border border-white/[0.07] bg-[#070a10]" aria-labelledby="leads-title">
       <div className="flex flex-col gap-4 border-b border-white/[0.06] p-5 sm:p-6 lg:flex-row lg:items-center lg:justify-between">
         <div>
           <div className="flex items-center gap-2">
@@ -1057,7 +1080,7 @@ function LeadsSection({
 
 function ListsSection({ onNotify }: { onNotify: (message: string) => void }) {
   return (
-    <section className="rounded-2xl border border-white/[0.07] bg-[#070a10] p-6 sm:p-8" aria-labelledby="lists-title">
+    <section id="listas" className="scroll-mt-24 rounded-2xl border border-white/[0.07] bg-[#070a10] p-6 sm:p-8" aria-labelledby="lists-title">
       <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
         <div>
           <p className="text-xs font-medium text-blue-400">Workspace</p>
@@ -1089,7 +1112,7 @@ function ListsSection({ onNotify }: { onNotify: (message: string) => void }) {
 
 function ReportsSection() {
   return (
-    <section className="rounded-2xl border border-white/[0.07] bg-[#070a10] p-6 sm:p-8" aria-labelledby="reports-title">
+    <section id="relatorios" className="scroll-mt-24 rounded-2xl border border-white/[0.07] bg-[#070a10] p-6 sm:p-8" aria-labelledby="reports-title">
       <p className="text-xs font-medium text-blue-400">Analytics</p>
       <h1 id="reports-title" className="mt-2 text-2xl font-semibold">Relatórios</h1>
       <p className="mt-2 max-w-xl text-sm leading-6 text-slate-500">
@@ -1107,7 +1130,7 @@ function ReportsSection() {
 
 function SettingsSection({ onLogout }: { onLogout: () => void }) {
   return (
-    <section className="rounded-2xl border border-white/[0.07] bg-[#070a10] p-6 sm:p-8" aria-labelledby="settings-title">
+    <section id="configuracoes" className="scroll-mt-24 rounded-2xl border border-white/[0.07] bg-[#070a10] p-6 sm:p-8" aria-labelledby="settings-title">
       <p className="text-xs font-medium text-blue-400">Conta</p>
       <h1 id="settings-title" className="mt-2 text-2xl font-semibold">Configurações</h1>
       <div className="mt-8 grid gap-4 md:grid-cols-2">
