@@ -260,10 +260,14 @@
     .wn-sidebar__theme-button{display:grid;place-items:center;width:40px;height:40px;border:1px solid var(--gray-800);border-radius:50%;background:#0b0d12;color:var(--gray-400);cursor:pointer;transition:.2s}.wn-sidebar__theme-button:hover{border-color:var(--blue);color:var(--blue)}.wn-sidebar__theme-button svg{width:18px;height:18px;stroke-width:1.75}
     .wn-sidebar__profile{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px 14px}.wn-sidebar__avatar{display:grid;flex:none;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--blue-soft);color:var(--blue);font-size:14px;font-weight:700}.wn-sidebar__profile-copy{display:flex;flex:1;min-width:0;flex-direction:column;gap:3px}.wn-sidebar__profile-copy strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--white);font-size:14px;font-weight:600}.wn-sidebar__profile-copy span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--gray-500);font-size:12px}.wn-sidebar__logout{padding:5px 0;border:0;background:none;color:var(--white);font:600 13px Inter,system-ui,sans-serif;cursor:pointer;transition:color .2s}.wn-sidebar__logout:hover{color:var(--blue)}
     .wn-mobile-only{display:none}.wn-desktop-only{display:grid}#wn-dash-inset{margin-left:250px}.wn-sidebar~#wn-dash-inset{min-height:100vh}@keyframes wnSidebarIn{from{opacity:0;transform:translateX(-18px)}to{opacity:1;transform:translateX(0)}}
-    @media(max-width:767px){.wn-sidebar{transform:translateX(-100%);transition:transform .25s ease}.wn-dash-drawer-open .wn-sidebar{transform:translateX(0)}.wn-mobile-only{display:grid}.wn-desktop-only{display:none}#wn-dash-inset{margin-left:0}}
+    @media(max-width:767px){.wn-sidebar{animation:none;transform:translateX(-100%);transition:transform .25s ease}.wn-dash-drawer-open .wn-sidebar{transform:translateX(0)}.wn-mobile-only{display:grid}.wn-desktop-only{display:none}#wn-dash-inset{margin-left:0}}
     @media(min-width:768px){.wn-dash-collapsed .wn-sidebar{width:72px}.wn-dash-collapsed #wn-dash-inset{margin-left:72px}.wn-dash-collapsed .wn-sidebar__brand span:last-child,.wn-dash-collapsed .wn-sidebar__item span,.wn-dash-collapsed .wn-sidebar__credits,.wn-dash-collapsed .wn-sidebar__profile-copy,.wn-dash-collapsed .wn-sidebar__logout{display:none}.wn-dash-collapsed .wn-sidebar__item{justify-content:center;padding-inline:10px}.wn-dash-collapsed .wn-sidebar__profile{justify-content:center}.wn-dash-collapsed .wn-sidebar__top{justify-content:center}}
 </style>
-  <link rel="preconnect" href="https://fonts.googleapis.com">\n  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">\n  <script src="https://unpkg.com/lucide@latest"></script>\n</head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
 <body>
   <div id="intro" class="intro fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-black">
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(37,99,235,.22),transparent_28%),radial-gradient(circle_at_30%_50%,rgba(14,165,233,.12),transparent_32%),#000]"></div>
@@ -283,7 +287,7 @@
   </div>
 
   <section id="sales-page" class="page active">
-    <header class="sticky top-0 z-40 border-b border-white/5 bg-[#030509]/80 backdrop-blur-xl"><nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
+    <header class="sticky top-0 z-40 border-b border-white/5 bg-[#030509]/95 backdrop-blur-xl"><nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
       <button type="button" data-route="/" class="flex items-center gap-2.5 font-bold tracking-tight"><span class="webnova-logo">WEBNOVA IA</span></button>
       <div class="hidden items-center gap-7 text-sm text-slate-500 md:flex"><a href="#beneficios">Benefícios</a><a href="#como-funciona">Como funciona</a><a href="#planos">Planos</a><a href="#faq">FAQ</a></div>
       <button type="button" data-route="/login" class="rounded-xl border border-white/10 px-4 py-2 text-sm font-semibold hover:bg-white/5">Entrar</button>
@@ -327,8 +331,8 @@
     <footer class="border-t border-white/5 px-6 py-8"><div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 text-xs text-slate-600 sm:flex-row"><b class="text-slate-400">WEBNOVA IA</b><span>Prospecção inteligente para sua operação comercial.</span><span>Segurança e privacidade</span></div></footer>
   </section>
 
-  <section id="login-page" class="page min-h-screen overflow-hidden">
-    <div class="flex h-[100dvh] w-[100dvw] flex-col bg-background text-foreground font-geist md:flex-row">
+  <section id="login-page" class="page min-h-screen">
+    <div class="flex min-h-[100dvh] w-full flex-col bg-background text-foreground font-geist md:flex-row">
       <section class="flex flex-1 items-center justify-center p-8">
         <div class="w-full max-w-md"><div class="flex flex-col gap-6">
           <h1 class="animate-element animate-delay-100 text-4xl font-semibold leading-tight md:text-5xl"><span class="font-light tracking-tighter text-foreground">Welcome</span></h1>
